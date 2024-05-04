@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { SignFarmerDto } from './dtos/sign.dto';
+import { SignFarmerDto } from '../users/dto/sign.dto';
 import { EditFarmerDto } from './dtos/editFarmer.dto';
 
 @Injectable()

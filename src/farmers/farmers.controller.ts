@@ -1,7 +1,7 @@
 import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
 import { ApiOperation, ApiParam, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { FarmersService } from './farmers.service';
-import { SignFarmerDto } from './dtos/sign.dto';
+import { SignFarmerDto } from '../users/dto/sign.dto';
 import { EditFarmerDto } from './dtos/editFarmer.dto';
 
 @ApiTags('Farmers')

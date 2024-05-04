@@ -2,14 +2,22 @@ import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ConfigModule } from '@nestjs/config';
-import { FarmersModule } from './farmers/farmers.module';
+import { SequelizeModule } from '@nestjs/sequelize';
 
 @Module({
   imports: [
     ConfigModule.forRoot({
-      envFilePath: '.development.env',
+      envFilePath: '.env',
     }),
-    FarmersModule,
+    SequelizeModule.forRoot({
+      dialect: 'mysql',
+      host: 'localhost',
+      port: 3306,
+      username: 'root',
+      password: 'root',
+      database: 'test',
+      models: [],
+    }),
   ],
   controllers: [AppController],
   providers: [AppService],

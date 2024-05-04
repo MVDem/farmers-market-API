@@ -5,6 +5,7 @@ export class SignFarmerDto {
   @ApiProperty({
     example: 'farmer@mail.ru',
     description: 'login should be an email',
+    required: true,
   })
   @IsEmail({}, { message: 'Email is not correct' })
   readonly login: string;
@@ -12,6 +13,7 @@ export class SignFarmerDto {
   @ApiProperty({
     example: '1q2w3e',
     description: 'Password must be a string, at least 8 simbols ',
+    required: true,
   })
   @IsString({ message: 'Password must be a string' })
   @MinLength(8, {

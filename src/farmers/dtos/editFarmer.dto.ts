@@ -12,6 +12,7 @@ export class EditFarmerDto {
   @ApiProperty({
     example: "Bob's ferma",
     description: 'Full name ',
+    required: false,
   })
   @IsString({ message: 'Name must be a string' })
   @MaxLength(15, {
@@ -24,6 +25,7 @@ export class EditFarmerDto {
     example:
       'lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ',
     description: 'Description must be a string and max 150 simbols',
+    required: false,
   })
   @IsString({ message: 'Description must be a string' })
   @MaxLength(150, {
@@ -35,6 +37,7 @@ export class EditFarmerDto {
   @ApiProperty({
     example: 'Qiryat Shemona',
     description: 'City name must be a string and max 15 simbols',
+    required: false,
   })
   @IsString({ message: 'City name must be a string' })
   @MaxLength(15, {
@@ -46,6 +49,7 @@ export class EditFarmerDto {
   @ApiProperty({
     example: 'lorem ipsum dolor sit amet, consectetur adipiscing',
     description: 'Address must be a string and max 50 simbols',
+    required: false,
   })
   @IsString({ message: 'Address must be a string' })
   @MaxLength(50, {
@@ -57,6 +61,7 @@ export class EditFarmerDto {
   @ApiProperty({
     example: 'farmer@mail.ru',
     description: 'Email should be an email',
+    required: false,
   })
   @IsEmail({}, { message: 'Email is not correct' })
   @IsOptional()
@@ -65,6 +70,7 @@ export class EditFarmerDto {
   @ApiProperty({
     example: '055 555 5555',
     description: 'Phone should be an number',
+    required: false,
   })
   @IsNumber({}, { message: 'Phone is not a number' })
   @Length(10)
@@ -74,6 +80,7 @@ export class EditFarmerDto {
   @ApiProperty({
     example: '739745.6585827',
     description: 'Coordinate latitude should be a number',
+    required: false,
   })
   @IsNumber({}, { message: 'Coordinate latitude is not a number' })
   @IsOptional()
@@ -82,6 +89,7 @@ export class EditFarmerDto {
   @ApiProperty({
     example: '3677220.3427914',
     description: 'Coordinate longitude should be a number',
+    required: false,
   })
   @IsNumber({}, { message: 'Coordinate longitude is not a number' })
   @IsOptional()

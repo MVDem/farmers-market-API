@@ -1,37 +1,31 @@
 import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
 import { ApiOperation, ApiParam, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { FarmersService } from './farmers.service';
-import { SignFarmerDto } from './dtos/sign.dto';
 import { EditFarmerDto } from './dtos/editFarmer.dto';
+import { CreateFarmerDto } from './dtos/createFarmer.dto';
+import { Farmer } from './farmers.model';
 
 @ApiTags('Farmers')
 @Controller('farmers')
 export class FarmersController {
   constructor(private farmersService: FarmersService) {}
 
-  @ApiOperation({ summary: 'Login' })
-  @ApiResponse({ status: 201 }) //create and add type: Farmer
-  @Post('/signIn')
-  signIn(@Body() signDto: SignFarmerDto) {
-    return this.farmersService.signIn(signDto);
-  }
-
-  @ApiOperation({ summary: 'Register' })
-  @ApiResponse({ status: 201 }) //create and add type: Farmer
-  @Post('/signUp')
-  signUp(@Body() signDto: SignFarmerDto) {
-    return this.farmersService.signUp(signDto);
+  @ApiOperation({ summary: 'Create Farmer' })
+  @ApiResponse({ status: 201, type: Farmer })
+  @Post()
+  createFarmer(@Body() updateDto: CreateFarmerDto) {
+    return this.farmersService.createFarmer(updateDto);
   }
 
   @ApiOperation({ summary: 'Update Farmer' })
-  @ApiResponse({ status: 201 }) //create and add type: Farmer
-  @Post()
-  updateFarmer(@Body() updateDto: EditFarmerDto) {
-    return this.farmersService.updateFarmer(updateDto);
+  @ApiResponse({ status: 200, type: Farmer })
+  @Post(':id')
+  updateFarmer(@Param('id') id: string, @Body() updateDto: EditFarmerDto) {
+    return this.farmersService.updateFarmer(updateDto, id);
   }
 
   @ApiOperation({ summary: 'Get Farmer' })
-  @ApiResponse({ status: 201 }) //create and add type: Farmer
+  @ApiResponse({ status: 200, type: Farmer })
   @Get(':id')
   @ApiParam({
     name: 'id',
@@ -39,11 +33,11 @@ export class FarmersController {
     example: 'F-123',
   })
   getFarmer(@Param('id') id: string) {
-    return this.farmersService.getOne(id);
+    return this.farmersService.getOne(+id);
   }
 
   @ApiOperation({ summary: 'Delete Farmer' })
-  @ApiResponse({ status: 201 }) // create and add type: Farmer
+  @ApiResponse({ status: 200, type: Farmer })
   @Delete(':id')
   @ApiParam({
     name: 'id',

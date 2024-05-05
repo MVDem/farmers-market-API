@@ -8,7 +8,7 @@ import {
   IsOptional,
 } from 'class-validator';
 
-export class EditFarmerDto {
+export class CreateFarmerDto {
   @ApiProperty({
     example: "Bob's ferma",
     description: 'Full name ',
@@ -18,7 +18,6 @@ export class EditFarmerDto {
   @MaxLength(15, {
     message: 'Name must be max 15 simbols ',
   })
-  @IsOptional()
   readonly name: string;
 
   @ApiProperty({
@@ -43,7 +42,6 @@ export class EditFarmerDto {
   @MaxLength(15, {
     message: 'Name must be max 15 simbols ',
   })
-  @IsOptional()
   city: string;
 
   @ApiProperty({
@@ -64,7 +62,6 @@ export class EditFarmerDto {
     required: false,
   })
   @IsEmail({}, { message: 'Email is not correct' })
-  @IsOptional()
   email: string;
 
   @ApiProperty({
@@ -74,7 +71,6 @@ export class EditFarmerDto {
   })
   @IsString({ message: 'Phone is not a string' })
   @Length(10)
-  @IsOptional()
   phone: string;
 
   @ApiProperty({

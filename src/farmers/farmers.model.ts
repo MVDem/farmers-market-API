@@ -27,7 +27,7 @@ export class Farmer extends Model<Farmer, FarmerCreationAtributes> {
   @ApiProperty({ example: 'John Doe', description: 'Name of farmer' })
   @Column({
     type: DataType.STRING,
-    allowNull: false,
+    allowNull: true,
   })
   name: string;
 
@@ -37,7 +37,7 @@ export class Farmer extends Model<Farmer, FarmerCreationAtributes> {
   })
   @Column({
     type: DataType.STRING,
-    allowNull: false,
+    allowNull: true,
   })
   description: string;
 
@@ -47,7 +47,7 @@ export class Farmer extends Model<Farmer, FarmerCreationAtributes> {
   })
   @Column({
     type: DataType.STRING,
-    allowNull: false,
+    allowNull: true,
   })
   city: string;
 
@@ -57,7 +57,7 @@ export class Farmer extends Model<Farmer, FarmerCreationAtributes> {
   })
   @Column({
     type: DataType.STRING,
-    allowNull: false,
+    allowNull: true,
   })
   address: string;
 
@@ -71,7 +71,7 @@ export class Farmer extends Model<Farmer, FarmerCreationAtributes> {
   @ApiProperty({ example: '0555555555', description: 'Phone of farmer' })
   @Column({
     type: DataType.STRING,
-    allowNull: false,
+    allowNull: true,
   })
   phone: string;
 
@@ -81,7 +81,7 @@ export class Farmer extends Model<Farmer, FarmerCreationAtributes> {
   })
   @Column({
     type: DataType.FLOAT,
-    allowNull: false,
+    allowNull: true,
   })
   coordinateLat: number;
 
@@ -91,9 +91,21 @@ export class Farmer extends Model<Farmer, FarmerCreationAtributes> {
   })
   @Column({
     type: DataType.FLOAT,
-    allowNull: false,
+    allowNull: true,
   })
   coordinateLong: number;
+
+  @ApiProperty({
+    example:
+      'https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png',
+    description: 'Image URL',
+    required: false,
+  })
+  @Column({
+    type: DataType.STRING,
+    allowNull: false,
+  })
+  imageURL: string;
 
   //@HasMany(() => Deal)
   //projects: Deal[];

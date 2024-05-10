@@ -1,9 +1,19 @@
-import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Post,
+  UploadedFile,
+  UseInterceptors,
+} from '@nestjs/common';
 import { ApiOperation, ApiParam, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { FarmersService } from './farmers.service';
 import { EditFarmerDto } from './dtos/editFarmer.dto';
 import { CreateFarmerDto } from './dtos/createFarmer.dto';
 import { Farmer } from './farmers.model';
+import { FileInterceptor } from '@nestjs/platform-express';
 
 @ApiTags('Farmers')
 @Controller('farmers')
@@ -20,8 +30,13 @@ export class FarmersController {
   @ApiOperation({ summary: 'Update Farmer' })
   @ApiResponse({ status: 200, type: Farmer })
   @Post(':id')
-  updateFarmer(@Param('id') id: string, @Body() updateDto: EditFarmerDto) {
-    return this.farmersService.updateFarmer(updateDto, id);
+  @UseInterceptors(FileInterceptor('file'))
+  uploadImage(
+    @UploadedFile() file: Express.Multer.File,
+    @Param('id') id: string,
+    @Body() updateDto: EditFarmerDto,
+  ) {
+    return this.farmersService.updateFarmer(updateDto, id, file);
   }
 
   @ApiOperation({ summary: 'Get Farmer' })

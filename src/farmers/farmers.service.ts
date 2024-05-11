@@ -15,6 +15,7 @@ interface IFarmer {
   phone?: string;
   coordinateLat?: number;
   coordinateLong?: number;
+  userId: number;
 }
 
 const defaultImgUrl =
@@ -28,8 +29,11 @@ export class FarmersService {
   ) {}
 
   async createFarmer(dto: CreateFarmerDto) {
+    console.log('Create farmer:', dto);
+
     const farmerData: IFarmer = {
       email: dto.email,
+      userId: dto.userId,
       imageURL: defaultImgUrl,
     };
 
@@ -40,7 +44,7 @@ export class FarmersService {
         HttpStatus.BAD_REQUEST,
       );
     }
-    console.log('Create farmer:', farmer);
+    // console.log('Create farmer:', farmer);
     return farmer;
   }
 
@@ -56,7 +60,7 @@ export class FarmersService {
         HttpStatus.NOT_FOUND,
       );
     }
-    const fermerData: IFarmer = { ...dto };
+    const fermerData: IFarmer = { ...dto, userId: farmer.userId };
     if (file) {
       const { public_id } = await this.uploadImageToCloudinary(
         file,
@@ -77,7 +81,7 @@ export class FarmersService {
     return updatedfarmer;
   }
 
-  async getOne(id: string) {
+  async getOne(id: number) {
     const farmer = await this.farmerRepository.findOne({
       where: { id },
       include: { all: true },

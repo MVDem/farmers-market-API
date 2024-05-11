@@ -16,7 +16,6 @@ import { CreateUserDto } from './dto/create-user-dto';
 export class AuthService {
   constructor(
     @InjectModel(Auth) private userRepository: typeof Auth,
-    // private userService: UsersService,
     private jwtService: JwtService,
     private farmerService: FarmersService,
   ) {}
@@ -27,7 +26,6 @@ export class AuthService {
   }
 
   async signup(userDto: CreateUserDto) {
-    // const condidate = await this.userRepository.getUserByEmail(userDto.email);
     const condidate = await this.userRepository.findOne({
       where: { email: userDto.email },
       include: { all: true },
@@ -69,7 +67,6 @@ export class AuthService {
   }
 
   private async validateUser(userDto: CreateUserDto) {
-    // const user = await this.userService.getUserByEmail(userDto.email);
     const user = await this.userRepository.findOne({
       where: { email: userDto.email },
       include: { all: true },

@@ -1,14 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import {
-  Table,
-  Model,
-  Column,
-  DataType,
-  BelongsTo,
-  ForeignKey,
-  HasOne,
-  HasMany,
-} from 'sequelize-typescript';
+import { Table, Model, Column, DataType, HasOne } from 'sequelize-typescript';
 import { Farmer } from 'src/farmers/farmers.model';
 
 interface AuthCreationAttrs {

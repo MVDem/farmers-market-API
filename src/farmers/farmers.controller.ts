@@ -3,7 +3,6 @@ import {
   Controller,
   Delete,
   Get,
-  Param,
   Post,
   Req,
   UseGuards,
@@ -13,7 +12,7 @@ import {
 import { ApiOperation, ApiParam, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { FarmersService } from './farmers.service';
 import { EditFarmerDto } from './dtos/editFarmer.dto';
-import { CreateFarmerDto } from './dtos/createFarmer.dto';
+// import { CreateFarmerDto } from './dtos/createFarmer.dto';
 import { Farmer } from './farmers.model';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { JwtAuthGuard } from 'src/auth/jwt-auth-guard';
@@ -48,27 +47,17 @@ export class FarmersController {
   @ApiResponse({ status: 200, type: Farmer })
   @UseGuards(JwtAuthGuard)
   @Get()
-  // @ApiParam({
-  //   name: 'id',
-  //   required: true,
-  //   example: 'F-123',
-  // })
   getFarmer(@Req() req) {
-    const id = req.user.id;
+    const id = +req.user.id;
     return this.farmersService.getOne(id);
   }
 
-  @ApiOperation({ summary: 'Delete Farmer' })
-  @ApiResponse({ status: 200, type: Farmer })
-  @UseGuards(JwtAuthGuard)
-  @Delete()
-  // @ApiParam({
-  //   name: 'id',
-  //   required: true,
-  //   example: 'F-123',
-  // })
-  deleteFarmer(@Req() req) {
-    const id = req.user.id;
-    return this.farmersService.deleteFarmer(id);
-  }
+  // @ApiOperation({ summary: 'Delete Farmer' })
+  // @ApiResponse({ status: 200, type: Farmer })
+  // @UseGuards(JwtAuthGuard)
+  // @Delete()
+  // deleteFarmer(@Req() req) {
+  //   const id = req.user.id;
+  //   return this.farmersService.deleteFarmer(id);
+  // }
 }

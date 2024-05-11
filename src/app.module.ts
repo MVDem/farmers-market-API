@@ -7,12 +7,11 @@ import { FarmersModule } from './farmers/farmers.module';
 import { Farmer } from './farmers/farmers.model';
 import { AuthModule } from './auth/auth.module';
 import { Auth } from './auth/auth.model';
-import { DealsModule } from './deals/deals.module';
-import { Farmer } from './farmers/farmers.model';
-import { Deal } from './deals/deal.model';
 import { Product } from './products/products.model';
 import { ProductsModule } from './products/products.module';
 import { CloudinaryModule } from './cloudinary/cloudinary.module';
+import { Offer } from './offers/offers.model';
+import { OffersModule } from './offers/offers.module';
 
 @Module({
   imports: [
@@ -26,13 +25,14 @@ import { CloudinaryModule } from './cloudinary/cloudinary.module';
       username: process.env.POSTGRES_USER,
       password: process.env.POSTGRES_PASSWORD,
       database: process.env.POSTGRES_DB,
-      models: [Auth, Farmer, Deal, Product],
+      models: [Auth, Farmer, Offer, Product],
       autoLoadModels: true,
+      logging: false,
     }),
-    FarmersModule,
     AuthModule,
+    FarmersModule,
     ProductsModule,
-    DealsModule,
+    OffersModule,
     CloudinaryModule,
   ],
   controllers: [AppController],

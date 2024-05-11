@@ -8,7 +8,7 @@ import {
   ForeignKey,
   BelongsTo,
 } from 'sequelize-typescript';
-import { Deal } from 'src/deals/deal.model';
+import { Offer } from 'src/offers/offers.model';
 import { Auth } from 'src/auth/auth.model';
 
 interface FarmerCreationAtributes {
@@ -118,8 +118,8 @@ export class Farmer extends Model<Farmer, FarmerCreationAtributes> {
   @BelongsTo(() => Auth)
   user: Auth;
 
-  @HasMany(() => Deal)
-  deals: Deal[];
+  @HasMany(() => Offer)
+  deals: Offer[];
   @ApiProperty({
     example:
       'https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png',

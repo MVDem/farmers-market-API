@@ -9,7 +9,7 @@ import {
 } from 'sequelize-typescript';
 import { Farmer } from 'src/farmers/farmers.model';
 
-interface DealCreationAtributes {
+interface OffersCreationAtributes {
   unit: string;
   price: number;
   image: string;
@@ -20,7 +20,7 @@ interface DealCreationAtributes {
 }
 
 @Table({ tableName: 'deals' })
-export class Deal extends Model<Deal, DealCreationAtributes> {
+export class Offer extends Model<Offer, OffersCreationAtributes> {
   @ApiProperty({ example: '1', description: 'Unic id. Must be a string' })
   @Column({
     type: DataType.INTEGER,

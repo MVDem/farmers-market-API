@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsEmail, IsString } from 'class-validator';
+import { IsEmail, IsNumber } from 'class-validator';
 
 export class CreateFarmerDto {
   @ApiProperty({
@@ -15,6 +15,6 @@ export class CreateFarmerDto {
     description: 'Id of the user who is a farmer',
     required: false,
   })
-  @IsString({ message: 'Id must be a string' })
-  userId: string;
+  @IsNumber({}, { message: 'UserId is not a number' })
+  userId: number;
 }

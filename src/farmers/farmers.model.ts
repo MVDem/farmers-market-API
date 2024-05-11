@@ -1,5 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { Column, Model, DataType, Table, HasMany } from 'sequelize-typescript';
+import { Deal } from 'src/deals/deal.model';
 
 interface FarmerCreationAtributes {
   name: string;
@@ -95,6 +96,6 @@ export class Farmer extends Model<Farmer, FarmerCreationAtributes> {
   })
   coordinateLong: number;
 
-  //@HasMany(() => Deal)
-  //projects: Deal[];
+  @HasMany(() => Deal)
+  deals: Deal[];
 }

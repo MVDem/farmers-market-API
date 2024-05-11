@@ -37,7 +37,10 @@ export class FarmersService {
   }
 
   async getOne(id: number) {
-    const farmer = await this.farmerRepository.findOne({ where: { id } });
+    const farmer = await this.farmerRepository.findOne({
+      where: { id },
+      include: { all: true },
+    });
     if (!farmer) {
       throw new HttpException(
         'Farmer with this id is not found',

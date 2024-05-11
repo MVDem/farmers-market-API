@@ -16,7 +16,7 @@ export class EditProductDto {
       })
       @IsString({ message: 'Category must be a string' })
       @MaxLength(15, {
-        Category: 'Name must be max 15 simbols ',
+        message: 'Name must be max 15 simbols ',
       })
       category: string;
 

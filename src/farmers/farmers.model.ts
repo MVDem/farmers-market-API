@@ -1,5 +1,13 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { Column, Model, DataType, Table, HasMany } from 'sequelize-typescript';
+import {
+  Column,
+  Model,
+  DataType,
+  Table,
+  ForeignKey,
+  BelongsTo,
+} from 'sequelize-typescript';
+import { Auth } from 'src/auth/auth.model';
 
 interface FarmerCreationAtributes {
   name: string;
@@ -27,7 +35,7 @@ export class Farmer extends Model<Farmer, FarmerCreationAtributes> {
   @ApiProperty({ example: 'John Doe', description: 'Name of farmer' })
   @Column({
     type: DataType.STRING,
-    allowNull: false,
+    allowNull: true,
   })
   name: string;
 
@@ -37,7 +45,7 @@ export class Farmer extends Model<Farmer, FarmerCreationAtributes> {
   })
   @Column({
     type: DataType.STRING,
-    allowNull: false,
+    allowNull: true,
   })
   description: string;
 
@@ -47,7 +55,7 @@ export class Farmer extends Model<Farmer, FarmerCreationAtributes> {
   })
   @Column({
     type: DataType.STRING,
-    allowNull: false,
+    allowNull: true,
   })
   city: string;
 
@@ -57,7 +65,7 @@ export class Farmer extends Model<Farmer, FarmerCreationAtributes> {
   })
   @Column({
     type: DataType.STRING,
-    allowNull: false,
+    allowNull: true,
   })
   address: string;
 
@@ -71,7 +79,7 @@ export class Farmer extends Model<Farmer, FarmerCreationAtributes> {
   @ApiProperty({ example: '0555555555', description: 'Phone of farmer' })
   @Column({
     type: DataType.STRING,
-    allowNull: false,
+    allowNull: true,
   })
   phone: string;
 
@@ -81,7 +89,7 @@ export class Farmer extends Model<Farmer, FarmerCreationAtributes> {
   })
   @Column({
     type: DataType.FLOAT,
-    allowNull: false,
+    allowNull: true,
   })
   coordinateLat: number;
 
@@ -91,9 +99,22 @@ export class Farmer extends Model<Farmer, FarmerCreationAtributes> {
   })
   @Column({
     type: DataType.FLOAT,
-    allowNull: false,
+    allowNull: true,
   })
   coordinateLong: number;
+
+  @ForeignKey(() => Auth)
+  @ApiProperty({
+    example: '2',
+    description: 'uniqu id from user table',
+  })
+  @Column({
+    type: DataType.INTEGER,
+  })
+  userId: number;
+
+  @BelongsTo(() => Auth)
+  user: Auth;
 
   //@HasMany(() => Deal)
   //projects: Deal[];

@@ -9,6 +9,8 @@ export class FarmersService {
   constructor(@InjectModel(Farmer) private farmerRepository: typeof Farmer) {}
 
   async createFarmer(dto: CreateFarmerDto) {
+    console.log("I'm Here");
+
     const farmer = await this.farmerRepository.create(dto);
     if (!farmer) {
       throw new HttpException(
@@ -36,7 +38,7 @@ export class FarmersService {
     }
   }
 
-  async getOne(id: number) {
+  async getOne(id: string) {
     const farmer = await this.farmerRepository.findOne({ where: { id } });
     if (!farmer) {
       throw new HttpException(

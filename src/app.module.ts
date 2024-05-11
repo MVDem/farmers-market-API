@@ -4,8 +4,9 @@ import { AppService } from './app.service';
 import { ConfigModule } from '@nestjs/config';
 import { SequelizeModule } from '@nestjs/sequelize';
 import { FarmersModule } from './farmers/farmers.module';
-import { UsersModule } from './users/users.module';
-import { User } from './users/users.model';
+import { Farmer } from './farmers/farmers.model';
+import { AuthModule } from './auth/auth.module';
+import { Auth } from './auth/auth.model';
 
 @Module({
   imports: [
@@ -19,11 +20,11 @@ import { User } from './users/users.model';
       username: process.env.POSTGRES_USER,
       password: process.env.POSTGRES_PASSWORD,
       database: process.env.POSTGRES_DB,
-      models: [User],
+      models: [Auth, Farmer],
       autoLoadModels: true,
     }),
     FarmersModule,
-    UsersModule,
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService],

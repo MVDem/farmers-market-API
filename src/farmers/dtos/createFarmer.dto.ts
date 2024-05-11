@@ -18,7 +18,8 @@ export class CreateFarmerDto {
   @MaxLength(15, {
     message: 'Name must be max 15 simbols ',
   })
-  readonly name: string;
+  @IsOptional()
+  readonly name?: string;
 
   @ApiProperty({
     example:
@@ -31,7 +32,7 @@ export class CreateFarmerDto {
     message: 'Description must be max 150 simbols',
   })
   @IsOptional()
-  description: string;
+  description?: string;
 
   @ApiProperty({
     example: 'Qiryat Shemona',
@@ -42,7 +43,8 @@ export class CreateFarmerDto {
   @MaxLength(15, {
     message: 'Name must be max 15 simbols ',
   })
-  city: string;
+  @IsOptional()
+  city?: string;
 
   @ApiProperty({
     example: 'lorem ipsum dolor sit amet, consectetur adipiscing',
@@ -54,7 +56,7 @@ export class CreateFarmerDto {
     message: 'Address must be max 50 simbols',
   })
   @IsOptional()
-  address: string;
+  address?: string;
 
   @ApiProperty({
     example: 'farmer@mail.ru',
@@ -71,7 +73,7 @@ export class CreateFarmerDto {
   })
   @IsString({ message: 'Phone is not a string' })
   @Length(10)
-  phone: string;
+  phone?: string;
 
   @ApiProperty({
     example: '739745.6585827',
@@ -80,7 +82,7 @@ export class CreateFarmerDto {
   })
   @IsNumber({}, { message: 'Coordinate latitude is not a number' })
   @IsOptional()
-  coordinateLat: number;
+  coordinateLat?: number;
 
   @ApiProperty({
     example: '3677220.3427914',
@@ -89,5 +91,14 @@ export class CreateFarmerDto {
   })
   @IsNumber({}, { message: 'Coordinate longitude is not a number' })
   @IsOptional()
-  coordinateLong: number;
+  coordinateLong?: number;
+
+  // @ApiProperty({
+  //   example: '3677220.3427914',
+  //   description: 'Coordinate longitude should be a number',
+  //   required: false,
+  // })
+  // @IsNumber({}, { message: 'Coordinate longitude is not a number' })
+  @IsOptional()
+  userId?: number;
 }

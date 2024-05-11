@@ -19,7 +19,7 @@ interface OffersCreationAtributes {
   farmerId: number;
 }
 
-@Table({ tableName: 'deals' })
+@Table({ tableName: 'offers' })
 export class Offer extends Model<Offer, OffersCreationAtributes> {
   @ApiProperty({ example: '1', description: 'Unic id. Must be a string' })
   @Column({

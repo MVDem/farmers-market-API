@@ -77,7 +77,7 @@ export class FarmersService {
     const updatedfarmer = await this.farmerRepository.findOne({
       where: { id },
     });
-    console.log('Update farmer:', farmer);
+    // console.log('Update farmer:', updatedfarmer);
     return updatedfarmer;
   }
 

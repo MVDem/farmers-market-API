@@ -1,17 +1,17 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsNumber, IsString, MaxLength, IsOptional } from 'class-validator';
 
-export class CreateOfferDto {
+export class editOfferDto {
   @ApiProperty({
-    example: 'P-123',
-    description: 'Product id',
+    example: 'O-123',
+    description: 'Offer id',
     required: true,
   })
-  @IsString({ message: 'Product id must be a string' })
+  @IsString({ message: 'Offer id must be a string' })
   @MaxLength(10, {
-    message: 'Product id must be max 10 simbols',
+    message: 'Offer id must be max 10 simbols',
   })
-  productId: string;
+  offerId: string;
 
   @ApiProperty({
     example: '100',
@@ -19,6 +19,7 @@ export class CreateOfferDto {
     required: true,
   })
   @IsString({ message: 'Price must be a string' })
+  @IsOptional()
   price: string;
 
   @ApiProperty({
@@ -30,6 +31,7 @@ export class CreateOfferDto {
   @MaxLength(5, {
     message: 'Unit must be max 5 simbols',
   })
+  @IsOptional()
   unit: string;
 
   @ApiProperty({
@@ -39,6 +41,7 @@ export class CreateOfferDto {
   })
   @IsOptional()
   @IsString({ message: 'Image must be a string' })
+  @IsOptional()
   image: string;
 
   @ApiProperty({
@@ -46,6 +49,7 @@ export class CreateOfferDto {
     description: 'Display/Hide deal on the market',
     required: false,
   })
+  @IsOptional()
   @IsOptional()
   isActive: boolean;
 

@@ -11,6 +11,7 @@ import { Farmer } from './farmers/farmers.model';
 import { Deal } from './deals/deal.model';
 import { Product } from './products/products.model';
 import { ProductsModule } from './products/products.module';
+import { CloudinaryModule } from './cloudinary/cloudinary.module';
 
 @Module({
   imports: [
@@ -31,6 +32,7 @@ import { ProductsModule } from './products/products.module';
     UsersModule,
     ProductsModule,
     DealsModule,
+    CloudinaryModule,
   ],
   controllers: [AppController],
   providers: [AppService],

@@ -6,6 +6,7 @@ import {
   Length,
   MaxLength,
   IsOptional,
+  IsUrl,
 } from 'class-validator';
 
 export class EditFarmerDto {

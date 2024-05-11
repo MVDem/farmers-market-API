@@ -6,6 +6,7 @@ import { SequelizeModule } from '@nestjs/sequelize';
 import { FarmersModule } from './farmers/farmers.module';
 import { UsersModule } from './users/users.module';
 import { User } from './users/users.model';
+import { CloudinaryModule } from './cloudinary/cloudinary.module';
 
 @Module({
   imports: [
@@ -24,6 +25,7 @@ import { User } from './users/users.model';
     }),
     FarmersModule,
     UsersModule,
+    CloudinaryModule,
   ],
   controllers: [AppController],
   providers: [AppService],

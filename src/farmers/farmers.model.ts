@@ -1,5 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { Column, Model, DataType, Table, HasMany } from 'sequelize-typescript';
+import { Deal } from 'src/deals/deal.model';
 
 interface FarmerCreationAtributes {
   name: string;
@@ -95,6 +96,8 @@ export class Farmer extends Model<Farmer, FarmerCreationAtributes> {
   })
   coordinateLong: number;
 
+  @HasMany(() => Deal)
+  deals: Deal[];
   @ApiProperty({
     example:
       'https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png',
@@ -107,6 +110,4 @@ export class Farmer extends Model<Farmer, FarmerCreationAtributes> {
   })
   imageURL: string;
 
-  //@HasMany(() => Deal)
-  //projects: Deal[];
 }

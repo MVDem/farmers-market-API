@@ -6,6 +6,11 @@ import { SequelizeModule } from '@nestjs/sequelize';
 import { FarmersModule } from './farmers/farmers.module';
 import { UsersModule } from './users/users.module';
 import { User } from './users/users.model';
+import { DealsModule } from './deals/deals.module';
+import { Farmer } from './farmers/farmers.model';
+import { Deal } from './deals/deal.model';
+import { Product } from './products/products.model';
+import { ProductsModule } from './products/products.module';
 import { CloudinaryModule } from './cloudinary/cloudinary.module';
 
 @Module({
@@ -20,11 +25,13 @@ import { CloudinaryModule } from './cloudinary/cloudinary.module';
       username: process.env.POSTGRES_USER,
       password: process.env.POSTGRES_PASSWORD,
       database: process.env.POSTGRES_DB,
-      models: [User],
+      models: [User, Farmer, Deal, Product],
       autoLoadModels: true,
     }),
     FarmersModule,
     UsersModule,
+    ProductsModule,
+    DealsModule,
     CloudinaryModule,
   ],
   controllers: [AppController],

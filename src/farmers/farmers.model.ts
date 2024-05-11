@@ -1,6 +1,15 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { Column, Model, DataType, Table, HasMany } from 'sequelize-typescript';
+import {
+  Column,
+  Model,
+  DataType,
+  Table,
+  HasMany,
+  ForeignKey,
+  BelongsTo,
+} from 'sequelize-typescript';
 import { Deal } from 'src/deals/deal.model';
+import { Auth } from 'src/auth/auth.model';
 
 interface FarmerCreationAtributes {
   name: string;
@@ -96,6 +105,19 @@ export class Farmer extends Model<Farmer, FarmerCreationAtributes> {
   })
   coordinateLong: number;
 
+  @ForeignKey(() => Auth)
+  @ApiProperty({
+    example: '2',
+    description: 'uniqu id from user table',
+  })
+  @Column({
+    type: DataType.INTEGER,
+  })
+  userId: number;
+
+  @BelongsTo(() => Auth)
+  user: Auth;
+
   @HasMany(() => Deal)
   deals: Deal[];
   @ApiProperty({
@@ -109,5 +131,4 @@ export class Farmer extends Model<Farmer, FarmerCreationAtributes> {
     allowNull: false,
   })
   imageURL: string;
-
 }

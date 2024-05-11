@@ -32,6 +32,7 @@ export class FarmersService {
       email: dto.email,
       imageURL: defaultImgUrl,
     };
+
     const farmer = await this.farmerRepository.create(farmerData);
     if (!farmer) {
       throw new HttpException(
@@ -76,7 +77,7 @@ export class FarmersService {
     return updatedfarmer;
   }
 
-  async getOne(id: number) {
+  async getOne(id: string) {
     const farmer = await this.farmerRepository.findOne({
       where: { id },
       include: { all: true },

@@ -1,60 +1,102 @@
-# Frontend Project: Farm Market
+# Backend Server for Market
 
-## Description:
+## Description
 
-This is the frontend part of the Farm Market project, which is aimed at creating an online marketplace for farmers to sell their products directly to consumers. The frontend is built using modern web technologies and frameworks to provide an intuitive user experience for both farmers and consumers.
+This project aims to create a backend server for managing users, farmers, and market deals in an agriculture market application. The server is built using various technologies for efficient development and scalability.
 
-## Technologies Used for Frontend Creation:
+## Technologies Used
 
-- **Framework:** React with TypeScript
-- **Web Application Building Tool:** Vite
-- **Routing:** React Router
-- **State Management:** Redux
-- **Requests:** RTK-Query
-- **Styling:** SCSS
+- **Framework:** Nest.js with TypeScript
+- **Database:** PostgreSQL with Sequelize
+- **Authentication:** JWT token, Google Passport
+- **Documentation:** Swagger
+- **Testing:** Jest
 
-## Frontend Functionality:
+## Endpoints
 
-### HomePage:
+### User
 
-- View a list of all available products (name, description, farmer name, farmer region, date of supplemental, product’s picture, pack)
-- Sort products by product name / farmer name / farmer region / date of supplemental
-- Filter products by product name / farmer name / farmer region / date of supplemental (only new products)
-- Navigate to farmer’s pages / product’s page
+- **SignIn**
+  - Request: `{login: string, password: string}`
+  - Response: `{token: string}`
+- **SignUp**
+  - Request: `{login: string, password: string, role: string}`
+    - If `role` is 'FARMER', a new Farmer is created using farmer’s method
+  - Response: `{token: string}`
+- **getAll**
+  - Response: Array of User objects
+- **Delete**
+  - Request Header: Bearer token
+  - Request Body: `{id: string}`
+  - Deletes user information and dependencies
+  - Response: Deleted user object
 
-### SignIn/SignUp Page:
+### Farmer
 
-- Allow users to sign in to their accounts or sign up for a new account.
+- **GetOne**
+  - Request Header: Bearer token
+  - Request Body: `{id: string}`
+  - Response: Farmer object
+- **Update**
+  - Request Header: Bearer token
+  - Request Body: `{name?: string, description?: string, city?: string, address?: string, email?: string, phone?: number, coordinateLat?: number, coordinateLong?: number}`
+  - Response: Updated user object
 
-### Farmer:
+### Market
 
-#### Profile Page:
+- **Add a deal to the market**
+  - Request Header: Bearer token
+  - Request Body: `{farmerId: string, productId: string, unit: string, price: number, photo?: File, descriptionEN?: string, descriptionHEB?: string}`
+  - Response: Deal object
+- **Update a deal on the market**
+  - Request Header: Bearer token
+  - Request Body: `{id: string, unit?: string, price?: number, photo?: File, descriptionEN?: string, descriptionHEB?: string}`
+  - Response: Updated deal object
+- **Delete a deal from the market**
+  - Request Header: Bearer token
+  - Request Body: `{id: string}`
+  - Response: Deleted deal object
+- **get all offers**
+  - Response: Array of offer objects
+- **get one offer by id**
+  - Request Body: `{id: string}`
+  - Response: Deal object
 
-- View farmer’s page
-- Update farmer’s info
-- Delete account
+## Additional Features
 
-#### Dashboard Page:
+- \*get a page out of the offer list
+- \*get a sorted list of the offers
 
-- View a list of all my transactions
-  - Date of transaction
-  - Product details
-  - Transaction status
-- Search for a transaction by product from my transactions list
-- Hide/display a transaction on the market
-  - Toggle visibility of transactions to control product availability
+(\* denotes features to be implemented)
 
-### Admin:
+## Installation
 
-#### User Management:
+```bash
+$ npm install
+```
 
-- View a list of all users
-- Block/unblock a user account
-- View user details
+## Running the app
 
-#### Product Management:
+```bash
+# development
+$ npm run start
 
-- View a list of all products
-- Add new products
-- Edit existing product details
-- Delete products from the marketplace
+# watch mode
+$ npm run start:dev
+
+# production mode
+$ npm run start:prod
+```
+
+## Test
+
+```bash
+# unit tests
+$ npm run test
+
+# e2e tests
+$ npm run test:e2e
+
+# test coverage
+$ npm run test:cov
+```

@@ -5,6 +5,7 @@ import {
   Get,
   Param,
   Post,
+  Query,
   Req,
   UploadedFile,
   UseGuards,
@@ -76,5 +77,23 @@ export class OffersController {
   deleteFarmer(@Req() req, @Param('id') offerId: string) {
     const farmerId = +req.user.farmer.id;
     return this.OffersService.delete(farmerId, +offerId);
+  }
+
+  @ApiOperation({ summary: 'Get list of offers with pagination and sorting' })
+  @ApiResponse({ status: 200, type: Offer })
+  @UseGuards(JwtAuthGuard)
+  @Get()
+  getPaginatedSortedOffers(
+    @Query('pageNumber') pageNumber: number,
+    @Query('pageSize') pageSize: number,
+    @Query('sortBy') sortBy?: string,
+    @Query('order') order?: string,
+  ) {
+    return this.OffersService.getPaginatedSortedOffers(
+      pageNumber,
+      pageSize,
+      sortBy,
+      order,
+    );
   }
 }

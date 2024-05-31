@@ -63,7 +63,7 @@ export class Offer extends Model<Offer, OffersCreationAtributes> {
 
   @ApiProperty({
     example: 'Lorem ',
-    description: 'English descroption for product',
+    description: 'English description for product',
   })
   @Column({
     type: DataType.STRING,
@@ -73,7 +73,7 @@ export class Offer extends Model<Offer, OffersCreationAtributes> {
 
   @ApiProperty({
     example: 'Lorem ',
-    description: 'Hebrew descroption for product',
+    description: 'Hebrew description for product',
   })
   @Column({
     type: DataType.STRING,

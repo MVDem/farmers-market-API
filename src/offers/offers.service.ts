@@ -4,6 +4,8 @@ import { InjectModel } from '@nestjs/sequelize';
 import { CreateOfferDto } from './dtos/createOffer.dto';
 import { CloudinaryService } from 'src/cloudinary/cloudinary.service';
 import { editOfferDto } from './dtos/editOffer.dto';
+import { OfferDto } from './dtos/offer.dto';
+import { PaginatedOfferDto } from './dtos/paginatedOffers.dto';
 
 interface IOffer {
   unit?: string;
@@ -171,5 +173,51 @@ export class OffersService {
       throw new HttpException('Image was not uploaded', HttpStatus.BAD_REQUEST);
     }
     return result;
+  }
+
+  async getPaginatedSortedOffers(
+    pageNumber = 1,
+    pageSize = 10,
+    sortBy = 'id',
+    order = 'ASC',
+  ): Promise<PaginatedOfferDto> {
+    const offset = (pageNumber - 1) * pageSize;
+
+    const response = await this.OffersRepository.findAndCountAll({
+      offset,
+      limit: pageSize,
+      order: [[sortBy, order]],
+    });
+
+    if (!response) {
+      throw new HttpException('Nothing to display', HttpStatus.NOT_FOUND);
+    }
+    const { count, rows } = response;
+
+    const offers: OfferDto[] = rows.map((offer) => {
+      const {
+        id,
+        price,
+        unit,
+        isActive,
+        description_EN,
+        description_HEB,
+        image,
+      } = offer;
+      return {
+        offerId: id,
+        price,
+        unit,
+        isActive,
+        description_EN,
+        description_HEB,
+        image,
+      };
+    });
+
+    return {
+      offers,
+      count,
+    };
   }
 }

@@ -4,11 +4,9 @@ import {
   Model,
   DataType,
   Table,
-  HasMany,
   ForeignKey,
   BelongsTo,
 } from 'sequelize-typescript';
-import { Offer } from 'src/offers/offers.model';
 import { Auth } from 'src/auth/auth.model';
 
 interface FarmerCreationAtributes {
@@ -25,6 +23,9 @@ interface FarmerCreationAtributes {
 
 @Table({ tableName: 'farmers' })
 export class Farmer extends Model<Farmer, FarmerCreationAtributes> {
+  static find() {
+    throw new Error('Method not implemented.');
+  }
   @ApiProperty({ example: '1', description: 'Unic id. Must be a string' })
   @Column({
     type: DataType.INTEGER,
@@ -118,17 +119,6 @@ export class Farmer extends Model<Farmer, FarmerCreationAtributes> {
   @BelongsTo(() => Auth)
   user: Auth;
 
-  @HasMany(() => Offer)
-  deals: Offer[];
-  @ApiProperty({
-    example:
-      'https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png',
-    description: 'Image URL',
-    required: false,
-  })
-  @Column({
-    type: DataType.STRING,
-    allowNull: false,
-  })
-  imageURL: string;
+  //@HasMany(() => Deal)
+  //projects: Deal[];
 }

@@ -102,7 +102,7 @@ export class OffersService {
     return updatedoffer;
   }
 
-  async getOne(farmerId: number, offerId: number) {
+  async getOne(offerId: number) {
     const offer = await this.OffersRepository.findOne({
       where: { id: offerId },
       include: { all: true },
@@ -113,12 +113,12 @@ export class OffersService {
         HttpStatus.NOT_FOUND,
       );
     }
-    if (offer.farmerId !== farmerId) {
-      throw new HttpException(
-        'You are not the owner of this offer',
-        HttpStatus.BAD_REQUEST,
-      );
-    }
+    // if (offer.farmerId !== farmerId) {
+    //   throw new HttpException(
+    //     'You are not the owner of this offer',
+    //     HttpStatus.BAD_REQUEST,
+    //   );
+    // }
     console.log('Get offer by id:', offer);
     return offer;
   }

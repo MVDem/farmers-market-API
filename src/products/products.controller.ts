@@ -20,7 +20,7 @@ export class ProductsController {
   @ApiOperation({ summary: 'Update Product' })
   @ApiResponse({ status: 200, type:Product })
   @Post(':id')
-  updateProduct(@Body() updateDto: EditProductDto, @Param('id') id: string) {
+  updateProduct(@Body() updateDto: EditProductDto, @Param('id') id: number) {
     return this.productsService.updateProduct(updateDto, id);
   }
 
@@ -30,9 +30,9 @@ export class ProductsController {
   @ApiParam({
     name: 'id',
     required: true,
-    example: 'F-123',
+     example: 'F-123',
   })
-  getProduct(@Param('id') id: string) {
+  getProduct(@Param('id') id: number) {
     return this.productsService.getOne(+id);
   }
 
@@ -44,8 +44,16 @@ export class ProductsController {
     required: true,
     example: 'F-123',
   })
-  deleteProduct(@Param('id') id: string) {
+  deleteProduct(@Param('id') id: number) {
     return this.productsService.deleteProduct(id);
   }
- 
+
+
+
+  @ApiOperation({ summary: 'Get list of product names' })
+  @ApiResponse({ status: 200, type: [String] })
+  @Get()
+  getAllProductNames() {
+    return this.productsService.getAllProductNames();
+  }
 }

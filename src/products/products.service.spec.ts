@@ -1,4 +1,3 @@
-import { Injectable } from '@nestjs/common';
 import { ProductsService } from './products.service';
 import { Test, TestingModule } from '@nestjs/testing';
 

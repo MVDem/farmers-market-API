@@ -31,11 +31,8 @@ export class RolesGuard implements CanActivate {
       if (!requiredRoles) {
         return true;
       }
-      const authHeader = req.headers.authorization;
-      const bearer = authHeader.split(' ')[0];
-      const token = authHeader.split(' ')[1];
-
-      if (bearer !== 'Bearer' || !token) {
+      const token = req.cookies['token'];
+      if (!token) {
         throw new UnauthorizedException({
           message: 'User is not authorization',
         });

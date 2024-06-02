@@ -17,11 +17,11 @@ export class JwtAuthGuard implements CanActivate {
   ): boolean | Promise<boolean> | Observable<boolean> {
     const req = context.switchToHttp().getRequest();
     try {
-      const authHeader = req.headers.authorization;
-      const bearer = authHeader.split(' ')[0];
-      const token = authHeader.split(' ')[1];
+      const token = req.cookies['token'];
+      // const bearer = authHeader.split(' ')[0];
+      // const token = authHeader.split(' ')[1];
 
-      if (bearer !== 'Bearer' || !token) {
+      if (!token) {
         throw new UnauthorizedException({
           message: 'User is not authorization',
         });

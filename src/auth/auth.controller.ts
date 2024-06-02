@@ -24,4 +24,10 @@ export class AuthController {
   async signup(@Body() userDto: CreateUserDto, @Res() res: Response) {
     return res.json(await this.authService.signup(userDto));
   }
+
+  @Post('/logout')
+  async logout(@Res() res: Response) {
+    res.clearCookie('token');
+    return res.json({ message: 'user checkout' });
+  }
 }

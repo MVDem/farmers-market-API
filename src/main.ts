@@ -2,7 +2,6 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { ValidationPipe } from '@nestjs/common';
-import { CorsOptions } from '@nestjs/common/interfaces/external/cors-options.interface';
 import * as cookieParser from 'cookie-parser';
 
 async function bootstrap() {
@@ -10,14 +9,6 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.useGlobalPipes(new ValidationPipe());
   app.use(cookieParser());
-
-  const corsOptions: CorsOptions = {
-    origin: 'http://localhost:3000', // Замените на адрес вашего клиентского приложения
-    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-    credentials: true,
-  };
-
-  app.enableCors(corsOptions);
 
   const config = new DocumentBuilder()
     .setTitle("farmer's-API")

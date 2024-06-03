@@ -16,6 +16,8 @@ import { EditFarmerDto } from './dtos/editFarmer.dto';
 import { Farmer } from './farmers.model';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { JwtAuthGuard } from 'src/auth/jwt-auth-guard';
+import { Roles } from 'src/auth/user-self.decorator';
+import { RolesGuard } from 'src/auth/roles.quard';
 
 @ApiTags('Farmers')
 @Controller('farmers')
@@ -60,4 +62,18 @@ export class FarmersController {
   //   const id = req.user.id;
   //   return this.farmersService.deleteFarmer(id);
   // }
+
+  @ApiOperation({ summary: 'Get all users' })
+  @ApiResponse({ status: 200, type: Farmer })
+  @Roles('ADMIN')
+  @UseGuards(RolesGuard)
+  @Get('/all')
+  // @ApiParam({
+  //   name: 'id',
+  //   required: true,
+  //   example: 'F-123',
+  // })
+  getAllUsers() {
+    return this.farmersService.getAll();
+  }
 }

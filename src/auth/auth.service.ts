@@ -22,19 +22,7 @@ export class AuthService {
 
   async signin(userDto: CreateUserDto) {
     const user = await this.validateUser(userDto);
-    const token = await this.generateToken(user);
-    if (user.role === 'FARMER') {
-      let userData = await this.userRepository.findOne({
-        where: { id: user.id },
-        include: { all: true },
-      });
-
-      userData.password = null;
-
-      return { token, userData };
-    }
-
-    return { token };
+    return this.generateToken(user);
   }
 
   async signup(userDto: CreateUserDto) {
@@ -52,24 +40,18 @@ export class AuthService {
       ...userDto,
       password: hashPassword,
     });
-    if (userDto.role === 'FARMER') {
+    if (userDto.role === 'farmer') {
       const farmer: CreateFarmerDto = {
         email: userDto.email,
         userId: user.id,
       };
-      const userfarmer = await this.farmerService.createFarmer(farmer);
-      if (!userfarmer) {
-        throw new HttpException('User is not created', HttpStatus.BAD_REQUEST);
-      }
+      await this.farmerService.createFarmer(farmer);
     }
-    return { message: 'success' };
-
-    // const createdUser = await this.userRepository.findOne({
-    //   where: { id: user.id },
-    //   include: { all: true },
-    // });
-
-    // return this.generateToken(createdUser);
+    const createdUser = await this.userRepository.findOne({
+      where: { id: user.id },
+      include: { all: true },
+    });
+    return this.generateToken(createdUser);
   }
 
   private async generateToken(user: Auth) {

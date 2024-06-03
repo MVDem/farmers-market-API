@@ -7,18 +7,31 @@ import {
 import { JwtService } from '@nestjs/jwt';
 import { Observable } from 'rxjs';
 import { Auth } from './auth.model';
+import { Reflector } from '@nestjs/core';
+import { ROLES_KEY } from './user-self.decorator';
 
 @Injectable()
-export class JwtAuthGuard implements CanActivate {
-  constructor(private jwtService: JwtService) {}
+export class RolesGuard implements CanActivate {
+  constructor(
+    private jwtService: JwtService,
+    private reflector: Reflector,
+  ) {}
 
   canActivate(
     context: ExecutionContext,
   ): boolean | Promise<boolean> | Observable<boolean> {
     const req = context.switchToHttp().getRequest();
     try {
-      const token = req.cookies['token'];
+      const requiredRoles = this.reflector.getAllAndOverride(ROLES_KEY, [
+        context.getHandler(),
+        context.getClass(),
+      ]);
+      console.log('requiredRoles==>', requiredRoles);
 
+      if (!requiredRoles) {
+        return true;
+      }
+      const token = req.cookies['token'];
       if (!token) {
         throw new UnauthorizedException({
           message: 'User is not authorization',
@@ -27,7 +40,7 @@ export class JwtAuthGuard implements CanActivate {
 
       const user: Auth = this.jwtService.verify(token);
       req.user = user;
-      return true;
+      return user.role === requiredRoles[0];
     } catch (e) {
       throw new UnauthorizedException({
         message: 'Token is not valid or User is not authorization ',

@@ -1,6 +1,6 @@
-import { Body, Controller, Post } from '@nestjs/common';
+import { Body, Controller, Post, Res } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
-
+import { Response } from 'express';
 import { AuthService } from './auth.service';
 import { CreateUserDto } from './dto/create-user-dto';
 
@@ -10,12 +10,21 @@ export class AuthController {
   constructor(private authService: AuthService) {}
 
   @Post('/signin')
-  signin(@Body() userDto: CreateUserDto) {
-    return this.authService.signin(userDto);
+  async signin(@Body() userDto: CreateUserDto, @Res() res: Response) {
+    const { token, userData } = await this.authService.signin(userDto);
+
+    res.cookie('token', token, { httpOnly: true, secure: false });
+    return res.json(userData);
   }
 
   @Post('/signup')
-  signup(@Body() userDto: CreateUserDto) {
-    return this.authService.signup(userDto);
+  async signup(@Body() userDto: CreateUserDto, @Res() res: Response) {
+    return res.json(await this.authService.signup(userDto));
+  }
+
+  @Post('/logout')
+  async logout(@Res() res: Response) {
+    res.clearCookie('token');
+    return res.json({ message: 'user checkout' });
   }
 }

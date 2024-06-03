@@ -18,6 +18,8 @@ import { CreateOfferDto } from './dtos/createOffer.dto';
 import { JwtAuthGuard } from 'src/auth/jwt-auth-guard';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { editOfferDto } from './dtos/editOffer.dto';
+import { Roles } from 'src/auth/user-self.decorator';
+import { RolesGuard } from 'src/auth/roles.quard';
 
 @ApiTags('Offers')
 @Controller('offers')
@@ -40,7 +42,8 @@ export class OffersController {
 
   @ApiOperation({ summary: 'Update Offer' })
   @ApiResponse({ status: 200, type: Offer })
-  @UseGuards(JwtAuthGuard)
+  @Roles('FARMER')
+  @UseGuards(RolesGuard)
   @Post('update')
   @UseInterceptors(FileInterceptor('file'))
   update(
@@ -54,27 +57,24 @@ export class OffersController {
 
   @ApiOperation({ summary: 'Get one offer by id' })
   @ApiResponse({ status: 200, type: Offer })
-  @UseGuards(JwtAuthGuard)
   @Get('one/:id')
-  getFarmer(@Req() req, @Param('id') offerId: string) {
-    const farmerId = +req.user.farmer.id;
-    return this.OffersService.getOne(farmerId, +offerId);
+  getFarmer(@Param('id') offerId: string) {
+    return this.OffersService.getOne(+offerId);
   }
 
   @ApiOperation({ summary: "Get all farmer's offers" })
   @ApiResponse({ status: 200, type: Offer })
-  @UseGuards(JwtAuthGuard)
-  @Get('allbyfarmer')
-  getAllByFarmer(@Req() req) {
-    const farmerId = +req.user.farmer.id;
-    return this.OffersService.getAllByFarmer(farmerId);
+  @Get('allByFarmer/:id')
+  getAllByFarmer(@Param('id') farmerId: string) {
+    return this.OffersService.getAllByFarmer(+farmerId);
   }
 
   @ApiOperation({ summary: 'Delete Offer' })
   @ApiResponse({ status: 200, type: Offer })
-  @UseGuards(JwtAuthGuard)
+  @Roles('FARMER')
+  @UseGuards(RolesGuard)
   @Delete(':id')
-  deleteFarmer(@Req() req, @Param('id') offerId: string) {
+  delete(@Req() req, @Param('id') offerId: string) {
     const farmerId = +req.user.farmer.id;
     return this.OffersService.delete(farmerId, +offerId);
   }

@@ -119,13 +119,4 @@ export class FarmersService {
     }
     return result;
   }
-
-  async getAll() {
-    const farmers = await this.farmerRepository.findAll();
-    if (!farmers || farmers.length === 0) {
-      throw new HttpException('No farmers found', HttpStatus.NOT_FOUND);
-    }
-    console.log('Get all farmers', farmers);
-    return farmers;
-  }
 }

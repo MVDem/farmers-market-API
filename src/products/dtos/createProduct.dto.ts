@@ -15,33 +15,30 @@ export class CreateProductDto {
     required: false,
   })
   @IsString({ message: 'Category must be a string' })
-  // @MaxLength(15, {
-  //   Category: 'Name must be max 15 simbols ',
-  // })
+  @MaxLength(50, {
+    message: 'category must be max 50 simbols ',
+  })
   category: string;
 
   @ApiProperty({
-    example:
-      'lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ',
-    description: 'Description must be a string and max 150 simbols',
+    example: 'lorem ipsum ',
+    description: 'nameENG must be a string and max 15 simbols',
     required: true,
   })
   @IsString({ message: 'NameENG must be a string' })
-  @MaxLength(150, {
-    message: 'Description must be max 150 simbols',
+  @MaxLength(15, {
+    message: 'nameENG must be max 15 simbols',
   })
   @IsOptional()
   nameENG: string;
 
   @ApiProperty({
-    example:
-      'lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ',
-    description: 'Description must be a string and max 150 simbols',
+    example: 'lorem ipsum',
     required: false,
   })
   @IsString({ message: 'NameHEB must be a string' })
-  @MaxLength(150, {
-    message: 'NameHEB must be max 150 simbols',
+  @MaxLength(15, {
+    message: 'NameHEB must be max 15 simbols',
   })
   @IsOptional()
   nameHEB: string;
@@ -49,12 +46,12 @@ export class CreateProductDto {
   @ApiProperty({
     example:
       'lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ',
-    description: 'Description must be a string and max 150 simbols',
+    description: 'DescriptionENG must be a string and max 150 simbols',
     required: true,
   })
-  @IsString({ message: 'Description must be a string' })
+  @IsString({ message: 'DescriptionENG must be a string' })
   @MaxLength(150, {
-    message: 'Description must be max 150 simbols',
+    message: 'DescriptionENG must be max 150 simbols',
   })
   @IsOptional()
   descriptionENG: string;
@@ -62,24 +59,24 @@ export class CreateProductDto {
   @ApiProperty({
     example:
       'lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ',
-    description: 'Description must be a string and max 150 simbols',
+    description: 'DescriptionHEB must be a string and max 150 simbols',
     required: false,
   })
-  @IsString({ message: 'Description must be a string' })
+  @IsString({ message: 'DescriptionHEB must be a string' })
   @MaxLength(150, {
-    message: 'Description must be max 150 simbols',
+    message: 'DescriptionHEB must be max 150 simbols',
   })
   @IsOptional()
   descriptionHEB: string;
 
   @ApiProperty({
     example: 'http://Photo.com/photo.jpg',
-    description: 'City name must be a string and max 15 simbols',
+    description: 'Photo url must be a string and max 15 simbols',
     required: false,
   })
-  @IsString({ message: 'Photo must be a string' })
-  @MaxLength(15, {
-    message: 'Name must be max 15 simbols ',
+  @IsString({ message: 'Photo url must be a string' })
+  @MaxLength(150, {
+    message: 'Photo url must be max 15 simbols ',
   })
   photo: string;
 }

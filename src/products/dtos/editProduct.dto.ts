@@ -3,6 +3,8 @@ import {
   IsString,
   MaxLength,
   IsOptional,
+  IsNotEmpty,
+
 } from 'class-validator';
 
 export class EditProductDto {
@@ -11,6 +13,8 @@ export class EditProductDto {
     description: 'Full name ',
     required: false,
   })
+
+  @IsNotEmpty({ message: 'Category must be Not empty' })
   @IsString({ message: 'Category must be a string' })
   @MaxLength(50, {
     message: 'Category must be max 50 simbols ',
@@ -22,6 +26,8 @@ export class EditProductDto {
     description: 'nameENG must be a string and max 15 simbols',
     required: true,
   })
+
+  @IsNotEmpty({ message: 'NameENG must be Not empty' })
   @IsString({ message: 'NameENG must be a string' })
   @MaxLength(15, {
     message: 'NameENG must be max 15 simbols',
@@ -47,6 +53,8 @@ export class EditProductDto {
     description: 'DescriptionENG must be a string and max 150 simbols',
     required: true,
   })
+
+  @IsNotEmpty({ message: 'DescriptionENG must be Not empty' })
   @IsString({ message: 'DescriptionENG must be a string' })
   @MaxLength(150, {
     message: 'DescriptionENG must be max 150 simbols',

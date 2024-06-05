@@ -7,6 +7,7 @@ import {
   MaxLength,
   IsOptional,
   IsUrl,
+  IsNotEmpty, 
 } from 'class-validator';
 
 export class EditFarmerDto {
@@ -40,6 +41,8 @@ export class EditFarmerDto {
     description: 'City name must be a string and max 15 simbols',
     required: false,
   })
+
+  @IsNotEmpty({ message: 'City must be Not empty' })
   @IsString({ message: 'City name must be a string' })
   @MaxLength(15, {
     message: 'Name must be max 15 simbols ',
@@ -64,6 +67,8 @@ export class EditFarmerDto {
     description: 'Email should be an email',
     required: false,
   })
+
+  @IsNotEmpty({ message: 'Email must be Not empty' })
   @IsEmail({}, { message: 'Email is not correct' })
   @IsOptional()
   email: string;

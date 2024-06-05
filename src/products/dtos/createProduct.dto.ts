@@ -1,8 +1,10 @@
 import { ApiProperty } from '@nestjs/swagger';
 import {
   IsString,
+  IsNotEmpty,
   MaxLength,
   IsOptional,
+
 } from 'class-validator';
 
 export class CreateProductDto {
@@ -11,6 +13,7 @@ export class CreateProductDto {
     description: 'Full name ',
     required: false,
   })
+  @IsNotEmpty({ message: 'Category must be Not empty' })
   @IsString({ message: 'Category must be a string' })
   @MaxLength(50, {
     message: 'Category must be max 50 simbols ',
@@ -22,11 +25,13 @@ export class CreateProductDto {
     description: 'nameENG must be a string and max 15 simbols',
     required: true,
   })
+  
+  @IsNotEmpty({ message: 'NameENG must be Not empty' })
   @IsString({ message: 'NameENG must be a string' })
   @MaxLength(15, {
     message: 'NameENG must be max 15 simbols',
   })
-  @IsOptional()
+  // @IsOptional()
   nameENG: string;
 
   @ApiProperty({
@@ -47,6 +52,7 @@ export class CreateProductDto {
     description: 'DescriptionENG must be a string and max 150 simbols',
     required: true,
   })
+  @IsNotEmpty({ message: 'DescriptionENG must be Not empty' })
   @IsString({ message: 'DescriptionENG must be a string' })
   @MaxLength(150, {
     message: 'DescriptionENG must be max 150 simbols',
@@ -74,7 +80,7 @@ export class CreateProductDto {
   })
   @IsString({ message: 'Photo url must be a string' })
   @MaxLength(150, {
-    message: 'Photo url must be max 15 simbols ',
+    message: 'Photo url must be max 150 simbols ',
   })
   photo: string;
 }

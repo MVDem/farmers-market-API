@@ -28,7 +28,8 @@ export class OffersController {
 
   @ApiOperation({ summary: 'Create Offer' })
   @ApiResponse({ status: 201, type: Offer })
-  @UseGuards(JwtAuthGuard)
+  @Roles('FARMER')
+  @UseGuards(RolesGuard)
   @Post()
   @UseInterceptors(FileInterceptor('file'))
   create(
@@ -81,7 +82,6 @@ export class OffersController {
 
   @ApiOperation({ summary: 'Get list of offers with pagination and sorting' })
   @ApiResponse({ status: 200, type: Offer })
-  @UseGuards(JwtAuthGuard)
   @Get()
   getPaginatedSortedOffers(
     @Query('pageNumber') pageNumber: number,

@@ -27,11 +27,21 @@ export class AuthService {
   async signin(userDto: SignInUserDto) {
     const user = await this.validateUser(userDto);
     const token = await this.generateToken(user);
-    if (user.role === 'FARMER') {
+    if (user.role === 'FARMER' && user.farmer) {
       const userData: SignedUserDto = {
+        name: user.farmer.name,
+        description: user.farmer.description,
+        city: user.farmer.city,
+        address: user.farmer.address,
         email: user.email,
+        phone: user.farmer.phone,
+        coordinateLat: user.farmer.coordinateLat,
+        coordinateLong: user.farmer.coordinateLong,
+        userId: user.farmer.userId,
         role: user.role,
       };
+      console.log('🚀 ~ AuthService ~ signin ~ userData:', userData);
+
       return { token, userData };
     }
     return { token };
@@ -80,6 +90,7 @@ export class AuthService {
   private async validateUser(userDto: SignInUserDto) {
     const user = await this.userRepository.findOne({
       where: { email: userDto.email },
+      include: { all: true },
     });
     if (!user) {
       throw new NotFoundException({
@@ -93,13 +104,12 @@ export class AuthService {
     );
 
     if (passwordEquals) {
-      console.log('🚀 ~ AuthService ~ validateUser ~ user:', user)
+      console.log('🚀 ~ AuthService ~ validateUser ~ user:', user);
       return user;
     } else {
       throw new BadRequestException({
         message: 'Incorrect login (email) or password',
       });
     }
-      
   }
 }

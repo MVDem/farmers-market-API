@@ -102,7 +102,7 @@ export class OffersService {
     return updatedoffer;
   }
 
-  async getOne(offerId: number) {
+  async getById(offerId: number) {
     const offer = await this.OffersRepository.findOne({
       where: { id: offerId },
       include: { all: true },

@@ -1,9 +1,12 @@
-import { ApiProperty } from '@nestjs/swagger';
-import { IsEmail, IsString, MinLength } from 'class-validator';
-
 export class SignedUserDto {
-  @ApiProperty({ example: 'user@gmail.com', description: 'email' })
-  readonly email: string;
-  @ApiProperty({ example: 'castomer | farmer', description: 'User role' })
-  readonly role: string;
+  name: string;
+  description: string;
+  city: string;
+  address: string;
+  email: string;
+  phone: string;
+  coordinateLat: number;
+  coordinateLong: number;
+  userId: number;
+  role: string;
 }

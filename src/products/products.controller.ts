@@ -56,4 +56,6 @@ export class ProductsController {
   getAllProductNames() {
     return this.productsService.getAllProductNames();
   }
+
+
 }

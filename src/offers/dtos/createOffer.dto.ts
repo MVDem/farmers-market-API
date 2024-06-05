@@ -11,7 +11,7 @@ export class CreateOfferDto {
   @MaxLength(10, {
     message: 'Product id must be max 10 simbols',
   })
-  productId: string;
+  productId: number;
 
   @ApiProperty({
     example: '100',

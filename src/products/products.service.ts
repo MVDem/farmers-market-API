@@ -5,6 +5,9 @@ import { CreateProductDto } from './dtos/createProduct.dto';
 import { EditProductDto } from './dtos/editProduct.dto';
 import { ProductDto } from './dtos/product.dto';
 import { ListProductDto } from './dtos/listProducts.dto';
+import { Offer } from 'src/offers/offers.model';
+import { Farmer } from 'src/farmers/farmers.model';
+
 
 interface IProduct {
   category?: string;
@@ -20,6 +23,8 @@ interface IProduct {
 export class ProductsService {
   constructor(
     @InjectModel(Product) private ProductRepository: typeof Product,
+    @InjectModel(Offer) private offerRepository: typeof Offer,
+    @InjectModel(Farmer) private farmerRepository: typeof Farmer,
   ) {}
 
   async create(dto: CreateProductDto) {
@@ -45,9 +50,7 @@ export class ProductsService {
     return product;
   }
 
-  async updateProduct(
-    dto: EditProductDto, 
-    id: number)  {
+  async updateProduct(dto: EditProductDto, id: number) {
     const product = await this.ProductRepository.findOne({ where: { id } });
     if (!product) {
       throw new HttpException(
@@ -62,7 +65,10 @@ export class ProductsService {
       where: { id },
     });
     if (isUpdated[0] === 0) {
-      throw new HttpException('The product was not updated', HttpStatus.NOT_FOUND);
+      throw new HttpException(
+        'The product was not updated',
+        HttpStatus.NOT_FOUND,
+      );
     }
 
     const updateproduct = await this.ProductRepository.findOne({
@@ -73,7 +79,7 @@ export class ProductsService {
   }
 
   async getOne(id: number) {
-    const product = await this.ProductRepository.findOne({ 
+    const product = await this.ProductRepository.findOne({
       where: { id },
       include: { all: true },
     });
@@ -108,7 +114,7 @@ export class ProductsService {
 
     const names = response.map((product) => ({ name: product.nameENG }));
     return names;
-  };
+  }
 
   /*
 
@@ -145,5 +151,57 @@ export class ProductsService {
       products,
     };
 */
-  }
+
+
+
+/*
+async getOffersWithFarmerAndProductDetails(): Promise<any[]> {
+  const response = await this.offerRepository.findAll({
+    include: [
+      {
+        model: Farmer,
+        attributes: ['id', 'name', 'city', 'email', 'phone']
+      },
+      {
+        model: Product,
+        attributes: ['id', 'category', 'nameENG', 'nameHEB', 'descriptionENG', 'descriptionHEB', 'photo']
+      }
+    ]
+  });
+
+  return offers;*/
+
+ // if (!response || response.length === 0) {
+//    throw new HttpException('No offers found', HttpStatus.NOT_FOUND);
+//  }
+
+  //return response.map((offer: any) => ({
+    //offerId: offer.id,
+    //unit: offer.unit,
+    //price: offer.price,
+    //offerImage: offer.image,
+    //isActive: offer.isActive,
+    //offerDescriptionEN: offer.description_EN,
+    //offerDescriptionHEB: offer.description_HEB,
+    /*farmer: {
+      farmerId: offer.farmer.id,
+      farmerName: offer.farmer.name,
+      farmerCity: offer.farmer.city,
+      farmerEmail: offer.farmer.email,
+      farmerPhone: offer.farmer.phone,
+    },*/
+    /*product: {
+      productId: offer.product.id,
+      productCategory: offer.product.category,
+      productNameENG: offer.product.nameENG,
+      productNameHEB: offer.product.nameHEB,
+      productDescriptionENG: offer.product.descriptionENG,
+      productDescriptionHEB: offer.product.descriptionHEB,
+      productPhoto: offer.product.photo,
+    },*/
+  //}));
+}
+
+
+//}
 //}

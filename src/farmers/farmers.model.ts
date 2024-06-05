@@ -131,4 +131,7 @@ export class Farmer extends Model<Farmer, FarmerCreationAtributes> {
     allowNull: false,
   })
   imageURL: string;
+
+  @HasMany(() => Offer)
+  offers: Offer[];
 }

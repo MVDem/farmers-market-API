@@ -1,14 +1,14 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsEmail, IsString, MinLength } from 'class-validator';
 
-export class SignFarmerDto {
+export class SignInUserDto {
   @ApiProperty({
     example: 'farmer@mail.ru',
     description: 'login should be an email',
     required: true,
   })
   @IsEmail({}, { message: 'Email is not correct' })
-  readonly login: string;
+  readonly email: string;
 
   @ApiProperty({
     example: '1q2w3e',
@@ -16,8 +16,8 @@ export class SignFarmerDto {
     required: true,
   })
   @IsString({ message: 'Password must be a string' })
-  @MinLength(8, {
-    message: 'Password must be min 8 simbols ',
+  @MinLength(6, {
+    message: 'Password must be min 6 simbols ',
   })
   readonly password: string;
 }

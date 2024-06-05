@@ -1,7 +1,9 @@
 import {
+  BadRequestException,
   HttpException,
   HttpStatus,
   Injectable,
+  NotFoundException,
   UnauthorizedException,
 } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
@@ -11,6 +13,8 @@ import { FarmersService } from 'src/farmers/farmers.service';
 import { InjectModel } from '@nestjs/sequelize';
 import { Auth } from './auth.model';
 import { CreateUserDto } from './dto/create-user-dto';
+import { SignedUserDto } from './dto/signed-user-dto';
+import { SignInUserDto } from './dto/signin-user.dto';
 
 @Injectable()
 export class AuthService {
@@ -20,30 +24,26 @@ export class AuthService {
     private farmerService: FarmersService,
   ) {}
 
-  async signin(userDto: CreateUserDto) {
+  async signin(userDto: SignInUserDto) {
     const user = await this.validateUser(userDto);
     const token = await this.generateToken(user);
     if (user.role === 'FARMER') {
-      let userData = await this.userRepository.findOne({
-        where: { id: user.id },
-        include: { all: true },
-      });
-
-      userData.password = null;
-
+      const userData: SignedUserDto = {
+        email: user.email,
+        role: user.role,
+      };
       return { token, userData };
     }
-
     return { token };
   }
 
   async signup(userDto: CreateUserDto) {
-    const condidate = await this.userRepository.findOne({
+    const candidate = await this.userRepository.findOne({
       where: { email: userDto.email },
       include: { all: true },
     });
-    if (condidate) {
-      throw new HttpException('User allready exist', HttpStatus.BAD_REQUEST);
+    if (candidate) {
+      throw new BadRequestException('User already exist');
     }
 
     const hashPassword = await bcrypt.hash(userDto.password, 5);
@@ -59,17 +59,10 @@ export class AuthService {
       };
       const userfarmer = await this.farmerService.createFarmer(farmer);
       if (!userfarmer) {
-        throw new HttpException('User is not created', HttpStatus.BAD_REQUEST);
+        throw new BadRequestException('User is not created');
       }
     }
     return { message: 'success' };
-
-    // const createdUser = await this.userRepository.findOne({
-    //   where: { id: user.id },
-    //   include: { all: true },
-    // });
-
-    // return this.generateToken(createdUser);
   }
 
   private async generateToken(user: Auth) {
@@ -84,23 +77,29 @@ export class AuthService {
     };
   }
 
-  private async validateUser(userDto: CreateUserDto) {
+  private async validateUser(userDto: SignInUserDto) {
     const user = await this.userRepository.findOne({
       where: { email: userDto.email },
-      include: { all: true },
     });
-    try {
-      const passwordEquals = await bcrypt.compare(
-        userDto.password,
-        user?.password,
-      );
-      if (user || passwordEquals) {
-        return user;
-      }
-    } catch {
-      throw new UnauthorizedException({
-        message: 'incorrect email or password',
+    if (!user) {
+      throw new NotFoundException({
+        message: `User with login: ${userDto.email} not found`,
       });
     }
+
+    const passwordEquals = await bcrypt.compare(
+      userDto.password,
+      user.password,
+    );
+
+    if (passwordEquals) {
+      console.log('🚀 ~ AuthService ~ validateUser ~ user:', user)
+      return user;
+    } else {
+      throw new BadRequestException({
+        message: 'Incorrect login (email) or password',
+      });
+    }
+      
   }
 }

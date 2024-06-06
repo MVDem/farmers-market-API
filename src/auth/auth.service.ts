@@ -1,10 +1,7 @@
 import {
   BadRequestException,
-  HttpException,
-  HttpStatus,
   Injectable,
   NotFoundException,
-  UnauthorizedException,
 } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcryptjs';
@@ -29,18 +26,25 @@ export class AuthService {
     const token = await this.generateToken(user);
     if (user.role === 'FARMER' && user.farmer) {
       const userData: SignedUserDto = {
-        name: user.farmer.name,
-        description: user.farmer.description,
-        city: user.farmer.city,
-        address: user.farmer.address,
+        id: user.id,
         email: user.email,
-        phone: user.farmer.phone,
-        coordinateLat: user.farmer.coordinateLat,
-        coordinateLong: user.farmer.coordinateLong,
-        userId: user.farmer.userId,
         role: user.role,
+        farmer: {
+          id: user.farmer.id,
+          name: user.farmer.name,
+          description: user.farmer.description,
+          city: user.farmer.city,
+          address: user.farmer.address,
+          email: user.farmer.email,
+          phone: user.farmer.phone,
+          coordinateLat: user.farmer.coordinateLat,
+          coordinateLong: user.farmer.coordinateLong,
+          userId: user.farmer.userId,
+          imageURL: user.farmer.imageURL,
+        },
       };
-      console.log('🚀 ~ AuthService ~ signin ~ userData:', userData);
+      // console.log('🚀 ~ AuthService ~ signin ~ userData:', userData);
+      console.log('🚀 ~ AuthService ~ signin ~ userData:', userData.farmer);
 
       return { token, userData };
     }
@@ -104,7 +108,6 @@ export class AuthService {
     );
 
     if (passwordEquals) {
-      console.log('🚀 ~ AuthService ~ validateUser ~ user:', user);
       return user;
     } else {
       throw new BadRequestException({

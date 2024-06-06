@@ -13,15 +13,15 @@ export class CategoriesController {
   @ApiOperation({ summary: 'Create Category' })
   @ApiResponse({ status: 201, type:Category })
   @Post()
-  createProduct(@Body() createDto: CreateCategoryDto) {
+  createCategory(@Body() createDto: CreateCategoryDto) {
     return this.categoriesService.create(createDto);
   }
 
   @ApiOperation({ summary: 'Update Category' })
   @ApiResponse({ status: 200, type:Category })
   @Post(':id')
-  updateProduct(@Body() updateDto: EditCategoryDto, @Param('id') id: string) {
-    return this.categoriesService.updateProduct(updateDto, id);
+  updateCategory(@Body() updateDto: EditCategoryDto, @Param('id') id: string) {
+    return this.categoriesService.updateCategory(updateDto, id);
   }
 
   @ApiOperation({ summary: 'Get Category' })
@@ -32,7 +32,7 @@ export class CategoriesController {
     required: true,
     example: '123',
   })
-  getProduct(@Param('id') id: string) {
+  getCategory(@Param('id') id: string) {
     return this.categoriesService.getOne(+id);
   }
 
@@ -44,7 +44,7 @@ export class CategoriesController {
     required: true,
     example: '123',
   })
-  deleteProduct(@Param('id') id: string) {
+  deleteCategory(@Param('id') id: string) {
     return this.categoriesService.deleteCategory(id);
   }
  

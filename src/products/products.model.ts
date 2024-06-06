@@ -12,7 +12,7 @@ interface ProductCreationAtributes {
 
 @Table({ tableName: 'products' })
 export class Product extends Model<Product, ProductCreationAtributes> {
-  @ApiProperty({ example: '1', description: 'Unic id. Must be a string' })
+  @ApiProperty({ example: '1', description: 'Unic id. Must be a number' })
   @Column({
     type: DataType.INTEGER,
     unique: true,
@@ -28,28 +28,28 @@ export class Product extends Model<Product, ProductCreationAtributes> {
   })
   category: string;
 
-  @ApiProperty({ example: 'Coffe', description: 'Name of product ENG' })
+  @ApiProperty({ example: 'Coffe', description: 'NameENG of product ENG' })
   @Column({
     type: DataType.STRING,
     allowNull: false,
   })
   nameENG: string;
 
-  @ApiProperty({ example: 'קפה', description: 'Name of product HEB' })
+  @ApiProperty({ example: 'קפה', description: 'NameHEB of product HEB' })
   @Column({
     type: DataType.STRING,
     allowNull: true,
   })
   nameHEB: string;
 
-  @ApiProperty({ example: 'Coffe', description: 'Name of product ENG' })
+  @ApiProperty({ example: 'Coffe', description: 'DescriptionENG of product ENG' })
   @Column({
     type: DataType.STRING,
     allowNull: false,
   })
   descriptionENG: string;
 
-  @ApiProperty({ example: 'קפה', description: 'Name of product HEB' })
+  @ApiProperty({ example: 'קפה', description: 'DescriptionHEB of product HEB' })
   @Column({
     type: DataType.STRING,
     allowNull: true,

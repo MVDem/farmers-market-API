@@ -8,26 +8,26 @@ import {
   IsOptional,
 } from 'class-validator';
 
-export class CreateProductDto {
+export class CreateCategoryDto {
   @ApiProperty({
-    example: 'Coffe-Jacobs-20gr',
-    description: 'Full name ',
+    example: 'Coffe',
+    description: 'Sub-category name ',
     required: false,
   })
-  @IsString({ message: 'Category must be a string' })
+  @IsString({ message: 'Subcategory must be a string' })
   @MaxLength(50, {
     message: 'category must be max 50 simbols ',
   })
-  category: string;
+  subcategory: string;
 
   @ApiProperty({
     example: 'lorem ipsum ',
-    description: 'nameENG must be a string and max 15 simbols',
+    description: 'NameENG must be a string and max 15 simbols',
     required: true,
   })
   @IsString({ message: 'NameENG must be a string' })
   @MaxLength(15, {
-    message: 'nameENG must be max 15 simbols',
+    message: 'NameENG must be max 15 simbols',
   })
   @IsOptional()
   nameENG: string;

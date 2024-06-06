@@ -1,8 +1,8 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { Column, Model, DataType, Table, HasMany } from 'sequelize-typescript';
 
-interface ProductCreationAtributes {
-  category: string;
+interface CategoryCreationAtributes {
+  subcategory: string;
   nameENG: string;
   nameHEB: string;
   photo: string;
@@ -10,8 +10,8 @@ interface ProductCreationAtributes {
   descriptionHEB: string;
 }
 
-@Table({ tableName: 'products' })
-export class Product extends Model<Product, ProductCreationAtributes> {
+@Table({ tableName: 'categories' })
+export class Category extends Model<Category, CategoryCreationAtributes> {
   @ApiProperty({ example: '1', description: 'Unic id. Must be a string' })
   @Column({
     type: DataType.INTEGER,
@@ -21,35 +21,35 @@ export class Product extends Model<Product, ProductCreationAtributes> {
   })
   id: number;
 
-  @ApiProperty({ example: 'Coffe-black', description: 'Category of product' })
+  @ApiProperty({ example: 'Coffe', description: 'Subcategory of product' })
   @Column({
     type: DataType.STRING,
     allowNull: false,
   })
-  category: string;
+  subcategory: string;
 
-  @ApiProperty({ example: 'Coffe', description: 'Name of product ENG' })
+  @ApiProperty({ example: 'Coffe', description: 'NameENG of subcategory ENG' })
   @Column({
     type: DataType.STRING,
     allowNull: false,
   })
   nameENG: string;
 
-  @ApiProperty({ example: 'קפה', description: 'Name of product HEB' })
+  @ApiProperty({ example: 'קפה', description: 'NameHEB of subcategory HEB' })
   @Column({
     type: DataType.STRING,
     allowNull: true,
   })
   nameHEB: string;
 
-  @ApiProperty({ example: 'Coffe', description: 'Name of product ENG' })
+  @ApiProperty({ example: 'Coffe', description: 'DescriptionENG of subcategory ENG' })
   @Column({
     type: DataType.STRING,
     allowNull: false,
   })
   descriptionENG: string;
 
-  @ApiProperty({ example: 'קפה', description: 'Name of product HEB' })
+  @ApiProperty({ example: 'קפה', description: 'DescriptionHEB of subcategory HEB' })
   @Column({
     type: DataType.STRING,
     allowNull: true,
@@ -58,7 +58,7 @@ export class Product extends Model<Product, ProductCreationAtributes> {
 
   @ApiProperty({
     example: 'http://Photo.com/photo.jpg',
-    description: 'Photo of product',
+    description: 'Photo of subcategory',
   })
   @Column({
     type: DataType.STRING,

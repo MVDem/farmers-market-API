@@ -22,12 +22,12 @@ export class CreateProductDto {
 
   @ApiProperty({
     example: 'lorem ipsum ',
-    description: 'nameENG must be a string and max 15 simbols',
+    description: 'NameENG must be a string and max 15 simbols',
     required: true,
   })
   @IsString({ message: 'NameENG must be a string' })
   @MaxLength(15, {
-    message: 'nameENG must be max 15 simbols',
+    message: 'NameENG must be max 15 simbols',
   })
   @IsOptional()
   nameENG: string;

@@ -16,14 +16,14 @@ export class EditProductDto {
       })
       @IsString({ message: 'Category must be a string' })
       @MaxLength(15, {
-        message: 'Name must be max 15 simbols ',
+        message: 'Category must be max 15 simbols ',
       })
       category: string;
 
       @ApiProperty({
         example:
           'lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ',
-        description: 'Description must be a string and max 150 simbols',
+        description: 'NameENG must be a string and max 150 simbols',
         required: true,
       })
       @IsString({ message: 'NameENG must be a string' })
@@ -36,7 +36,7 @@ export class EditProductDto {
       @ApiProperty({
         example:
           'lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ',
-        description: 'Description must be a string and max 150 simbols',
+        description: 'NameHEB must be a string and max 150 simbols',
         required: false,
       })
       @IsString({ message: 'NameHEB must be a string' })
@@ -74,12 +74,12 @@ export class EditProductDto {
     
       @ApiProperty({
         example: 'http://Photo.com/photo.jpg',
-        description: 'City name must be a string and max 15 simbols',
+        description: 'Photo url must be a string and max 15 simbols',
         required: false,
       })
-      @IsString({ message: 'Photo must be a string' })
+      @IsString({ message: 'Photo url must be a string' })
       @MaxLength(15, {
-        message: 'Name must be max 15 simbols ',
+        message: 'Photo url must be max 15 simbols ',
       })
       photo: string;
 

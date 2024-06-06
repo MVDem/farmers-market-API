@@ -3,7 +3,7 @@ import { IsNumber, IsString, MaxLength, IsOptional } from 'class-validator';
 
 export class CreateOfferDto {
   @ApiProperty({
-    example: 'P-123',
+    example: '123',
     description: 'Product id',
     required: true,
   })
@@ -11,7 +11,7 @@ export class CreateOfferDto {
   @MaxLength(10, {
     message: 'Product id must be max 10 simbols',
   })
-  productId: string;
+  productId: number;
 
   @ApiProperty({
     example: '100',

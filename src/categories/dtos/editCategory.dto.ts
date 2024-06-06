@@ -8,27 +8,27 @@ import {
   IsOptional,
 } from 'class-validator';
 
-export class EditProductDto {
+export class EditCategoryDto {
     @ApiProperty({
-        example: "Coffe-Jacobs-20gr",
+        example: "Coffe",
         description: 'Full name ',
         required: false,
       })
-      @IsString({ message: 'Category must be a string' })
+      @IsString({ message: 'Subcategory must be a string' })
       @MaxLength(15, {
-        message: 'Category must be max 15 simbols ',
+        message: 'Subcategory must be max 15 simbols ',
       })
-      category: string;
+      subcategory: string;
 
       @ApiProperty({
         example:
           'lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ',
-        description: 'NameENG must be a string and max 150 simbols',
+        description: 'Description must be a string and max 150 simbols',
         required: true,
       })
       @IsString({ message: 'NameENG must be a string' })
       @MaxLength(150, {
-        message: 'Description must be max 150 simbols',
+        message: 'NameENG must be max 150 simbols',
       })
       @IsOptional()
       nameENG: string;
@@ -36,7 +36,7 @@ export class EditProductDto {
       @ApiProperty({
         example:
           'lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ',
-        description: 'NameHEB must be a string and max 150 simbols',
+        description: 'Description must be a string and max 150 simbols',
         required: false,
       })
       @IsString({ message: 'NameHEB must be a string' })
@@ -52,9 +52,9 @@ export class EditProductDto {
         description: 'Description must be a string and max 150 simbols',
         required: true,
       })
-      @IsString({ message: 'Description must be a string' })
+      @IsString({ message: 'DescriptionENG must be a string' })
       @MaxLength(150, {
-        message: 'Description must be max 150 simbols',
+        message: 'DescriptionENG must be max 150 simbols',
       })
       @IsOptional()
       descriptionENG: string;
@@ -65,9 +65,9 @@ export class EditProductDto {
         description: 'Description must be a string and max 150 simbols',
         required: false,
       })
-      @IsString({ message: 'Description must be a string' })
+      @IsString({ message: 'DescriptionHEB must be a string' })
       @MaxLength(150, {
-        message: 'Description must be max 150 simbols',
+        message: 'DescriptionHEB must be max 150 simbols',
       })
       @IsOptional()
       descriptionHEB: string;

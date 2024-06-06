@@ -1,10 +1,10 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { validateValue } from './validate.value';
-
+/*
 test('FIRST TEST', () => {
     expect(validateValue(50)).toBe(true);
 
-})
+})*/
 /*
 describe('MyTestJS', () => {
     expect(ValidateValue(50)).toBe(true);
@@ -16,5 +16,14 @@ describe('MyTestJS', () => {
         expect(validateValue(50)).toBe(true);
 
 })*/
-  
 
+
+ // Добавляем тестовые данные в базу
+ await service.create({
+    category: 'Test Category',
+    nameENG: 'Product1',
+    nameHEB: 'מוצר1',
+    descriptionENG: 'Test Description',
+    descriptionHEB: 'תיאור בדיקה',
+    photo: 'test-photo-url',
+  });

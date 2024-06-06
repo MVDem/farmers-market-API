@@ -1,0 +1,81 @@
+import { Test, TestingModule } from '@nestjs/testing';
+import { SequelizeModule } from '@nestjs/sequelize';
+import { ConfigModule } from '@nestjs/config';
+import { ProductsService } from './products.service';
+import { Product } from './products.model';
+import * as dotenv from 'dotenv';
+//import { Offer } from 'src/offers/offers.model';
+
+import * as fs from 'fs';//
+import * as path from 'path';
+
+// Установка verbose: false для Jest прямо внутри файла спецификации (spec)
+//-jest.spyOn(global.console, 'log').mockImplementation(() => {});
+
+dotenv.config({ path: '.development.env' });
+
+
+
+describe('ProductsService', () => {
+  let service: ProductsService;
+  let module: TestingModule;
+
+  beforeEach(async () => {
+    module = await Test.createTestingModule({
+      imports: [
+        ConfigModule.forRoot({
+          isGlobal: true,
+          envFilePath: '.development.env',
+        }),
+        SequelizeModule.forRoot({
+          dialect: 'postgres',
+          host: process.env.POSTGRES_HOST,
+          port: Number(process.env.POSTGRESS_PORT),
+          username: process.env.POSTGRES_USER,
+          password: process.env.POSTGRES_PASSWORD,
+          database: process.env.POSTGRES_DATABASE,
+          autoLoadModels: true,
+          synchronize: true,
+          logging: false, // Отключение логов
+        }),
+        SequelizeModule.forFeature([Product]),
+      ],
+      providers: [ProductsService],
+    }).compile();
+
+    service = module.get<ProductsService>(ProductsService);
+  });
+
+  afterEach(async () => {
+    await module.close();
+  });
+
+  it('should be defined', () => {
+    expect(service).toBeDefined();
+  });
+
+  it('should return all product names', async () => {
+    // Добавляем тестовые данные в базу
+    await service.create({      
+        "category": "Coffe-Jacobs-20gr-01",
+        "nameENG": "lorem ipsum ",
+        "nameHEB": "lorem ipsum",
+        "descriptionENG": "lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ",
+        "descriptionHEB": "lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ",
+        "photo": "http://Photo.com/photo_01.jpg"
+  });
+
+
+  
+
+    const result = await service.getAllProductNames();
+    expect(result).toBeInstanceOf(Array);
+    expect(result.length).toBeGreaterThan(0);
+    expect(result[0]).toHaveProperty('name');
+  });
+});
+
+
+
+
+

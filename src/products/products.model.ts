@@ -7,7 +7,7 @@ import {
   HasMany,
   ForeignKey,
 } from 'sequelize-typescript';
-import { Offer } from 'src/offers/offers.model';
+//import { Offer } from 'src/offers/offers.model';
 
 interface ProductCreationAtributes {
   category: string;
@@ -74,8 +74,8 @@ export class Product extends Model<Product, ProductCreationAtributes> {
   })
   photo: string;
 
-  @HasMany(() => Offer)
-  offers: Offer[];
+  //@HasMany(() => Offer)
+  //offers: Offer[];
 
  
 }

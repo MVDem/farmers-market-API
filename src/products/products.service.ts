@@ -5,8 +5,8 @@ import { CreateProductDto } from './dtos/createProduct.dto';
 import { EditProductDto } from './dtos/editProduct.dto';
 import { ProductDto } from './dtos/product.dto';
 import { ListProductDto } from './dtos/listProducts.dto';
-import { Offer } from 'src/offers/offers.model';
-import { Farmer } from 'src/farmers/farmers.model';
+//import { Offer } from 'src/offers/offers.model';
+//import { Farmer } from 'src/farmers/farmers.model';
 
 
 interface IProduct {
@@ -23,8 +23,8 @@ interface IProduct {
 export class ProductsService {
   constructor(
     @InjectModel(Product) private ProductRepository: typeof Product,
-    @InjectModel(Offer) private offerRepository: typeof Offer,
-    @InjectModel(Farmer) private farmerRepository: typeof Farmer,
+    //@InjectModel(Offer) private offerRepository: typeof Offer,
+    //@InjectModel(Farmer) private farmerRepository: typeof Farmer,
   ) {}
 
   async create(dto: CreateProductDto) {

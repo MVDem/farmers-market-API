@@ -43,9 +43,6 @@ export class AuthService {
           imageURL: user.farmer.imageURL,
         },
       };
-      // console.log('🚀 ~ AuthService ~ signin ~ userData:', userData);
-      console.log('🚀 ~ AuthService ~ signin ~ userData:', userData.farmer);
-
       return { token, userData };
     }
     return { token };

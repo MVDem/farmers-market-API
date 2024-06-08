@@ -28,8 +28,8 @@ export class OffersController {
 
   @ApiOperation({ summary: 'Create Offer' })
   @ApiResponse({ status: 201, type: Offer })
-  @Roles('FARMER')
-  @UseGuards(RolesGuard)
+  // @Roles('FARMER')
+  // @UseGuards(RolesGuard)
   @Post()
   @UseInterceptors(FileInterceptor('file'))
   create(
@@ -43,8 +43,8 @@ export class OffersController {
 
   @ApiOperation({ summary: 'Update Offer' })
   @ApiResponse({ status: 200, type: Offer })
-  @Roles('FARMER')
-  @UseGuards(RolesGuard)
+  // @Roles('FARMER')
+  // @UseGuards(RolesGuard)
   @Post('update')
   @UseInterceptors(FileInterceptor('file'))
   update(
@@ -59,8 +59,8 @@ export class OffersController {
   @ApiOperation({ summary: 'Get one offer by id' })
   @ApiResponse({ status: 200, type: Offer })
   @Get('one/:id')
-  getFarmer(@Param('id') offerId: string) {
-    return this.OffersService.getOne(+offerId);
+  getOfferById(@Param('id') offerId: string) {
+    return this.OffersService.getById(+offerId);
   }
 
   @ApiOperation({ summary: "Get all farmer's offers" })
@@ -72,8 +72,8 @@ export class OffersController {
 
   @ApiOperation({ summary: 'Delete Offer' })
   @ApiResponse({ status: 200, type: Offer })
-  @Roles('FARMER')
-  @UseGuards(RolesGuard)
+  // @Roles('FARMER')
+  // @UseGuards(RolesGuard)
   @Delete(':id')
   delete(@Req() req, @Param('id') offerId: string) {
     const farmerId = +req.user.farmer.id;

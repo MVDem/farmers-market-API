@@ -6,12 +6,14 @@ import { FarmersModule } from 'src/farmers/farmers.module';
 import { Auth } from './auth.model';
 import { Farmer } from 'src/farmers/farmers.model';
 import { SequelizeModule } from '@nestjs/sequelize';
+import { CloudinaryModule } from 'src/cloudinary/cloudinary.module';
 
 @Module({
   providers: [AuthService],
   controllers: [AuthController],
   imports: [
     SequelizeModule.forFeature([Auth, Farmer]),
+    CloudinaryModule,
     // forwardRef(() => UsersModule),
     forwardRef(() => FarmersModule),
     JwtModule.register({

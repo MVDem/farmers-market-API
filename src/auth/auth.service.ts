@@ -7,6 +7,7 @@ import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcryptjs';
 import { CreateFarmerDto } from 'src/farmers/dtos/createFarmer.dto';
 import { FarmersService } from 'src/farmers/farmers.service';
+import { CloudinaryService } from 'src/cloudinary/cloudinary.service';
 import { InjectModel } from '@nestjs/sequelize';
 import { Auth } from './auth.model';
 import { CreateUserDto } from './dto/create-user-dto';
@@ -19,12 +20,19 @@ export class AuthService {
     @InjectModel(Auth) private userRepository: typeof Auth,
     private jwtService: JwtService,
     private farmerService: FarmersService,
+    private cloudinaryService: CloudinaryService,
   ) {}
 
   async signin(userDto: SignInUserDto) {
     const user = await this.validateUser(userDto);
     const token = await this.generateToken(user);
     if (user.role === 'FARMER' && user.farmer) {
+      let publicId = user.farmer.imageURL;
+
+      if (publicId) {
+        publicId = await this.cloudinaryService.getPathToImg(publicId);
+      } 
+
       const userData: SignedUserDto = {
         id: user.id,
         email: user.email,
@@ -40,7 +48,7 @@ export class AuthService {
           coordinateLat: user.farmer.coordinateLat,
           coordinateLong: user.farmer.coordinateLong,
           userId: user.farmer.userId,
-          imageURL: user.farmer.imageURL,
+          imageURL: publicId,
         },
       };
       return { token, userData };

@@ -25,8 +25,8 @@ export class CloudinaryService {
     });
   }
 
-  // publicId shoulfd include folderName
+  // publicId should include folderName
   async getPathToImg(publicId: string): Promise<string> {
-    return v2.url(publicId, { secure: true });
+    return await v2.url(publicId, { secure: true });
   }
 }

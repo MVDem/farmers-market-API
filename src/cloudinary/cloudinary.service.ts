@@ -24,4 +24,9 @@ export class CloudinaryService {
       toStream(file.buffer).pipe(upload);
     });
   }
+
+  // publicId should include folderName
+  async getPathToImg(publicId: string): Promise<string> {
+    return await v2.url(publicId, { secure: true });
+  }
 }

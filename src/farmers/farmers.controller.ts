@@ -8,6 +8,7 @@ import {
   UseGuards,
   UploadedFile,
   UseInterceptors,
+  Param,
 } from '@nestjs/common';
 import { ApiOperation, ApiParam, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { FarmersService } from './farmers.service';
@@ -48,11 +49,10 @@ export class FarmersController {
 
   @ApiOperation({ summary: 'Get Farmer' })
   @ApiResponse({ status: 200, type: Farmer })
-  // @UseGuards(JwtAuthGuard)
-  @Get()
-  getFarmer(@Req() req) {
-    const id = +req.user.id;
-    return this.farmersService.getOne(id);
+  @Get('/one/:id')
+  getFarmer(@Param('id') id: string) {
+    console.log('id', id);
+    return this.farmersService.getOne(+id);
   }
 
   // @ApiOperation({ summary: 'Delete Farmer' })

@@ -84,11 +84,12 @@ export class OffersController {
   @ApiResponse({ status: 200, type: Offer })
   @Get()
   getPaginatedSortedOffers(
-    @Query('pageNumber') pageNumber: number,
-    @Query('pageSize') pageSize: number,
-    @Query('sortBy') sortBy?: string,
-    @Query('order') order?: string,
+    @Param('pageNumber') pageNumber: number,
+    @Param('pageSize') pageSize: number,
+    @Param('sortBy') sortBy?: string,
+    @Param('order') order?: string,
   ) {
+    console.log(pageNumber, pageSize, sortBy, order);
     return this.OffersService.getPaginatedSortedOffers(
       pageNumber,
       pageSize,

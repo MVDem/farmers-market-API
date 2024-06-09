@@ -20,7 +20,7 @@ interface FarmerCreationAtributes {
   phone: string;
   coordinateLat: number;
   coordinateLong: number;
-  products: string;
+  offers: string;
 }
 
 @Table({ tableName: 'farmers' })
@@ -119,7 +119,7 @@ export class Farmer extends Model<Farmer, FarmerCreationAtributes> {
   user: Auth;
 
   @HasMany(() => Offer)
-  deals: Offer[];
+  offers: Offer[];
   @ApiProperty({
     example:
       'https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png',

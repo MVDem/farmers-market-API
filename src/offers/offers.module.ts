@@ -5,12 +5,14 @@ import { SequelizeModule } from '@nestjs/sequelize';
 import { OffersController } from './offers.controller';
 import { AuthModule } from 'src/auth/auth.module';
 import { CloudinaryModule } from 'src/cloudinary/cloudinary.module';
+import { Farmer } from 'src/farmers/farmers.model';
+import { Product } from 'src/products/products.model';
 
 @Module({
   controllers: [OffersController],
   providers: [OffersService],
   imports: [
-    SequelizeModule.forFeature([Offer]),
+    SequelizeModule.forFeature([Offer, Farmer, Product]),
     CloudinaryModule,
     forwardRef(() => AuthModule),
   ],

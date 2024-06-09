@@ -11,7 +11,7 @@ export class editOfferDto {
   @MaxLength(10, {
     message: 'Offer id must be max 10 simbols',
   })
-  offerId: string;
+  offerId: number;
 
   @ApiProperty({
     example: '100',

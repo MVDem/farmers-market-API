@@ -8,6 +8,7 @@ import {
   Model,
 } from 'sequelize-typescript';
 import { Farmer } from 'src/farmers/farmers.model';
+import { Product } from 'src/products/products.model';
 
 interface OffersCreationAtributes {
   unit: string;
@@ -17,6 +18,7 @@ interface OffersCreationAtributes {
   description_EN: string;
   description_HEB: string;
   farmerId: number;
+  productId: number; 
 }
 
 @Table({ tableName: 'offers' })
@@ -87,4 +89,11 @@ export class Offer extends Model<Offer, OffersCreationAtributes> {
 
   @BelongsTo(() => Farmer)
   farmer: Farmer;
+
+  @ForeignKey(() => Product)
+  @Column({ type: DataType.INTEGER })
+  productId: number;
+
+  @BelongsTo(() => Product, { foreignKey: 'productId', targetKey: 'id' })
+  product: Product;
 }

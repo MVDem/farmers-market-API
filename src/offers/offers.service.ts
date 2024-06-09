@@ -6,6 +6,8 @@ import { CloudinaryService } from 'src/cloudinary/cloudinary.service';
 import { editOfferDto } from './dtos/editOffer.dto';
 import { OfferDto } from './dtos/offer.dto';
 import { PaginatedOfferDto } from './dtos/paginatedOffers.dto';
+import { Farmer } from 'src/farmers/farmers.model';
+import { Product } from 'src/products/products.model';
 
 interface IOffer {
   unit?: string;
@@ -21,6 +23,8 @@ interface IOffer {
 export class OffersService {
   constructor(
     @InjectModel(Offer) private OffersRepository: typeof Offer,
+    @InjectModel(Product) private ProductRepository: typeof Product,
+    @InjectModel(Farmer) private farmerRepository: typeof Farmer,
     private cloudinary: CloudinaryService,
   ) {}
 
@@ -219,5 +223,43 @@ export class OffersService {
       offers,
       count,
     };
+  }
+
+  async getFullOffers() {
+    try {
+      const offers = await this.OffersRepository.findAll({
+        include: [
+          {
+            model: Farmer,
+            attributes: [
+              'id',
+              'name',
+              'description',
+              'city',
+              'address',
+              'email',
+              'phone',
+              'coordinateLat',
+              'coordinateLong',
+            ],
+          },
+          {
+            model: Product,
+            attributes: [
+              'id',
+              'category',
+              'nameENG',
+              'nameHEB',
+              'photo',
+              'descriptionENG',
+              'descriptionHEB',
+            ],
+          },
+        ],
+      });
+      return offers;
+    } catch (error) {
+      throw new HttpException(error.message, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
   }
 }

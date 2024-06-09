@@ -1,15 +1,13 @@
 import {
   BadRequestException,
-  HttpException,
-  HttpStatus,
   Injectable,
   NotFoundException,
-  UnauthorizedException,
 } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcryptjs';
 import { CreateFarmerDto } from 'src/farmers/dtos/createFarmer.dto';
 import { FarmersService } from 'src/farmers/farmers.service';
+import { CloudinaryService } from 'src/cloudinary/cloudinary.service';
 import { InjectModel } from '@nestjs/sequelize';
 import { Auth } from './auth.model';
 import { CreateUserDto } from './dto/create-user-dto';
@@ -22,15 +20,36 @@ export class AuthService {
     @InjectModel(Auth) private userRepository: typeof Auth,
     private jwtService: JwtService,
     private farmerService: FarmersService,
+    private cloudinaryService: CloudinaryService,
   ) {}
 
   async signin(userDto: SignInUserDto) {
     const user = await this.validateUser(userDto);
     const token = await this.generateToken(user);
-    if (user.role === 'FARMER') {
+    if (user.role === 'FARMER' && user.farmer) {
+      let publicId = user.farmer.imageURL;
+
+      if (publicId) {
+        publicId = await this.cloudinaryService.getPathToImg(publicId);
+      } 
+
       const userData: SignedUserDto = {
+        id: user.id,
         email: user.email,
         role: user.role,
+        farmer: {
+          id: user.farmer.id,
+          name: user.farmer.name,
+          description: user.farmer.description,
+          city: user.farmer.city,
+          address: user.farmer.address,
+          email: user.farmer.email,
+          phone: user.farmer.phone,
+          coordinateLat: user.farmer.coordinateLat,
+          coordinateLong: user.farmer.coordinateLong,
+          userId: user.farmer.userId,
+          imageURL: publicId,
+        },
       };
       return { token, userData };
     }
@@ -80,6 +99,7 @@ export class AuthService {
   private async validateUser(userDto: SignInUserDto) {
     const user = await this.userRepository.findOne({
       where: { email: userDto.email },
+      include: { all: true },
     });
     if (!user) {
       throw new NotFoundException({
@@ -93,13 +113,11 @@ export class AuthService {
     );
 
     if (passwordEquals) {
-      console.log('🚀 ~ AuthService ~ validateUser ~ user:', user)
       return user;
     } else {
       throw new BadRequestException({
         message: 'Incorrect login (email) or password',
       });
     }
-      
   }
 }

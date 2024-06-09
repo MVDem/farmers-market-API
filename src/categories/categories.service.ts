@@ -83,16 +83,34 @@ export class CategoriesService {
     }
   }
 
-  async getOne(id: number) {
-    const category = await this.categoryRepository.findOne({ where: { id } });
-    if (!category) {
+  async getOne(id: number): Promise<CategoryDto> {
+    try {
+      const category = await this.categoryRepository.findOne({ where: { id } });
+      if (!category) {
+        throw new HttpException(
+          'Category with this id is not found',
+          HttpStatus.NOT_FOUND,
+        );
+      }
+      this.logger.log('Get category by id:', category);
+
+      const categoryData: CategoryDto = {
+        id: category.id,
+        nameENG: category.nameENG,
+        nameHEB: category.nameHEB,
+        descriptionENG: category.descriptionENG,
+        descriptionHEB: category.descriptionHEB,
+        imageURL: category.imageURL,
+      };
+
+      return categoryData;
+    } catch (error) {
+      this.logger.error('Error getting category by id:', error);
       throw new HttpException(
-        'Category with this id is not found',
-        HttpStatus.NOT_FOUND,
+        'An error occurred while retrieving the category',
+        HttpStatus.INTERNAL_SERVER_ERROR,
       );
     }
-    console.log('Get category by id:', category);
-    return category;
   }
 
   async deleteCategory(id: string) {

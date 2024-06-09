@@ -46,11 +46,11 @@ This project aims to create a backend server for managing users, farmers, and ma
 
 - **Add a deal to the market**
   - Request Header: Bearer token
-  - Request Body: `{farmerId: string, productId: string, unit: string, price: number, photo?: File, descriptionEN?: string, descriptionHEB?: string}`
+  - Request Body: `{farmerId: string, productId: string, unit: string, price: number, photo?: File, description_EN?: string, description_HE?: string}`
   - Response: Deal object
 - **Update a deal on the market**
   - Request Header: Bearer token
-  - Request Body: `{id: string, unit?: string, price?: number, photo?: File, descriptionEN?: string, descriptionHEB?: string}`
+  - Request Body: `{id: string, unit?: string, price?: number, photo?: File, description_EN?: string, description_HE?: string}`
   - Response: Updated deal object
 - **Delete a deal from the market**
   - Request Header: Bearer token

@@ -15,7 +15,7 @@ export class editOfferDto {
 
   @ApiProperty({
     example: '100',
-    description: 'Deal price',
+    description: 'Offer price',
     required: true,
   })
   @IsString({ message: 'Price must be a string' })
@@ -24,7 +24,7 @@ export class editOfferDto {
 
   @ApiProperty({
     example: 'kg',
-    description: 'Deal unit',
+    description: 'Offer unit',
     required: true,
   })
   @IsString({ message: 'Unit must be a string' })
@@ -60,20 +60,20 @@ export class editOfferDto {
   })
   @IsString({ message: 'Description must be a string' })
   @MaxLength(150, {
-    message: 'Description must be max 150 simbols',
+    message: 'Description must be max 150 symbols',
   })
   @IsOptional()
   description_EN: string;
 
   @ApiProperty({
     example: 'Lorem ',
-    description: 'Hebrew descroption for product',
+    description: 'Hebrew description for product',
     required: false,
   })
   @IsString({ message: 'Description must be a string' })
   @MaxLength(150, {
-    message: 'Description must be max 150 simbols',
+    message: 'Description must be max 150 symbols',
   })
   @IsOptional()
-  description_HEB: string;
+  description_HE: string;
 }

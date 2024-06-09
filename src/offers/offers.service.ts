@@ -13,7 +13,7 @@ interface IOffer {
   image?: string;
   isActive?: boolean;
   description_EN?: string;
-  description_HEB?: string;
+  description_HE?: string;
   farmerId?: number;
 }
 
@@ -201,7 +201,7 @@ export class OffersService {
         unit,
         isActive,
         description_EN,
-        description_HEB,
+        description_HE,
         image,
       } = offer;
       return {
@@ -210,7 +210,7 @@ export class OffersService {
         unit,
         isActive,
         description_EN,
-        description_HEB,
+        description_HE,
         image,
       };
     });

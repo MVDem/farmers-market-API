@@ -71,5 +71,5 @@ export class CreateOfferDto {
     message: 'Description must be max 150 simbols',
   })
   @IsOptional()
-  description_HEB: string;
+  description_HE: string;
 }

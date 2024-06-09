@@ -9,7 +9,7 @@ export class editOfferDto {
   })
   @IsString({ message: 'Offer id must be a string' })
   @MaxLength(10, {
-    message: 'Offer id must be max 10 simbols',
+    message: 'Offer id must be max 10 symbols',
   })
   offerId: string;
 
@@ -29,7 +29,7 @@ export class editOfferDto {
   })
   @IsString({ message: 'Unit must be a string' })
   @MaxLength(5, {
-    message: 'Unit must be max 5 simbols',
+    message: 'Unit must be max 5 symbols',
   })
   @IsOptional()
   unit: string;

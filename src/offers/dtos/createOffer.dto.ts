@@ -9,13 +9,13 @@ export class CreateOfferDto {
   })
   @IsString({ message: 'Product id must be a string' })
   @MaxLength(10, {
-    message: 'Product id must be max 10 simbols',
+    message: 'Product id must be max 10 symbols',
   })
   productId: string;
 
   @ApiProperty({
     example: '100',
-    description: 'Deal price',
+    description: 'Offer price',
     required: true,
   })
   @IsString({ message: 'Price must be a string' })
@@ -23,12 +23,12 @@ export class CreateOfferDto {
 
   @ApiProperty({
     example: 'kg',
-    description: 'Deal unit',
+    description: 'Offer unit',
     required: true,
   })
   @IsString({ message: 'Unit must be a string' })
   @MaxLength(5, {
-    message: 'Unit must be max 5 simbols',
+    message: 'Unit must be max 5 symbols',
   })
   unit: string;
 
@@ -56,7 +56,7 @@ export class CreateOfferDto {
   })
   @IsString({ message: 'Description must be a string' })
   @MaxLength(150, {
-    message: 'Description must be max 150 simbols',
+    message: 'Description must be max 150 symbols',
   })
   @IsOptional()
   description_EN: string;
@@ -68,7 +68,7 @@ export class CreateOfferDto {
   })
   @IsString({ message: 'Description must be a string' })
   @MaxLength(150, {
-    message: 'Description must be max 150 simbols',
+    message: 'Description must be max 150 symbols',
   })
   @IsOptional()
   description_HE: string;

@@ -41,7 +41,7 @@ export class EditProductDto {
   })
   @IsString({ message: 'name_HE must be a string' })
   @MaxLength(150, {
-    message: 'name_HE must be max 150 simbols',
+    message: 'name_HE must be max 150 symbols',
   })
   @IsOptional()
   name_HE: string;

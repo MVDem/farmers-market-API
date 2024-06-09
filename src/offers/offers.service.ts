@@ -40,7 +40,7 @@ export class OffersService {
     if (file) {
       const { public_id } = await this.uploadImageToCloudinary(
         file,
-        offer.id.toString(),
+        offer.id,
       );
       offerData.image = public_id;
     }
@@ -59,7 +59,7 @@ export class OffersService {
 
   async update(dto: editOfferDto, farmerId: number, file: Express.Multer.File) {
     const offer = await this.OffersRepository.findOne({
-      where: { id: dto.offerId },
+      where: { id: dto.id },
     });
 
     if (!offer) {
@@ -80,7 +80,7 @@ export class OffersService {
     if (file) {
       const { public_id } = await this.uploadImageToCloudinary(
         file,
-        offer.id.toString(),
+        offer.id,
       );
       offerData.image = public_id;
     }
@@ -102,9 +102,9 @@ export class OffersService {
     return updatedoffer;
   }
 
-  async getById(offerId: number) {
+  async getById(id: number) {
     const offer = await this.OffersRepository.findOne({
-      where: { id: offerId },
+      where: { id: id },
       include: { all: true },
     });
     if (!offer) {
@@ -165,9 +165,9 @@ export class OffersService {
 
   private async uploadImageToCloudinary(
     file: Express.Multer.File,
-    offerId: string,
+    offerId: number,
   ) {
-    const result = await this.cloudinary.uploadImage(file, 'offers', offerId);
+    const result = await this.cloudinary.uploadImage(file, 'offers', offerId.toString());
     console.log('Upload image:', result, file);
     if (!result) {
       throw new HttpException('Image was not uploaded', HttpStatus.BAD_REQUEST);
@@ -205,7 +205,7 @@ export class OffersService {
         image,
       } = offer;
       return {
-        offerId: id,
+        id,
         price,
         unit,
         isActive,

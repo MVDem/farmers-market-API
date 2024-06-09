@@ -3,15 +3,16 @@ import { IsNumber, IsString, MaxLength, IsOptional } from 'class-validator';
 
 export class editOfferDto {
   @ApiProperty({
-    example: 'O-123',
+    example: 123,
     description: 'Offer id',
     required: true,
   })
-  @IsString({ message: 'Offer id must be a string' })
-  @MaxLength(10, {
-    message: 'Offer id must be max 10 symbols',
-  })
-  offerId: string;
+  // @IsString({ message: 'Offer id must be a string' })
+  @IsNumber({}, { message: 'Offer Id must be a number'})
+  // @MaxLength(10, {
+  //   message: 'Offer id must be max 10 symbols',
+  // })
+  id: number;
 
   @ApiProperty({
     example: '100',

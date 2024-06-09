@@ -2,11 +2,11 @@ import { ApiProperty } from '@nestjs/swagger';
 
 export class OfferDto {
   @ApiProperty({
-    example: 'O-123',
+    example: 123,
     description: 'Offer id',
     required: true,
   })
-  offerId: number;
+  id: number;
 
   @ApiProperty({
     example: '100',

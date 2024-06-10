@@ -27,10 +27,10 @@ export class CategoriesService {
 
       const categoryData: CategoryDto = {
         id: category.id,
-        nameENG: category.nameENG,
-        nameHEB: category.nameHEB,
-        descriptionENG: category.descriptionENG,
-        descriptionHEB: category.descriptionHEB,
+        name_EN: category.name_EN,
+        name_HE: category.name_HE,
+        description_EN: category.description_EN,
+        description_HE: category.description_HE,
         imageURL: category.imageURL,
       };
       return categoryData;
@@ -64,10 +64,10 @@ export class CategoriesService {
 
       const categoryData: CategoryDto = {
         id: category.id,
-        nameENG: category.nameENG,
-        nameHEB: category.nameHEB,
-        descriptionENG: category.descriptionENG,
-        descriptionHEB: category.descriptionHEB,
+        name_EN: category.name_EN,
+        name_HE: category.name_HE,
+        description_EN: category.description_EN,
+        description_HE: category.description_HE,
         imageURL: category.imageURL,
       };
       return categoryData;
@@ -96,10 +96,10 @@ export class CategoriesService {
 
       const categoryData: CategoryDto = {
         id: category.id,
-        nameENG: category.nameENG,
-        nameHEB: category.nameHEB,
-        descriptionENG: category.descriptionENG,
-        descriptionHEB: category.descriptionHEB,
+        name_EN: category.name_EN,
+        name_HE: category.name_HE,
+        description_EN: category.description_EN,
+        description_HE: category.description_HE,
         imageURL: category.imageURL,
       };
 
@@ -145,15 +145,15 @@ export class CategoriesService {
     const { count, rows } = response;
 
     const categories: CategoryDto[] = rows.map((category) => {
-      const { id, nameENG, nameHEB, imageURL, descriptionENG, descriptionHEB } =
+      const { id, name_EN, name_HE, imageURL, description_EN, description_HE } =
         category;
       return {
         id,
-        nameENG,
-        nameHEB,
+        name_EN,
+        name_HE,
         imageURL,
-        descriptionENG,
-        descriptionHEB,
+        description_EN,
+        description_HE,
       };
     });
 

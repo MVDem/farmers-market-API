@@ -13,7 +13,8 @@ export class EditCategoryDto {
   @MaxLength(150, {
     message: 'NameENG must be max 150 symbols',
   })
-  nameENG: string;
+  @IsOptional()
+  name_EN: string;
 
   @ApiProperty({
     example:
@@ -26,7 +27,7 @@ export class EditCategoryDto {
     message: 'NameHEB must be max 150 symbols',
   })
   @IsOptional()
-  nameHEB: string;
+  name_HE: string;
 
   @ApiProperty({
     example:
@@ -39,7 +40,7 @@ export class EditCategoryDto {
     message: 'DescriptionENG must be max 150 symbols',
   })
   @IsOptional()
-  descriptionENG: string;
+  description_EN: string;
 
   @ApiProperty({
     example:
@@ -52,7 +53,7 @@ export class EditCategoryDto {
     message: 'DescriptionHEB must be max 150 symbols',
   })
   @IsOptional()
-  descriptionHEB: string;
+  description_HE: string;
 
   @ApiProperty({
     example: 'categories/public_id.jpg',
@@ -63,5 +64,6 @@ export class EditCategoryDto {
   @MaxLength(150, {
     message: 'Public id of image of category max 150 symbols ',
   })
+  @IsOptional()
   imageURL: string;
 }

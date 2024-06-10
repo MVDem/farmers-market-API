@@ -1,21 +1,19 @@
 import {
   Body,
   Controller,
-  Delete,
   Get,
   Post,
   Req,
   UseGuards,
   UploadedFile,
   UseInterceptors,
+  Param,
 } from '@nestjs/common';
-import { ApiOperation, ApiParam, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { FarmersService } from './farmers.service';
 import { EditFarmerDto } from './dtos/editFarmer.dto';
-// import { CreateFarmerDto } from './dtos/createFarmer.dto';
 import { Farmer } from './farmers.model';
 import { FileInterceptor } from '@nestjs/platform-express';
-import { JwtAuthGuard } from 'src/auth/jwt-auth-guard';
 import { Roles } from 'src/auth/user-self.decorator';
 import { RolesGuard } from 'src/auth/roles.quard';
 
@@ -23,13 +21,6 @@ import { RolesGuard } from 'src/auth/roles.quard';
 @Controller('farmers')
 export class FarmersController {
   constructor(private farmersService: FarmersService) {}
-
-  // @ApiOperation({ summary: 'Create Farmer' })
-  // @ApiResponse({ status: 201, type: Farmer })
-  // @Post()
-  // createFarmer(@Body() updateDto: CreateFarmerDto) {
-  //   return this.farmersService.createFarmer(updateDto);
-  // }
 
   @ApiOperation({ summary: 'Update Farmer' })
   @ApiResponse({ status: 200, type: Farmer })
@@ -50,11 +41,9 @@ export class FarmersController {
 
   @ApiOperation({ summary: 'Get Farmer' })
   @ApiResponse({ status: 200, type: Farmer })
-  // @UseGuards(JwtAuthGuard)
-  @Get()
-  getFarmer(@Req() req) {
-    const id = +req.user.id;
-    return this.farmersService.getOne(id);
+  @Get('/one/:id')
+  getFarmer(@Param('id') id: string) {
+    return this.farmersService.getOne(+id);
   }
 
   // @ApiOperation({ summary: 'Delete Farmer' })
@@ -71,11 +60,6 @@ export class FarmersController {
   @Roles('ADMIN')
   @UseGuards(RolesGuard)
   @Get('/all')
-  // @ApiParam({
-  //   name: 'id',
-  //   required: true,
-  //   example: 'F-123',
-  // })
   getAllUsers() {
     return this.farmersService.getAll();
   }

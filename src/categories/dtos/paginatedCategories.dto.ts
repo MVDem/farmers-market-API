@@ -7,11 +7,11 @@ export class PaginatedCategoryDto {
   @ApiProperty({
     example: [
       {
-        nameENG: 'nameENG',
-        nameHEB: 'nameHEB',
+        name_EN: 'name_EN',
+        name_HE: 'name_HE',
         imageURL: 'https://cloudinary.com/.../categories/public_id.jpg',
-        description_HEB: 'Lorem ',
-        descriptionHEB: 'Lorem',
+        description_EN: 'Lorem ',
+        description_HE: 'Lorem',
       },
     ],
     description: 'List of categories',

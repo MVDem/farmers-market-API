@@ -6,6 +6,8 @@ import { CloudinaryService } from 'src/cloudinary/cloudinary.service';
 import { editOfferDto } from './dtos/editOffer.dto';
 import { OfferDto } from './dtos/offer.dto';
 import { PaginatedOfferDto } from './dtos/paginatedOffers.dto';
+import { Farmer } from 'src/farmers/farmers.model';
+import { Product } from 'src/products/products.model';
 
 interface IOffer {
   unit?: string;
@@ -235,7 +237,11 @@ export class OffersService {
     file: Express.Multer.File,
     offerId: number,
   ) {
-    const result = await this.cloudinary.uploadImage(file, 'offers', offerId.toString());
+    const result = await this.cloudinary.uploadImage(
+      file,
+      'offers',
+      offerId.toString(),
+    );
     console.log('Upload image:', result, file);
     if (!result) {
       throw new HttpException('Image was not uploaded', HttpStatus.BAD_REQUEST);
@@ -288,4 +294,82 @@ export class OffersService {
       count,
     };
   }
-} 
+
+  async getFullOffers() {
+    try {
+      const offers = await this.OffersRepository.findAll({
+        include: [
+          {
+            model: Farmer,
+            attributes: [
+              'id',
+              'name',
+              'description',
+              'city',
+              'address',
+              'email',
+              'phone',
+              'logoURL',
+              'coverURL',
+              'coordinateLat',
+              'coordinateLong',
+            ],
+          },
+          {
+            model: Product,
+            attributes: [
+              'id',
+              'category',
+              'name_EN',
+              'name_HE',
+              'photo',
+              'description_EN',
+              'description_HE',
+            ],
+          },
+        ],
+      });
+
+      const offersDto: OfferDto[] = await Promise.all(
+        offers.map(async (offer) => {
+          let publicId = offer.image;
+
+          if (publicId) {
+            publicId = await this.cloudinary.getPathToImg(publicId);
+          }
+          const {
+            id,
+            price,
+            unit,
+            isActive,
+            description_EN,
+            description_HE,
+            farmer,
+            product,
+          } = offer;
+
+          if (farmer) {
+            farmer.logoURL = await this.cloudinary.getPathToImg(farmer.logoURL);
+          }
+
+          return {
+            id,
+            price,
+            unit,
+            isActive,
+            description_EN,
+            description_HE,
+            image: publicId,
+            farmer,
+            product,
+          };
+        }),
+      );
+
+      console.log('Get full offers:', offersDto);
+      return offersDto;
+    } catch (error) {
+      throw new HttpException(error.message, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+  }
+}

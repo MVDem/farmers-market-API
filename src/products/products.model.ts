@@ -2,10 +2,10 @@ import { ApiProperty } from '@nestjs/swagger';
 import { Column, Model, DataType, Table, HasMany } from 'sequelize-typescript';
 
 interface ProductCreationAtributes {
-  category: string;
+  categoryId: number;
   name_EN: string;
   name_HE: string;
-  photo: string;
+  imageURL: string;
   description_EN: string;
   description_HE: string;
 }
@@ -26,7 +26,7 @@ export class Product extends Model<Product, ProductCreationAtributes> {
     type: DataType.STRING,
     allowNull: false,
   })
-  category: string;
+  categoryId: number;
 
 
   @ApiProperty({ example: 'Coffe', description: 'Name of a product in English' })
@@ -66,5 +66,5 @@ export class Product extends Model<Product, ProductCreationAtributes> {
     type: DataType.STRING,
     allowNull: false,
   })
-  photo: string;
+  imageURL: string;
 }

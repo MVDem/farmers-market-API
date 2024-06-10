@@ -21,14 +21,14 @@ export class CategoriesController {
   @ApiOperation({ summary: 'Create Category' })
   @ApiResponse({ status: 201, type: Category })
   @Post()
-  editCategory(@Body() createDto: EditCategoryDto) {
+  create(@Body() createDto: EditCategoryDto) {
     return this.categoriesService.create(createDto);
   }
 
   @ApiOperation({ summary: 'Update Category' })
   @ApiResponse({ status: 200, type: Category })
   @Put(':id')
-  updateCategory(@Body() updateDto: EditCategoryDto, @Param('id') id: string) {
+  update(@Body() updateDto: EditCategoryDto, @Param('id') id: string) {
     return this.categoriesService.updateCategory(updateDto, id);
   }
 
@@ -40,7 +40,7 @@ export class CategoriesController {
     required: true,
     example: '123',
   })
-  getCategory(@Param('id') id: string) {
+  get(@Param('id') id: string) {
     return this.categoriesService.getOne(+id);
   }
 
@@ -52,7 +52,7 @@ export class CategoriesController {
     required: true,
     example: '123',
   })
-  deleteCategory(@Param('id') id: string) {
+  delete(@Param('id') id: string) {
     return this.categoriesService.deleteCategory(id);
   }
 
@@ -62,8 +62,8 @@ export class CategoriesController {
   @ApiResponse({ status: 200, type: Category })
   @Get()
   getPaginatedSortedCategories(
-    @Query('pageNumber') pageNumber: number,
-    @Query('pageSize') pageSize: number,
+    @Query('pageNumber') pageNumber?: number,
+    @Query('pageSize') pageSize?: number,
     @Query('sortBy') sortBy?: string,
     @Query('order') order?: string,
   ) {

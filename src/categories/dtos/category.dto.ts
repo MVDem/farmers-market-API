@@ -3,7 +3,7 @@ import { ApiProperty } from '@nestjs/swagger';
 export class CategoryDto {
   @ApiProperty({
     example: '123',
-    description: 'Offer id',
+    description: 'Category id',
     required: true,
   })
   id: number;
@@ -14,7 +14,7 @@ export class CategoryDto {
     description: 'Description must be a string and max 150 symbols',
     required: false,
   })
-  nameENG: string;
+  name_EN: string;
 
   @ApiProperty({
     example:
@@ -22,7 +22,7 @@ export class CategoryDto {
     description: 'Description must be a string and max 150 symbols',
     required: false,
   })
-  nameHEB: string;
+  name_HE: string;
 
   @ApiProperty({
     example:
@@ -30,7 +30,7 @@ export class CategoryDto {
     description: 'Description must be a string and max 150 symbols',
     required: true,
   })
-  descriptionENG: string;
+  description_EN: string;
 
   @ApiProperty({
     example:
@@ -38,7 +38,7 @@ export class CategoryDto {
     description: 'Description must be a string and max 150 symbols',
     required: false,
   })
-  descriptionHEB: string;
+  description_HE: string;
 
   @ApiProperty({
     example: 'categories/public_id.jpg',

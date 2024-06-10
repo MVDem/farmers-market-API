@@ -319,7 +319,7 @@ export class OffersService {
             model: Product,
             attributes: [
               'id',
-              'category',
+              'categoryId',
               'name_EN',
               'name_HE',
               'photo',

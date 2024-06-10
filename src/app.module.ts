@@ -12,6 +12,9 @@ import { ProductsModule } from './products/products.module';
 import { CloudinaryModule } from './cloudinary/cloudinary.module';
 import { Offer } from './offers/offers.model';
 import { OffersModule } from './offers/offers.module';
+//--add 06-06-2024 + new obj.category
+import { Category } from './categories/categories.model';
+import { CategoriesModule } from './categories/categories.module';
 
 @Module({
   imports: [
@@ -25,7 +28,7 @@ import { OffersModule } from './offers/offers.module';
       username: process.env.POSTGRES_USER,
       password: process.env.POSTGRES_PASSWORD,
       database: process.env.POSTGRES_DB,
-      models: [Auth, Farmer, Offer, Product],
+      models: [Auth, Farmer, Offer, Product, Category],
       autoLoadModels: true,
       logging: false,
     }),
@@ -33,6 +36,7 @@ import { OffersModule } from './offers/offers.module';
     FarmersModule,
     ProductsModule,
     OffersModule,
+    CategoriesModule,
     CloudinaryModule,
   ],
   controllers: [AppController],

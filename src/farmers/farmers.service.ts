@@ -4,18 +4,19 @@ import { Farmer } from './farmers.model';
 import { InjectModel } from '@nestjs/sequelize';
 import { CreateFarmerDto } from './dtos/createFarmer.dto';
 import { CloudinaryService } from 'src/cloudinary/cloudinary.service';
+import { FarmerDto } from './dtos/farmer.dto';
 
 interface IFarmer {
-  email: string;
-  imageURL?: string;
+  userId: number;
   name?: string;
   description?: string;
   city?: string;
   address?: string;
+  email: string;
   phone?: string;
   coordinateLat?: number;
   coordinateLong?: number;
-  userId: number;
+  imageURL?: string;
 }
 
 const defaultImgUrl =
@@ -28,12 +29,12 @@ export class FarmersService {
     private cloudinary: CloudinaryService,
   ) {}
 
-  async createFarmer(dto: CreateFarmerDto) {
+  async createFarmer(dto: CreateFarmerDto): Promise<FarmerDto> {
     console.log('Create farmer:', dto);
 
     const farmerData: IFarmer = {
-      email: dto.email,
       userId: dto.userId,
+      email: dto.email,
       imageURL: defaultImgUrl,
     };
 
@@ -44,8 +45,27 @@ export class FarmersService {
         HttpStatus.BAD_REQUEST,
       );
     }
+
+    let publicId = farmer.imageURL;
+
+    if (publicId) {
+      publicId = await this.cloudinary.getPathToImg(publicId);
+    }
     // console.log('Create farmer:', farmer);
-    return farmer;
+    const farmerDto: FarmerDto = {
+      id: farmer.id,
+      name: farmer.name,
+      description: farmer.description,
+      city: farmer.city,
+      address: farmer.address,
+      email: farmer.email,
+      phone: farmer.phone,
+      coordinateLat: farmer.coordinateLat,
+      coordinateLong: farmer.coordinateLong,
+      userId: farmer.userId,
+      imageURL: publicId,
+    };
+    return farmerDto;
   }
 
   async updateFarmer(
@@ -60,25 +80,41 @@ export class FarmersService {
         HttpStatus.NOT_FOUND,
       );
     }
-    const fermerData: IFarmer = { ...dto, userId: farmer.userId };
+    let imgUrl;
+
+    const farmerData: IFarmer = { ...dto, userId: farmer.userId };
     if (file) {
-      const { public_id } = await this.uploadImageToCloudinary(
+      const { public_id, url } = await this.uploadImageToCloudinary(
         file,
         farmer.id.toString(),
       );
-      fermerData.imageURL = public_id;
+      farmerData.imageURL = public_id;
+      imgUrl = url;
     }
-    const isUpdated = await this.farmerRepository.update(fermerData, {
+    const isUpdated = await this.farmerRepository.update(farmerData, {
       where: { id },
     });
     if (isUpdated[0] === 0) {
       throw new HttpException('Farmer not updated', HttpStatus.NOT_FOUND);
     }
-    const updatedfarmer = await this.farmerRepository.findOne({
+    const updatedFarmer = await this.farmerRepository.findOne({
       where: { id },
     });
-    // console.log('Update farmer:', updatedfarmer);
-    return updatedfarmer;
+    // console.log('Update farmer:', updatedFarmer);
+    const farmerDto: FarmerDto = {
+      id: updatedFarmer.id,
+      name: updatedFarmer.name,
+      description: updatedFarmer.description,
+      city: updatedFarmer.city,
+      address: updatedFarmer.address,
+      email: updatedFarmer.email,
+      phone: updatedFarmer.phone,
+      coordinateLat: updatedFarmer.coordinateLat,
+      coordinateLong: updatedFarmer.coordinateLong,
+      userId: updatedFarmer.userId,
+      imageURL: imgUrl,
+    };
+    return farmerDto;
   }
 
   async getOne(id: number) {
@@ -93,7 +129,26 @@ export class FarmersService {
       );
     }
     console.log('Get farmer by id:', farmer);
-    return farmer;
+    let publicId = farmer.imageURL;
+
+    if (publicId) {
+      publicId = await this.cloudinary.getPathToImg(publicId);
+    }
+
+    const farmerDto: FarmerDto = {
+      id: farmer.id,
+      name: farmer.name,
+      description: farmer.description,
+      city: farmer.city,
+      address: farmer.address,
+      email: farmer.email,
+      phone: farmer.phone,
+      coordinateLat: farmer.coordinateLat,
+      coordinateLong: farmer.coordinateLong,
+      userId: farmer.userId,
+      imageURL: publicId,
+    };
+    return farmerDto;
   }
 
   async deleteFarmer(id: string) {
@@ -126,6 +181,32 @@ export class FarmersService {
       throw new HttpException('No farmers found', HttpStatus.NOT_FOUND);
     }
     console.log('Get all farmers', farmers);
-    return farmers;
+
+    const farmersDtos: FarmerDto[] = await Promise.all(
+      farmers.map(async (farmer) => {
+        let publicId = farmer.imageURL;
+
+        if (publicId) {
+          publicId = await this.cloudinary.getPathToImg(publicId);
+        }
+
+        const farmerDto: FarmerDto = {
+          id: farmer.id,
+          name: farmer.name,
+          description: farmer.description,
+          city: farmer.city,
+          address: farmer.address,
+          email: farmer.email,
+          phone: farmer.phone,
+          coordinateLat: farmer.coordinateLat,
+          coordinateLong: farmer.coordinateLong,
+          userId: farmer.userId,
+          imageURL: publicId,
+        };
+
+        return farmerDto;
+      }),
+    );
+    return farmersDtos;
   }
 }

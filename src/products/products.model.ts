@@ -28,12 +28,14 @@ export class Product extends Model<Product, ProductCreationAtributes> {
   })
   category: string;
 
+
   @ApiProperty({ example: 'Coffe', description: 'Name of a product in English' })
   @Column({
     type: DataType.STRING,
     allowNull: false,
   })
   name_EN: string;
+
 
   @ApiProperty({ example: 'קפה', description: 'Name of a product in Hebrew' })
   @Column({

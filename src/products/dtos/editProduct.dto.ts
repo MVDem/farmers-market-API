@@ -9,6 +9,7 @@ import {
 } from 'class-validator';
 
 export class EditProductDto {
+
   @ApiProperty({
     example: 'Coffe-Jacobs-20gr',
     description: 'Category ',
@@ -83,3 +84,4 @@ export class EditProductDto {
   })
   photo: string;
 }
+

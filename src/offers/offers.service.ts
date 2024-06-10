@@ -62,12 +62,12 @@ export class OffersService {
     }
 
     const offerDto: OfferDto = {
-      offerId: updatedOffer.id,
+      id: updatedOffer.id,
       price: updatedOffer.price,
       unit: updatedOffer.unit,
       isActive: updatedOffer.isActive,
       description_EN: updatedOffer.description_EN,
-      description_HEB: updatedOffer.description_HEB,
+      description_HE: updatedOffer.description_HE,
       image: imageURL,
     };
     console.log('Created offer:', offerDto);
@@ -121,12 +121,12 @@ export class OffersService {
     console.log('Updated offer:', updatedOffer);
 
     const offerDto: OfferDto = {
-      offerId: updatedOffer.id,
+      id: updatedOffer.id,
       price: updatedOffer.price,
       unit: updatedOffer.unit,
       isActive: updatedOffer.isActive,
       description_EN: updatedOffer.description_EN,
-      description_HEB: updatedOffer.description_HEB,
+      description_HE: updatedOffer.description_HE,
       image: imageURL,
     };
     return offerDto;
@@ -158,12 +158,12 @@ export class OffersService {
     }
 
     const offerDto: OfferDto = {
-      offerId: offer.id,
+      id: offer.id,
       price: offer.price,
       unit: offer.unit,
       isActive: offer.isActive,
       description_EN: offer.description_EN,
-      description_HEB: offer.description_HEB,
+      description_HE: offer.description_HE,
       image: publicId,
     };
 
@@ -186,15 +186,15 @@ export class OffersService {
         if (publicId) {
           publicId = await this.cloudinary.getPathToImg(publicId);
         }
-        const { id, price, unit, isActive, description_EN, description_HEB } =
+        const { id, price, unit, isActive, description_EN, description_HE } =
           offer;
         return {
-          offerId: id,
+          id,
           price,
           unit,
           isActive,
           description_EN,
-          description_HEB,
+          description_HE,
           image: publicId,
         };
       }),
@@ -272,7 +272,7 @@ export class OffersService {
         const { id, price, unit, isActive, description_EN, description_HE } =
           offer;
         return {
-          offerId: id,
+          id,
           price,
           unit,
           isActive,

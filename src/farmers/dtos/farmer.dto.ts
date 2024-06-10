@@ -44,9 +44,15 @@ export class FarmerDto {
     userId: number;
   
     @ApiProperty({
-      example: 'v1713374928/cld-sample-5.jpg',
-      description: 'Part of the path of image in Cloudinary',
+      example: 'farmers/logos/img.jpg',
+      description: 'Public id of image in Cloudinary',
     })
-    imageURL: string;
+    logoURL: string;
+
+    @ApiProperty({
+      example: 'farmers/logos/img.jpg',
+      description: 'Public id of image in Cloudinary',
+    })
+    coverURL: string;
   }
   

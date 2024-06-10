@@ -27,11 +27,16 @@ export class AuthService {
     const user = await this.validateUser(userDto);
     const token = await this.generateToken(user);
     if (user.role === 'FARMER' && user.farmer) {
-      let publicId = user.farmer.imageURL;
+      let publicIdLogo = user.farmer.logoURL;
+      let publicIdCover = user.farmer.coverURL;
 
-      if (publicId) {
-        publicId = await this.cloudinaryService.getPathToImg(publicId);
-      } 
+      if (publicIdLogo) {
+        publicIdLogo = await this.cloudinaryService.getPathToImg(publicIdLogo);
+      }
+
+      if (publicIdCover) {
+        publicIdCover = await this.cloudinaryService.getPathToImg(publicIdCover);
+      }
 
       const userData: SignedUserDto = {
         id: user.id,
@@ -48,7 +53,8 @@ export class AuthService {
           coordinateLat: user.farmer.coordinateLat,
           coordinateLong: user.farmer.coordinateLong,
           userId: user.farmer.userId,
-          imageURL: publicId,
+          logoURL: publicIdLogo,
+          coverURL: publicIdCover,
         },
       };
       return { token, userData };

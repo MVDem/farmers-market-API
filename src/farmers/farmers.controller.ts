@@ -36,14 +36,16 @@ export class FarmersController {
   @Roles('FARMER')
   @UseGuards(RolesGuard)
   @Post()
-  @UseInterceptors(FileInterceptor('file'))
+  @UseInterceptors(FileInterceptor('logo'))
+  @UseInterceptors(FileInterceptor('cover'))
   update(
-    @UploadedFile() file: Express.Multer.File,
     @Req() req,
     @Body() updateDto: EditFarmerDto, // Check farmer id
+    @UploadedFile() logo?: Express.Multer.File,
+    @UploadedFile() cover?: Express.Multer.File,
   ) {
     const id = req.user.id;
-    return this.farmersService.updateFarmer(updateDto, id, file);
+    return this.farmersService.updateFarmer(updateDto, id, logo, cover);
   }
 
   @ApiOperation({ summary: 'Get Farmer' })

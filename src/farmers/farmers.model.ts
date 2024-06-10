@@ -122,13 +122,25 @@ export class Farmer extends Model<Farmer, FarmerCreationAtributes> {
   deals: Offer[];
   @ApiProperty({
     example:
-      'https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png',
-    description: 'Image URL',
+      'farmers/logo.png',
+    description: 'Logo URL',
     required: false,
   })
   @Column({
     type: DataType.STRING,
-    allowNull: false,
+    allowNull: true,
   })
-  imageURL: string;
+  logoURL: string;
+
+  @ApiProperty({
+    example:
+      'farmers/logo.png',
+    description: 'Cover URL',
+    required: false,
+  })
+  @Column({
+    type: DataType.STRING,
+    allowNull: true,
+  })
+  coverURL: string;
 }

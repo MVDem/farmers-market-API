@@ -16,11 +16,16 @@ interface IFarmer {
   phone?: string;
   coordinateLat?: number;
   coordinateLong?: number;
-  imageURL?: string;
+  logoURL?: string;
+  coverURL?: string;
 }
 
-const defaultImgUrl =
-  process.env.CLOUDINARY_DEFAULT_FARMERS_IMAGE || 'farmers/default.jpg';
+const defaultLogo =
+  process.env.CLOUDINARY_DEFAULT_FARMERS_LOGO_IMAGE ||
+  'farmers/logos/default.jpg';
+const defaultCover =
+  process.env.CLOUDINARY_DEFAULT_FARMERS_COVER_IMAGE ||
+  'farmers/covers/default.jpg';
 
 @Injectable()
 export class FarmersService {
@@ -35,7 +40,8 @@ export class FarmersService {
     const farmerData: IFarmer = {
       userId: dto.userId,
       email: dto.email,
-      imageURL: defaultImgUrl,
+      logoURL: defaultLogo,
+      coverURL: defaultCover,
     };
 
     const farmer = await this.farmerRepository.create(farmerData);
@@ -46,11 +52,18 @@ export class FarmersService {
       );
     }
 
-    let publicId = farmer.imageURL;
+    let publicIdLogo = farmer.logoURL;
 
-    if (publicId) {
-      publicId = await this.cloudinary.getPathToImg(publicId);
+    if (publicIdLogo) {
+      publicIdLogo = await this.cloudinary.getPathToImg(publicIdLogo);
     }
+
+    let publicIdCover = farmer.coverURL;
+
+    if (publicIdCover) {
+      publicIdCover = await this.cloudinary.getPathToImg(publicIdCover);
+    }
+
     // console.log('Create farmer:', farmer);
     const farmerDto: FarmerDto = {
       id: farmer.id,
@@ -63,7 +76,8 @@ export class FarmersService {
       coordinateLat: farmer.coordinateLat,
       coordinateLong: farmer.coordinateLong,
       userId: farmer.userId,
-      imageURL: publicId,
+      logoURL: publicIdLogo,
+      coverURL: publicIdCover,
     };
     return farmerDto;
   }
@@ -71,7 +85,8 @@ export class FarmersService {
   async updateFarmer(
     dto: EditFarmerDto,
     id: string,
-    file: Express.Multer.File,
+    logo?: Express.Multer.File,
+    cover?: Express.Multer.File,
   ) {
     const farmer = await this.farmerRepository.findOne({ where: { id } });
     if (!farmer) {
@@ -80,17 +95,31 @@ export class FarmersService {
         HttpStatus.NOT_FOUND,
       );
     }
-    let imgUrl;
 
     const farmerData: IFarmer = { ...dto, userId: farmer.userId };
-    if (file) {
+
+    let logoUrl;
+
+    if (logo) {
       const { public_id, url } = await this.uploadImageToCloudinary(
-        file,
+        logo,
         farmer.id.toString(),
       );
-      farmerData.imageURL = public_id;
-      imgUrl = url;
+      farmerData.logoURL = public_id;
+      logoUrl = url;
     }
+
+    let coverUrl;
+
+    if (cover) {
+      const { public_id, url } = await this.uploadImageToCloudinary(
+        cover,
+        farmer.id.toString(),
+      );
+      farmerData.coverURL = public_id;
+      coverUrl = url;
+    }
+
     const isUpdated = await this.farmerRepository.update(farmerData, {
       where: { id },
     });
@@ -112,7 +141,8 @@ export class FarmersService {
       coordinateLat: updatedFarmer.coordinateLat,
       coordinateLong: updatedFarmer.coordinateLong,
       userId: updatedFarmer.userId,
-      imageURL: imgUrl,
+      logoURL: logoUrl,
+      coverURL: coverUrl,
     };
     return farmerDto;
   }
@@ -129,10 +159,16 @@ export class FarmersService {
       );
     }
     console.log('Get farmer by id:', farmer);
-    let publicId = farmer.imageURL;
+    let logoUrl = farmer.logoURL;
 
-    if (publicId) {
-      publicId = await this.cloudinary.getPathToImg(publicId);
+    if (logoUrl) {
+      logoUrl = await this.cloudinary.getPathToImg(logoUrl);
+    }
+
+    let coverUrl = farmer.coverURL;
+
+    if (coverUrl) {
+      coverUrl = await this.cloudinary.getPathToImg(coverUrl);
     }
 
     const farmerDto: FarmerDto = {
@@ -146,7 +182,8 @@ export class FarmersService {
       coordinateLat: farmer.coordinateLat,
       coordinateLong: farmer.coordinateLong,
       userId: farmer.userId,
-      imageURL: publicId,
+      logoURL: logoUrl,
+      coverURL: coverUrl,
     };
     return farmerDto;
   }
@@ -184,10 +221,16 @@ export class FarmersService {
 
     const farmersDtos: FarmerDto[] = await Promise.all(
       farmers.map(async (farmer) => {
-        let publicId = farmer.imageURL;
+        let logoUrl = farmer.logoURL;
 
-        if (publicId) {
-          publicId = await this.cloudinary.getPathToImg(publicId);
+        if (logoUrl) {
+          logoUrl = await this.cloudinary.getPathToImg(logoUrl);
+        }
+
+        let coverUrl = farmer.coverURL;
+
+        if (coverUrl) {
+          coverUrl = await this.cloudinary.getPathToImg(coverUrl);
         }
 
         const farmerDto: FarmerDto = {
@@ -201,7 +244,8 @@ export class FarmersService {
           coordinateLat: farmer.coordinateLat,
           coordinateLong: farmer.coordinateLong,
           userId: farmer.userId,
-          imageURL: publicId,
+          logoURL: logoUrl,
+          coverURL: coverUrl,
         };
 
         return farmerDto;

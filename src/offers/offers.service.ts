@@ -8,6 +8,7 @@ import { OfferDto } from './dtos/offer.dto';
 import { PaginatedOfferDto } from './dtos/paginatedOffers.dto';
 import { Farmer } from 'src/farmers/farmers.model';
 import { Product } from 'src/products/products.model';
+import { Category } from 'src/categories/categories.model';
 
 interface IOffer {
   unit?: string;
@@ -317,15 +318,7 @@ export class OffersService {
           },
           {
             model: Product,
-            attributes: [
-              'id',
-              'categoryId',
-              'name_EN',
-              'name_HE',
-              'photo',
-              'description_EN',
-              'description_HE',
-            ],
+            include: [Category],
           },
         ],
       });

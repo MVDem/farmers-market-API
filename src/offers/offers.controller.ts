@@ -59,8 +59,8 @@ export class OffersController {
   @ApiOperation({ summary: 'Get one offer by id' })
   @ApiResponse({ status: 200, type: Offer })
   @Get('one/:id')
-  getOfferById(@Param('id') offerId: string) {
-    return this.OffersService.getById(+offerId);
+  getOfferById(@Param('id') id: string) {
+    return this.OffersService.getById(+id);
   }
 
   @ApiOperation({ summary: "Get all farmer's offers" })
@@ -75,9 +75,9 @@ export class OffersController {
   // @Roles('FARMER')
   // @UseGuards(RolesGuard)
   @Delete(':id')
-  delete(@Req() req, @Param('id') offerId: string) {
+  delete(@Req() req, @Param('id') id: string) {
     const farmerId = +req.user.farmer.id;
-    return this.OffersService.delete(farmerId, +offerId);
+    return this.OffersService.delete(farmerId, +id);
   }
 
   @ApiOperation({ summary: 'Get list of offers with pagination and sorting' })

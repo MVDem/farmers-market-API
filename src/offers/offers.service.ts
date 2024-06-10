@@ -15,7 +15,7 @@ interface IOffer {
   image?: string;
   isActive?: boolean;
   description_EN?: string;
-  description_HEB?: string;
+  description_HE?: string;
   farmerId?: number;
 }
 
@@ -41,12 +41,15 @@ export class OffersService {
         HttpStatus.BAD_REQUEST,
       );
     }
+    let imageURL = '';
+
     if (file) {
-      const { public_id } = await this.uploadImageToCloudinary(
+      const { public_id, url } = await this.uploadImageToCloudinary(
         file,
-        offer.id.toString(),
+        offer.id,
       );
       offerData.image = public_id;
+      imageURL = url;
     }
     const isUpdated = await this.OffersRepository.update(offerData, {
       where: { id: offer.id },
@@ -54,16 +57,30 @@ export class OffersService {
     if (isUpdated[0] === 0) {
       throw new HttpException("Photo didn't upload", HttpStatus.NOT_FOUND);
     }
-    const updatedoffer = await this.OffersRepository.findOne({
+    const updatedOffer = await this.OffersRepository.findOne({
       where: { id: offer.id },
     });
-    console.log('Created offer:', updatedoffer);
-    return updatedoffer;
+
+    if (!updatedOffer) {
+      throw new HttpException('Updated offer not found', HttpStatus.NOT_FOUND);
+    }
+
+    const offerDto: OfferDto = {
+      id: updatedOffer.id,
+      price: updatedOffer.price,
+      unit: updatedOffer.unit,
+      isActive: updatedOffer.isActive,
+      description_EN: updatedOffer.description_EN,
+      description_HE: updatedOffer.description_HE,
+      image: imageURL,
+    };
+    console.log('Created offer:', offerDto);
+    return offerDto;
   }
 
   async update(dto: editOfferDto, farmerId: number, file: Express.Multer.File) {
     const offer = await this.OffersRepository.findOne({
-      where: { id: dto.offerId },
+      where: { id: dto.id },
     });
 
     if (!offer) {
@@ -81,12 +98,15 @@ export class OffersService {
 
     const offerData: IOffer = { ...dto, price: +dto.price || offer.price };
 
+    let imageURL = '';
+
     if (file) {
-      const { public_id } = await this.uploadImageToCloudinary(
+      const { public_id, url } = await this.uploadImageToCloudinary(
         file,
-        offer.id.toString(),
+        offer.id,
       );
       offerData.image = public_id;
+      imageURL = url;
     }
 
     const isUpdated = await this.OffersRepository.update(offerData, {
@@ -99,16 +119,26 @@ export class OffersService {
       );
     }
 
-    const updatedoffer = await this.OffersRepository.findOne({
+    const updatedOffer = await this.OffersRepository.findOne({
       where: { id: +offer.id },
     });
-    console.log('Updated offer:', updatedoffer);
-    return updatedoffer;
+    console.log('Updated offer:', updatedOffer);
+
+    const offerDto: OfferDto = {
+      id: updatedOffer.id,
+      price: updatedOffer.price,
+      unit: updatedOffer.unit,
+      isActive: updatedOffer.isActive,
+      description_EN: updatedOffer.description_EN,
+      description_HE: updatedOffer.description_HE,
+      image: imageURL,
+    };
+    return offerDto;
   }
 
-  async getById(offerId: number) {
+  async getById(id: number) {
     const offer = await this.OffersRepository.findOne({
-      where: { id: offerId },
+      where: { id: id },
       include: { all: true },
     });
     if (!offer) {
@@ -124,7 +154,24 @@ export class OffersService {
     //   );
     // }
     console.log('Get offer by id:', offer);
-    return offer;
+
+    let publicId = offer.image;
+
+    if (publicId) {
+      publicId = await this.cloudinary.getPathToImg(publicId);
+    }
+
+    const offerDto: OfferDto = {
+      id: offer.id,
+      price: offer.price,
+      unit: offer.unit,
+      isActive: offer.isActive,
+      description_EN: offer.description_EN,
+      description_HE: offer.description_HE,
+      image: publicId,
+    };
+
+    return offerDto;
   }
 
   async getAllByFarmer(farmer_Id: number) {
@@ -135,7 +182,28 @@ export class OffersService {
       throw new HttpException('You have no offers', HttpStatus.NOT_FOUND);
     }
     console.log('Get offer by id:', offers);
-    return offers;
+
+    const offersDto: OfferDto[] = await Promise.all(
+      offers.map(async (offer) => {
+        let publicId = offer.image;
+
+        if (publicId) {
+          publicId = await this.cloudinary.getPathToImg(publicId);
+        }
+        const { id, price, unit, isActive, description_EN, description_HE } =
+          offer;
+        return {
+          id,
+          price,
+          unit,
+          isActive,
+          description_EN,
+          description_HE,
+          image: publicId,
+        };
+      }),
+    );
+    return offersDto;
   }
 
   async delete(farmerId: number, offerId: number) {
@@ -169,9 +237,9 @@ export class OffersService {
 
   private async uploadImageToCloudinary(
     file: Express.Multer.File,
-    offerId: string,
+    offerId: number,
   ) {
-    const result = await this.cloudinary.uploadImage(file, 'offers', offerId);
+    const result = await this.cloudinary.uploadImage(file, 'offers', offerId.toString());
     console.log('Upload image:', result, file);
     if (!result) {
       throw new HttpException('Image was not uploaded', HttpStatus.BAD_REQUEST);
@@ -198,29 +266,29 @@ export class OffersService {
     }
     const { count, rows } = response;
 
-    const offers: OfferDto[] = rows.map((offer) => {
-      const {
-        id,
-        price,
-        unit,
-        isActive,
-        description_EN,
-        description_HEB,
-        image,
-      } = offer;
-      return {
-        offerId: id,
-        price,
-        unit,
-        isActive,
-        description_EN,
-        description_HEB,
-        image,
-      };
-    });
+    const offersDto: OfferDto[] = await Promise.all(
+      rows.map(async (offer) => {
+        let publicId = offer.image;
+
+        if (publicId) {
+          publicId = await this.cloudinary.getPathToImg(publicId);
+        }
+        const { id, price, unit, isActive, description_EN, description_HE } =
+          offer;
+        return {
+          id,
+          price,
+          unit,
+          isActive,
+          description_EN,
+          description_HE,
+          image: publicId,
+        };
+      }),
+    );
 
     return {
-      offers,
+      offers: offersDto,
       count,
     };
   }

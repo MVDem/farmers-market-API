@@ -11,72 +11,72 @@ import {
 export class CreateProductDto {
   @ApiProperty({
     example: 'Coffe-Jacobs-20gr',
-    description: 'Full name ',
+    description: 'Full name',
     required: false,
   })
   @IsString({ message: 'Category must be a string' })
   @MaxLength(50, {
-    message: 'category must be max 50 simbols ',
+    message: 'category must be max 50 symbols ',
   })
   category: string;
 
   @ApiProperty({
     example: 'lorem ipsum ',
-    description: 'nameENG must be a string and max 15 simbols',
+    description: 'name_EN must be a string and max 15 symbols',
     required: true,
   })
-  @IsString({ message: 'NameENG must be a string' })
+  @IsString({ message: 'name_EN must be a string' })
   @MaxLength(15, {
-    message: 'nameENG must be max 15 simbols',
+    message: 'name_EN must be max 15 symbols',
   })
   @IsOptional()
-  nameENG: string;
+  name_EN: string;
 
   @ApiProperty({
     example: 'lorem ipsum',
     required: false,
   })
-  @IsString({ message: 'NameHEB must be a string' })
+  @IsString({ message: 'name_HE must be a string' })
   @MaxLength(15, {
-    message: 'NameHEB must be max 15 simbols',
+    message: 'name_HE must be max 15 symbols',
   })
   @IsOptional()
-  nameHEB: string;
+  name_HE: string;
 
   @ApiProperty({
     example:
       'lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ',
-    description: 'DescriptionENG must be a string and max 150 simbols',
+    description: 'description_EN must be a string and max 150 symbols',
     required: true,
   })
-  @IsString({ message: 'DescriptionENG must be a string' })
+  @IsString({ message: 'description_EN must be a string' })
   @MaxLength(150, {
-    message: 'DescriptionENG must be max 150 simbols',
+    message: 'description_EN must be max 150 symbols',
   })
   @IsOptional()
-  descriptionENG: string;
+  description_EN: string;
 
   @ApiProperty({
     example:
       'lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ',
-    description: 'DescriptionHEB must be a string and max 150 simbols',
+    description: 'description_HE must be a string and max 150 symbols',
     required: false,
   })
-  @IsString({ message: 'DescriptionHEB must be a string' })
+  @IsString({ message: 'description_HE must be a string' })
   @MaxLength(150, {
-    message: 'DescriptionHEB must be max 150 simbols',
+    message: 'description_HE must be max 150 symbols',
   })
   @IsOptional()
-  descriptionHEB: string;
+  description_HE: string;
 
   @ApiProperty({
     example: 'http://Photo.com/photo.jpg',
-    description: 'Photo url must be a string and max 15 simbols',
+    description: 'Photo url must be a string and max 15 symbols',
     required: false,
   })
   @IsString({ message: 'Photo url must be a string' })
   @MaxLength(150, {
-    message: 'Photo url must be max 15 simbols ',
+    message: 'Photo url must be max 15 symbols ',
   })
   photo: string;
 }

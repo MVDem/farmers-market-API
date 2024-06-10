@@ -16,7 +16,7 @@ interface OffersCreationAtributes {
   image: string;
   isActive: boolean;
   description_EN: string;
-  description_HEB: string;
+  description_HE: string;
   farmerId: number;
   productId: number; 
 }
@@ -81,7 +81,7 @@ export class Offer extends Model<Offer, OffersCreationAtributes> {
     type: DataType.STRING,
     allowNull: true,
   })
-  description_HEB: string;
+  description_HE: string;
 
   @ForeignKey(() => Farmer)
   @Column({ type: DataType.INTEGER })

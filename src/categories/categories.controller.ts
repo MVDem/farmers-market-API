@@ -6,6 +6,7 @@ import {
   Param,
   Query,
   Post,
+  Put,
 } from '@nestjs/common';
 import { ApiOperation, ApiParam, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { CategoriesService } from './categories.service';
@@ -26,7 +27,7 @@ export class CategoriesController {
 
   @ApiOperation({ summary: 'Update Category' })
   @ApiResponse({ status: 200, type: Category })
-  @Post(':id')
+  @Put(':id')
   updateCategory(@Body() updateDto: EditCategoryDto, @Param('id') id: string) {
     return this.categoriesService.updateCategory(updateDto, id);
   }

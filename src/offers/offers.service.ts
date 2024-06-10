@@ -13,7 +13,7 @@ interface IOffer {
   image?: string;
   isActive?: boolean;
   description_EN?: string;
-  description_HEB?: string;
+  description_HE?: string;
   farmerId?: number;
 }
 
@@ -42,7 +42,7 @@ export class OffersService {
     if (file) {
       const { public_id, url } = await this.uploadImageToCloudinary(
         file,
-        offer.id.toString(),
+        offer.id,
       );
       offerData.image = public_id;
       imageURL = url;
@@ -76,7 +76,7 @@ export class OffersService {
 
   async update(dto: editOfferDto, farmerId: number, file: Express.Multer.File) {
     const offer = await this.OffersRepository.findOne({
-      where: { id: dto.offerId },
+      where: { id: dto.id },
     });
 
     if (!offer) {
@@ -99,7 +99,7 @@ export class OffersService {
     if (file) {
       const { public_id, url } = await this.uploadImageToCloudinary(
         file,
-        offer.id.toString(),
+        offer.id,
       );
       offerData.image = public_id;
       imageURL = url;
@@ -132,9 +132,9 @@ export class OffersService {
     return offerDto;
   }
 
-  async getById(offerId: number) {
+  async getById(id: number) {
     const offer = await this.OffersRepository.findOne({
-      where: { id: offerId },
+      where: { id: id },
       include: { all: true },
     });
     if (!offer) {
@@ -233,9 +233,9 @@ export class OffersService {
 
   private async uploadImageToCloudinary(
     file: Express.Multer.File,
-    offerId: string,
+    offerId: number,
   ) {
-    const result = await this.cloudinary.uploadImage(file, 'offers', offerId);
+    const result = await this.cloudinary.uploadImage(file, 'offers', offerId.toString());
     console.log('Upload image:', result, file);
     if (!result) {
       throw new HttpException('Image was not uploaded', HttpStatus.BAD_REQUEST);
@@ -269,7 +269,7 @@ export class OffersService {
         if (publicId) {
           publicId = await this.cloudinary.getPathToImg(publicId);
         }
-        const { id, price, unit, isActive, description_EN, description_HEB } =
+        const { id, price, unit, isActive, description_EN, description_HE } =
           offer;
         return {
           offerId: id,
@@ -277,7 +277,7 @@ export class OffersService {
           unit,
           isActive,
           description_EN,
-          description_HEB,
+          description_HE,
           image: publicId,
         };
       }),

@@ -73,7 +73,7 @@
 - **description_EN:** STRING
   - Example: 'Lorem'
   - Description: English description for the product.
-- **description_HEB:** STRING
+- **description_HE:** STRING
   - Example: 'Lorem'
   - Description: Hebrew description for the product.
 - **farmerId:** INTEGER (Foreign Key referencing Farmer)
@@ -88,16 +88,16 @@
 - **category:** STRING (Not Null)
   - Example: 'Coffe-black'
   - Description: Category of the product.
-- **nameENG:** STRING (Not Null)
+- **name_EN:** STRING (Not Null)
   - Example: 'Coffe'
   - Description: Name of the product in English.
-- **nameHEB:** STRING
+- **name_HE:** STRING
   - Example: 'קפה'
   - Description: Name of the product in Hebrew.
-- **descriptionENG:** STRING (Not Null)
+- **description_EN:** STRING (Not Null)
   - Example: 'Coffe'
   - Description: Description of the product in English.
-- **descriptionHEB:** STRING
+- **description_HE:** STRING
   - Example: 'קפה'
   - Description: Description of the product in Hebrew.
 - **photo:** STRING (Not Null)

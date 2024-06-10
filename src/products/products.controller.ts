@@ -11,21 +11,21 @@ export class ProductsController {
   constructor(private productsService: ProductsService) {}
 
   @ApiOperation({ summary: 'Create Product' })
-  @ApiResponse({ status: 201, type:Product })
+  @ApiResponse({ status: 201, type: Product })
   @Post()
   createProduct(@Body() createDto: CreateProductDto) {
     return this.productsService.create(createDto);
   }
 
   @ApiOperation({ summary: 'Update Product' })
-  @ApiResponse({ status: 200, type:Product })
+  @ApiResponse({ status: 200, type: Product })
   @Post(':id')
   updateProduct(@Body() updateDto: EditProductDto, @Param('id') id: string) {
     return this.productsService.updateProduct(updateDto, id);
   }
 
   @ApiOperation({ summary: 'Get Product' })
-  @ApiResponse({ status: 200, type:Product })
+  @ApiResponse({ status: 200, type: Product })
   @Get(':id')
   @ApiParam({
     name: 'id',
@@ -37,7 +37,7 @@ export class ProductsController {
   }
 
   @ApiOperation({ summary: 'Delete Product' })
-  @ApiResponse({ status: 200, type:Product })
+  @ApiResponse({ status: 200, type: Product })
   @Delete(':id')
   @ApiParam({
     name: 'id',
@@ -47,5 +47,4 @@ export class ProductsController {
   deleteProduct(@Param('id') id: string) {
     return this.productsService.deleteProduct(id);
   }
- 
 }

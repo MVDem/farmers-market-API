@@ -158,7 +158,6 @@ export class FarmersService {
         HttpStatus.NOT_FOUND,
       );
     }
-    console.log('Get farmer by id:', farmer);
     let logoUrl = farmer.logoURL;
 
     if (logoUrl) {

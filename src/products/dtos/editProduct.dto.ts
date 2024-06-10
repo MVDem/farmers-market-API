@@ -9,17 +9,13 @@ import {
 } from 'class-validator';
 
 export class EditProductDto {
-
   @ApiProperty({
     example: 'Coffe-Jacobs-20gr',
     description: 'Category ',
     required: false,
   })
-  @IsString({ message: 'Category must be a string' })
-  @MaxLength(15, {
-    message: 'Category must be max 15 symbols ',
-  })
-  category: string;
+  @IsNumber({}, { message: 'category must be a number' })
+  categoryId: number;
 
   @ApiProperty({
     example:
@@ -82,6 +78,5 @@ export class EditProductDto {
   @MaxLength(255, {
     message: 'Photo URL must be max 255 symbols ',
   })
-  photo: string;
+  imageURL: string;
 }
-

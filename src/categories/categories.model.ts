@@ -2,11 +2,11 @@ import { ApiProperty } from '@nestjs/swagger';
 import { Column, Model, DataType, Table, HasMany } from 'sequelize-typescript';
 
 interface CategoryCreationAtributes {
-  nameENG: string;
-  nameHEB: string;
-  photo: string;
-  descriptionENG: string;
-  descriptionHEB: string;
+  name_EN: string;
+  name_HE: string;
+  imageURL: string;
+  description_EN: string;
+  description_HE: string;
 }
 
 @Table({ tableName: 'categories' })
@@ -20,44 +20,44 @@ export class Category extends Model<Category, CategoryCreationAtributes> {
   })
   id: number;
 
-  @ApiProperty({ example: 'Coffe', description: 'NameENG of category ENG' })
+  @ApiProperty({ example: 'Coffe', description: 'name_EN of category ENG' })
   @Column({
     type: DataType.STRING,
     allowNull: false,
     unique: true,
   })
-  nameENG: string;
+  name_EN: string;
 
-  @ApiProperty({ example: 'קפה', description: 'NameHEB of category HEB' })
+  @ApiProperty({ example: 'קפה', description: 'Name_HE of category HEB' })
   @Column({
     type: DataType.STRING,
     allowNull: true,
   })
-  nameHEB: string;
+  name_HE: string;
 
   @ApiProperty({
     example: 'Coffe',
-    description: 'DescriptionENG of category ENG',
+    description: 'DescriptionENG of category EN',
   })
   @Column({
     type: DataType.STRING,
     allowNull: false,
   })
-  descriptionENG: string;
+  description_EN: string;
 
   @ApiProperty({
     example: 'קפה',
-    description: 'DescriptionHEB of category HEB',
+    description: 'DescriptionHEB of category HE',
   })
   @Column({
     type: DataType.STRING,
     allowNull: true,
   })
-  descriptionHEB: string;
+  description_HE: string;
 
   @ApiProperty({
     example: 'categories/public_id.jpg',
-    description: 'Public id of image of category',
+    description: 'Public id of imageURL of category',
   })
   @Column({
     type: DataType.STRING,

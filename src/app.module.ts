@@ -30,6 +30,7 @@ import { CategoriesModule } from './categories/categories.module';
       database: process.env.POSTGRES_DB,
       models: [Auth, Farmer, Offer, Product, Category],
       autoLoadModels: true,
+      synchronize: true,
       logging: false,
     }),
     AuthModule,

@@ -96,4 +96,18 @@ export class OffersController {
       order,
     );
   }
+
+  //06-06-2024
+  @ApiOperation({ summary: 'Get offers with farmer and product details' })
+  @ApiResponse({
+    status: 200,
+    description:
+      'Successfully retrieved offers with farmer and product details',
+    type: [Object], // Укажите правильный тип, если он у вас есть
+  })
+  @ApiResponse({ status: 500, description: 'Internal Server Error' })
+  @Get('/getfulloffers')
+  async getFullOffers() {
+    return this.OffersService.getFullOffers();
+  }
 }

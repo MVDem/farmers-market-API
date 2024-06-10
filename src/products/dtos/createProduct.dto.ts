@@ -14,11 +14,8 @@ export class CreateProductDto {
     description: 'Full name',
     required: false,
   })
-  @IsString({ message: 'Category must be a string' })
-  @MaxLength(50, {
-    message: 'category must be max 50 symbols ',
-  })
-  category: string;
+  @IsNumber({}, { message: 'categoryId must be a number' })
+  categoryId: number;
 
   @ApiProperty({
     example: 'lorem ipsum ',
@@ -78,5 +75,5 @@ export class CreateProductDto {
   @MaxLength(150, {
     message: 'Photo url must be max 15 symbols ',
   })
-  photo: string;
+  imageURL: string;
 }

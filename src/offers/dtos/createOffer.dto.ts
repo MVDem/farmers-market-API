@@ -7,11 +7,7 @@ export class CreateOfferDto {
     description: 'Product id',
     required: true,
   })
-  @IsString({ message: 'Product id must be a string' })
-  @MaxLength(10, {
-    message: 'Product id must be max 10 symbols',
-  })
-  productId: string;
+  productId: number;
 
   @ApiProperty({
     example: '100',

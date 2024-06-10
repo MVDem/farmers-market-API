@@ -30,7 +30,7 @@ export class ProductsController {
   @ApiParam({
     name: 'id',
     required: true,
-    example: 'F-123',
+    example: '123',
   })
   getProduct(@Param('id') id: string) {
     return this.productsService.getOne(+id);
@@ -42,7 +42,7 @@ export class ProductsController {
   @ApiParam({
     name: 'id',
     required: true,
-    example: 'F-123',
+    example: '123',
   })
   deleteProduct(@Param('id') id: string) {
     return this.productsService.deleteProduct(id);

@@ -4,7 +4,6 @@
 module.exports = {
   async up(queryInterface) {
     await queryInterface.bulkInsert('offers', [
-      // Offers for Farmer 3
       {
         unit: 'kg',
         price: 50,
@@ -16,6 +15,8 @@ module.exports = {
         productId: 21,
         createdAt: new Date(),
         updatedAt: new Date(),
+        name_EN: 'Beef',
+        name_HE: 'בקר',
       },
       {
         unit: 'kg',
@@ -28,6 +29,8 @@ module.exports = {
         productId: 22,
         createdAt: new Date(),
         updatedAt: new Date(),
+        name_EN: 'Chicken',
+        name_HE: 'עוף',
       },
       {
         unit: 'kg',
@@ -40,6 +43,8 @@ module.exports = {
         productId: 23,
         createdAt: new Date(),
         updatedAt: new Date(),
+        name_EN: 'Lamb',
+        name_HE: 'כבש',
       },
       {
         unit: 'kg',
@@ -52,6 +57,8 @@ module.exports = {
         productId: 24,
         createdAt: new Date(),
         updatedAt: new Date(),
+        name_EN: 'Pork',
+        name_HE: 'חזיר',
       },
       {
         unit: 'kg',
@@ -64,6 +71,8 @@ module.exports = {
         productId: 25,
         createdAt: new Date(),
         updatedAt: new Date(),
+        name_EN: 'Veal',
+        name_HE: 'עגל',
       },
       {
         unit: 'kg',
@@ -76,6 +85,8 @@ module.exports = {
         productId: 26,
         createdAt: new Date(),
         updatedAt: new Date(),
+        name_EN: 'Duck',
+        name_HE: 'ברווז',
       },
       {
         unit: 'kg',
@@ -88,6 +99,8 @@ module.exports = {
         productId: 27,
         createdAt: new Date(),
         updatedAt: new Date(),
+        name_EN: 'Rabbit',
+        name_HE: 'ארנב',
       },
       {
         unit: 'kg',
@@ -100,6 +113,8 @@ module.exports = {
         productId: 28,
         createdAt: new Date(),
         updatedAt: new Date(),
+        name_EN: 'Bison',
+        name_HE: 'ביסון',
       },
       {
         unit: 'kg',
@@ -112,6 +127,8 @@ module.exports = {
         productId: 29,
         createdAt: new Date(),
         updatedAt: new Date(),
+        name_EN: 'Goat',
+        name_HE: 'עז',
       },
       {
         unit: 'kg',
@@ -124,6 +141,8 @@ module.exports = {
         productId: 30,
         createdAt: new Date(),
         updatedAt: new Date(),
+        name_EN: 'Elk',
+        name_HE: 'אייל',
       },
     ]);
   },

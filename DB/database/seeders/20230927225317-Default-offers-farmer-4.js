@@ -4,7 +4,6 @@
 module.exports = {
   async up(queryInterface) {
     await queryInterface.bulkInsert('offers', [
-      // Offers for Farmer 4
       {
         unit: 'kg',
         price: 60,
@@ -16,6 +15,8 @@ module.exports = {
         productId: 31,
         createdAt: new Date(),
         updatedAt: new Date(),
+        name_EN: 'Cheddar Cheese',
+        name_HE: 'גבינת צ׳דר',
       },
       {
         unit: 'kg',
@@ -28,6 +29,8 @@ module.exports = {
         productId: 32,
         createdAt: new Date(),
         updatedAt: new Date(),
+        name_EN: 'Mozzarella Cheese',
+        name_HE: 'גבינת מוצרלה',
       },
       {
         unit: 'kg',
@@ -40,6 +43,8 @@ module.exports = {
         productId: 33,
         createdAt: new Date(),
         updatedAt: new Date(),
+        name_EN: 'Parmesan Cheese',
+        name_HE: 'גבינת פרמזן',
       },
       {
         unit: 'kg',
@@ -52,6 +57,8 @@ module.exports = {
         productId: 34,
         createdAt: new Date(),
         updatedAt: new Date(),
+        name_EN: 'Blue Cheese',
+        name_HE: 'גבינה כחולה',
       },
       {
         unit: 'kg',
@@ -64,6 +71,8 @@ module.exports = {
         productId: 35,
         createdAt: new Date(),
         updatedAt: new Date(),
+        name_EN: 'Brie Cheese',
+        name_HE: 'גבינת ברי',
       },
       {
         unit: 'kg',
@@ -76,6 +85,8 @@ module.exports = {
         productId: 36,
         createdAt: new Date(),
         updatedAt: new Date(),
+        name_EN: 'Gouda Cheese',
+        name_HE: 'גבינת גאודה',
       },
       {
         unit: 'kg',
@@ -88,6 +99,8 @@ module.exports = {
         productId: 37,
         createdAt: new Date(),
         updatedAt: new Date(),
+        name_EN: 'Gruyere Cheese',
+        name_HE: 'גבינת גרוייר',
       },
       {
         unit: 'kg',
@@ -100,6 +113,8 @@ module.exports = {
         productId: 38,
         createdAt: new Date(),
         updatedAt: new Date(),
+        name_EN: 'Feta Cheese',
+        name_HE: 'גבינת פטה',
       },
       {
         unit: 'kg',
@@ -112,6 +127,8 @@ module.exports = {
         productId: 39,
         createdAt: new Date(),
         updatedAt: new Date(),
+        name_EN: 'Swiss Cheese',
+        name_HE: 'גבינה שוויצרית',
       },
       {
         unit: 'kg',
@@ -120,10 +137,13 @@ module.exports = {
         isActive: true,
         description_EN: 'Mild provolone cheese',
         description_HE: 'גבינת פרובולונה עדינה',
+        isActive: true,
         farmerId: 4,
         productId: 40,
         createdAt: new Date(),
         updatedAt: new Date(),
+        name_EN: 'Provolone Cheese',
+        name_HE: 'גבינת פרובולונה',
       },
     ]);
   },

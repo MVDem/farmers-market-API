@@ -16,6 +16,8 @@ module.exports = {
         productId: 1,
         createdAt: new Date(),
         updatedAt: new Date(),
+        name_EN: 'Carrot',
+        name_HE: 'גזר',
       },
       {
         unit: 'kg',
@@ -28,6 +30,8 @@ module.exports = {
         productId: 2,
         createdAt: new Date(),
         updatedAt: new Date(),
+        name_EN: 'Tomato',
+        name_HE: 'עגבנייה',
       },
       {
         unit: 'kg',
@@ -40,6 +44,8 @@ module.exports = {
         productId: 3,
         createdAt: new Date(),
         updatedAt: new Date(),
+        name_EN: 'Cucumber',
+        name_HE: 'מלפפון',
       },
       {
         unit: 'kg',
@@ -52,6 +58,8 @@ module.exports = {
         productId: 4,
         createdAt: new Date(),
         updatedAt: new Date(),
+        name_EN: 'Bell Pepper',
+        name_HE: 'פלפל',
       },
       {
         unit: 'kg',
@@ -64,6 +72,8 @@ module.exports = {
         productId: 5,
         createdAt: new Date(),
         updatedAt: new Date(),
+        name_EN: 'Broccoli',
+        name_HE: 'ברוקולי',
       },
       {
         unit: 'kg',
@@ -76,6 +86,8 @@ module.exports = {
         productId: 6,
         createdAt: new Date(),
         updatedAt: new Date(),
+        name_EN: 'Spinach',
+        name_HE: "ספינג'",
       },
       {
         unit: 'kg',
@@ -88,6 +100,8 @@ module.exports = {
         productId: 7,
         createdAt: new Date(),
         updatedAt: new Date(),
+        name_EN: 'Potato',
+        name_HE: 'תפוח אדמה',
       },
       {
         unit: 'kg',
@@ -100,6 +114,8 @@ module.exports = {
         productId: 8,
         createdAt: new Date(),
         updatedAt: new Date(),
+        name_EN: 'Onion',
+        name_HE: 'בצל',
       },
       {
         unit: 'kg',
@@ -112,6 +128,8 @@ module.exports = {
         productId: 9,
         createdAt: new Date(),
         updatedAt: new Date(),
+        name_EN: 'Lettuce',
+        name_HE: 'חסה',
       },
       {
         unit: 'kg',
@@ -124,6 +142,8 @@ module.exports = {
         productId: 10,
         createdAt: new Date(),
         updatedAt: new Date(),
+        name_EN: 'Zucchini',
+        name_HE: 'קישוא',
       },
     ]);
   },

@@ -16,6 +16,8 @@ module.exports = {
         productId: 11,
         createdAt: new Date(),
         updatedAt: new Date(),
+        name_EN: 'Apple',
+        name_HE: 'תפוח',
       },
       {
         unit: 'kg',
@@ -28,6 +30,8 @@ module.exports = {
         productId: 12,
         createdAt: new Date(),
         updatedAt: new Date(),
+        name_EN: 'Banana',
+        name_HE: 'בננה',
       },
       {
         unit: 'kg',
@@ -40,6 +44,8 @@ module.exports = {
         productId: 13,
         createdAt: new Date(),
         updatedAt: new Date(),
+        name_EN: 'Grape',
+        name_HE: 'ענב',
       },
       {
         unit: 'kg',
@@ -52,6 +58,8 @@ module.exports = {
         productId: 14,
         createdAt: new Date(),
         updatedAt: new Date(),
+        name_EN: 'Orange',
+        name_HE: 'תפוז',
       },
       {
         unit: 'kg',
@@ -64,6 +72,8 @@ module.exports = {
         productId: 15,
         createdAt: new Date(),
         updatedAt: new Date(),
+        name_EN: 'Strawberry',
+        name_HE: 'תות',
       },
       {
         unit: 'kg',
@@ -76,6 +86,8 @@ module.exports = {
         productId: 16,
         createdAt: new Date(),
         updatedAt: new Date(),
+        name_EN: 'Kiwi',
+        name_HE: 'קיווי',
       },
       {
         unit: 'kg',
@@ -88,6 +100,8 @@ module.exports = {
         productId: 17,
         createdAt: new Date(),
         updatedAt: new Date(),
+        name_EN: 'Mango',
+        name_HE: 'מנגו',
       },
       {
         unit: 'kg',
@@ -100,6 +114,8 @@ module.exports = {
         productId: 18,
         createdAt: new Date(),
         updatedAt: new Date(),
+        name_EN: 'Pear',
+        name_HE: 'אגס',
       },
       {
         unit: 'kg',
@@ -112,6 +128,8 @@ module.exports = {
         productId: 19,
         createdAt: new Date(),
         updatedAt: new Date(),
+        name_EN: 'Plum',
+        name_HE: 'שזיף',
       },
       {
         unit: 'kg',
@@ -124,6 +142,8 @@ module.exports = {
         productId: 20,
         createdAt: new Date(),
         updatedAt: new Date(),
+        name_EN: 'Pineapple',
+        name_HE: 'אננס',
       },
     ]);
   },

@@ -68,7 +68,7 @@ export class Offer extends Model<Offer, OffersCreationAttributes> {
     type: DataType.STRING,
     allowNull: true,
   })
-  image: string;
+  imageURL: string;
 
   @ApiProperty({
     example: 'true',

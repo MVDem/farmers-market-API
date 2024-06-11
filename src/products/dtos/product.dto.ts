@@ -1,13 +1,20 @@
 import { ApiProperty } from '@nestjs/swagger';
+import { CategoryDto } from 'src/categories/dtos/category.dto';
 
 export class ProductDto {
   @ApiProperty({
+    example: 123,
+    description: 'Product id',
+    required: true,
+  })
+  id: number;
+
+  @ApiProperty({
     example: 'Coffe-Jacobs-20gr',
     description: 'Category ',
-    required: false,
+    required: true,
   })
-  @IsNumber({}, { message: 'category must be a number' })
-  categoryId: number;
+  category: CategoryDto;
 
   @ApiProperty({
     example:
@@ -15,11 +22,6 @@ export class ProductDto {
     description: 'name_EN must be a string and max 150 symbols',
     required: true,
   })
-  @IsString({ message: 'name_EN must be a string' })
-  @MaxLength(150, {
-    message: 'name_EN must be max 150 symbols',
-  })
-  @IsOptional()
   name_EN: string;
 
   @ApiProperty({
@@ -28,11 +30,6 @@ export class ProductDto {
     description: 'name_HE must be a string and max 150 symbols',
     required: false,
   })
-  @IsString({ message: 'name_HE must be a string' })
-  @MaxLength(150, {
-    message: 'name_HE must be max 150 symbols',
-  })
-  @IsOptional()
   name_HE: string;
 
   @ApiProperty({
@@ -41,11 +38,6 @@ export class ProductDto {
     description: 'description_EN must be a string and max 150 symbols',
     required: true,
   })
-  @IsString({ message: 'description_EN must be a string' })
-  @MaxLength(150, {
-    message: 'description_EN must be max 150 symbols',
-  })
-  @IsOptional()
   description_EN: string;
 
   @ApiProperty({
@@ -54,21 +46,12 @@ export class ProductDto {
     description: 'description_HE must be a string and max 150 symbols',
     required: false,
   })
-  @IsString({ message: 'description_HE must be a string' })
-  @MaxLength(150, {
-    message: 'description_HE must be max 150 symbols',
-  })
-  @IsOptional()
   description_HE: string;
 
   @ApiProperty({
     example: 'http://Photo.com/photo.jpg',
     description: 'Photo URL must be a string and max 15 symbols',
     required: false,
-  })
-  @IsString({ message: 'Photo URL must be a string' })
-  @MaxLength(255, {
-    message: 'Photo URL must be max 255 symbols ',
   })
   imageURL: string;
 }

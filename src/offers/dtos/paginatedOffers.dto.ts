@@ -15,7 +15,7 @@ export class PaginatedOfferDto {
         isActive: true,
         description_EN: 'Lorem ',
         description_HE: 'Lorem ',
-        image: 'http://',
+        imageURL: 'http://',
       },
     ],
     description: 'List of offers',

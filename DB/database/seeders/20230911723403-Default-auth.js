@@ -11,46 +11,89 @@ module.exports = {
         email: 'bob@gmail.com',
         password: hashPassword,
         role: 'FARMER',
-        createdAt: '2022-01-17T04:33:12.000Z',
-        updatedAt: '2022-01-17T04:33:12.000Z',
+        createdAt: new Date(),
+        updatedAt: new Date(),
       },
       {
         email: 'john@gmail.com',
         password: hashPassword,
         role: 'CUSTOMER',
-        createdAt: '2022-01-17T04:33:12.000Z',
-        updatedAt: '2022-01-17T04:33:12.000Z',
+        createdAt: new Date(),
+        updatedAt: new Date(),
       },
       {
         email: 'alice@gmail.com',
         password: hashPassword,
         role: 'FARMER',
-        createdAt: '2022-01-17T04:33:12.000Z',
-        updatedAt: '2022-01-17T04:33:12.000Z',
+        createdAt: new Date(),
+        updatedAt: new Date(),
       },
       {
         email: 'charlie@gmail.com',
         password: hashPassword,
         role: 'FARMER',
-        createdAt: '2022-01-17T04:33:12.000Z',
-        updatedAt: '2022-01-17T04:33:12.000Z',
+        createdAt: new Date(),
+        updatedAt: new Date(),
       },
       {
         email: 'david@gmail.com',
         password: hashPassword,
         role: 'FARMER',
-        createdAt: '2022-01-17T04:33:12.000Z',
-        updatedAt: '2022-01-17T04:33:12.000Z',
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        email: 'eve@gmail.com',
+        password: hashPassword,
+        role: 'CUSTOMER',
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        email: 'frank@gmail.com',
+        password: hashPassword,
+        role: 'CUSTOMER',
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        email: 'grace@gmail.com',
+        password: hashPassword,
+        role: 'FARMER',
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        email: 'heidi@gmail.com',
+        password: hashPassword,
+        role: 'CUSTOMER',
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        email: 'ivan@gmail.com',
+        password: hashPassword,
+        role: 'FARMER',
+        createdAt: new Date(),
+        updatedAt: new Date(),
       },
     ]);
   },
 
-  async down(queryInterface, Sequelize) {
-    /**
-     * Add commands to revert seed here.
-     *
-     * Example:
-     * await queryInterface.bulkDelete('People', null, {});
-     */
-  },
+  async down(queryInterface) {
+    await queryInterface.bulkDelete('auth', {
+      email: [
+        'bob@gmail.com',
+        'john@gmail.com',
+        'alice@gmail.com',
+        'charlie@gmail.com',
+        'david@gmail.com',
+        'eve@gmail.com',
+        'frank@gmail.com',
+        'grace@gmail.com',
+        'heidi@gmail.com',
+        'ivan@gmail.com'
+      ],
+    });
+  }
 };

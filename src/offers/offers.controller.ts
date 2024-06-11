@@ -86,14 +86,16 @@ export class OffersController {
   @ApiResponse({ status: 200, type: Offer })
   @Get()
   getPaginatedSortedOffers(
-    @Query('search') search: ISearchParams,
+    @Query('columnName') columnName: string = '',
+    @Query('value') value: string = '',
     @Query('pageNumber') pageNumber: number = 1,
     @Query('pageSize') pageSize: number = 10,
     @Query('sortBy') sortBy: string = 'id',
     @Query('order') order: string = 'ASC',
   ) {
     return this.OffersService.getPaginatedSortedOffers(
-      search,
+      columnName,
+      value,
       pageNumber,
       pageSize,
       sortBy,

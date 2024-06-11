@@ -40,10 +40,8 @@ export class OffersService {
   ) {}
 
   async getPaginatedSortedOffers(
-    search: ISearchParams = {
-      columnName: 'createdAt',
-      value: '',
-    },
+    columnName,
+    value,
     pageNumber = 1,
     pageSize = 10,
     sortBy = 'id',
@@ -52,8 +50,8 @@ export class OffersService {
     const offset = (pageNumber - 1) * pageSize;
 
     const whatAndWhereSearch =
-      search.columnName && search.value
-        ? { [search.columnName]: { [Op.like]: `%${search.value}%` } }
+      columnName && value
+        ? { [columnName]: { [Op.like]: `%${value}%` } }
         : {};
 
     const response = await this.OffersRepository.findAndCountAll({

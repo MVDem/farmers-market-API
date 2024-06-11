@@ -8,6 +8,8 @@ import { OfferDto } from './dtos/offer.dto';
 import { PaginatedOfferDto } from './dtos/paginatedOffers.dto';
 import { Farmer } from 'src/farmers/farmers.model';
 import { Product } from 'src/products/products.model';
+import { Category } from 'src/categories/categories.model';
+import { Op } from 'sequelize';
 
 interface IOffer {
   unit?: string;
@@ -19,12 +21,153 @@ interface IOffer {
   farmerId?: number;
 }
 
+interface ISearchParams {
+  columnName?: string;
+  value?: string;
+}
+
 @Injectable()
 export class OffersService {
   constructor(
     @InjectModel(Offer) private OffersRepository: typeof Offer,
     private cloudinary: CloudinaryService,
   ) {}
+
+  async getPaginatedSortedOffers(
+    search: ISearchParams = {
+      columnName: 'createdAt',
+      value: '',
+    },
+    pageNumber = 1,
+    pageSize = 10,
+    sortBy = 'id',
+    order = 'ASC',
+  ): Promise<PaginatedOfferDto> {
+    const offset = (pageNumber - 1) * pageSize;
+
+    const whatAndWhereSearch =
+      search.columnName && search.value
+        ? { [search.columnName]: { [Op.like]: `%${search.value}%` } }
+        : {};
+
+    const response = await this.OffersRepository.findAndCountAll({
+      where: whatAndWhereSearch,
+      offset,
+      limit: pageSize,
+      order: [[sortBy, order]],
+    });
+
+    if (!response) {
+      throw new HttpException('Nothing to display', HttpStatus.NOT_FOUND);
+    }
+    const { count, rows } = response;
+
+    const offersDto: OfferDto[] = await Promise.all(
+      rows.map(async (offer) => {
+        let publicId = offer.image;
+
+        if (publicId) {
+          publicId = await this.cloudinary.getPathToImg(publicId);
+        }
+        const {
+          id,
+          name_EN,
+          name_HE,
+          price,
+          unit,
+          isActive,
+          description_EN,
+          description_HE,
+        } = offer;
+        return {
+          id,
+          name_EN,
+          name_HE,
+          price,
+          unit,
+          isActive,
+          description_EN,
+          description_HE,
+          image: publicId,
+        };
+      }),
+    );
+
+    return {
+      offers: offersDto,
+      count,
+    };
+  }
+
+  async getFullOffers() {
+    try {
+      const offers = await this.OffersRepository.findAll({
+        include: [
+          {
+            model: Farmer,
+            attributes: [
+              'id',
+              'name',
+              'description',
+              'city',
+              'address',
+              'email',
+              'phone',
+              'logoURL',
+              'coverURL',
+              'coordinateLat',
+              'coordinateLong',
+            ],
+          },
+          {
+            model: Product,
+            include: [Category],
+          },
+        ],
+      });
+
+      const offersDto: OfferDto[] = await Promise.all(
+        offers.map(async (offer) => {
+          let publicId = offer.image;
+
+          if (publicId) {
+            publicId = await this.cloudinary.getPathToImg(publicId);
+          }
+          const {
+            id,
+            price,
+            unit,
+            isActive,
+            description_EN,
+            description_HE,
+            farmer,
+            product,
+          } = offer;
+
+          if (farmer) {
+            farmer.logoURL = await this.cloudinary.getPathToImg(farmer.logoURL);
+          }
+
+          return {
+            id,
+            price,
+            unit,
+            isActive,
+            description_EN,
+            description_HE,
+            image: publicId,
+            farmer,
+            product,
+          };
+        }),
+      );
+
+      console.log('Get full offers:', offersDto);
+      return offersDto;
+    } catch (error) {
+      throw new HttpException(error.message, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+  }
 
   async create(
     dto: CreateOfferDto,
@@ -247,129 +390,5 @@ export class OffersService {
       throw new HttpException('Image was not uploaded', HttpStatus.BAD_REQUEST);
     }
     return result;
-  }
-
-  async getPaginatedSortedOffers(
-    pageNumber = 1,
-    pageSize = 10,
-    sortBy = 'id',
-    order = 'ASC',
-  ): Promise<PaginatedOfferDto> {
-    const offset = (pageNumber - 1) * pageSize;
-
-    const response = await this.OffersRepository.findAndCountAll({
-      offset,
-      limit: pageSize,
-      order: [[sortBy, order]],
-    });
-
-    if (!response) {
-      throw new HttpException('Nothing to display', HttpStatus.NOT_FOUND);
-    }
-    const { count, rows } = response;
-
-    const offersDto: OfferDto[] = await Promise.all(
-      rows.map(async (offer) => {
-        let publicId = offer.image;
-
-        if (publicId) {
-          publicId = await this.cloudinary.getPathToImg(publicId);
-        }
-        const { id, price, unit, isActive, description_EN, description_HE } =
-          offer;
-        return {
-          id,
-          price,
-          unit,
-          isActive,
-          description_EN,
-          description_HE,
-          image: publicId,
-        };
-      }),
-    );
-
-    return {
-      offers: offersDto,
-      count,
-    };
-  }
-
-  async getFullOffers() {
-    try {
-      const offers = await this.OffersRepository.findAll({
-        include: [
-          {
-            model: Farmer,
-            attributes: [
-              'id',
-              'name',
-              'description',
-              'city',
-              'address',
-              'email',
-              'phone',
-              'logoURL',
-              'coverURL',
-              'coordinateLat',
-              'coordinateLong',
-            ],
-          },
-          {
-            model: Product,
-            attributes: [
-              'id',
-              'category',
-              'name_EN',
-              'name_HE',
-              'photo',
-              'description_EN',
-              'description_HE',
-            ],
-          },
-        ],
-      });
-
-      const offersDto: OfferDto[] = await Promise.all(
-        offers.map(async (offer) => {
-          let publicId = offer.image;
-
-          if (publicId) {
-            publicId = await this.cloudinary.getPathToImg(publicId);
-          }
-          const {
-            id,
-            price,
-            unit,
-            isActive,
-            description_EN,
-            description_HE,
-            farmer,
-            product,
-          } = offer;
-
-          if (farmer) {
-            farmer.logoURL = await this.cloudinary.getPathToImg(farmer.logoURL);
-          }
-
-          return {
-            id,
-            price,
-            unit,
-            isActive,
-            description_EN,
-            description_HE,
-            image: publicId,
-            farmer,
-            product,
-          };
-        }),
-      );
-
-      console.log('Get full offers:', offersDto);
-      return offersDto;
-    } catch (error) {
-      throw new HttpException(error.message, HttpStatus.INTERNAL_SERVER_ERROR);
-    }
   }
 }

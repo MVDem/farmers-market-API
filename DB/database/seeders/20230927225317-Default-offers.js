@@ -5,6 +5,8 @@ module.exports = {
   async up(queryInterface) {
     await queryInterface.bulkInsert('offers', [
       {
+        name_EN: 'Lorem1',
+        name_HE: '',
         unit: 'kg',
         price: 3.5,
         image: 'products/a57e42-600x600_b99quk',
@@ -20,6 +22,8 @@ module.exports = {
         farmerId: 1,
       },
       {
+        name_EN: 'Lorem2',
+        name_HE: '',
         unit: 'kg',
         price: 4.0,
         image: 'products/50fb7d-600x600_fgq4qq',
@@ -34,6 +38,8 @@ module.exports = {
         farmerId: 1,
       },
       {
+        name_EN: 'Lorem3',
+        name_HE: '',
         unit: 'kg',
         price: 2.0,
         image: 'products/6_zjlcdk',
@@ -48,6 +54,8 @@ module.exports = {
         farmerId: 3,
       },
       {
+        name_EN: 'Lorem4',
+        name_HE: '',
         unit: 'kg',
         price: 2.5,
         image: 'products/1_xc498g',
@@ -62,6 +70,8 @@ module.exports = {
         farmerId: 1,
       },
       {
+        name_EN: 'Lorem5',
+        name_HE: '',
         unit: 'kg',
         price: 3.0,
         image: 'products/5_qcycqy',
@@ -77,6 +87,8 @@ module.exports = {
         farmerId: 3,
       },
       {
+        name_EN: 'Lorem6',
+        name_HE: '',
         unit: 'kg',
         price: 1.5,
         image: 'products/3c7919-600x600_ej7j3f',
@@ -91,6 +103,8 @@ module.exports = {
         updatedAt: '2024-03-14T15:51:12.409Z',
       },
       {
+        name_EN: 'Lorem7',
+        name_HE: '',
         unit: 'kg',
         price: 3.2,
         image: 'products/5_qcycqy',
@@ -105,6 +119,8 @@ module.exports = {
         farmerId: 3,
       },
       {
+        name_EN: 'Lorem8',
+        name_HE: '',
         unit: 'kg',
         price: 4.2,
         image: 'products/bec8ad-600x600_ujekd9',
@@ -120,6 +136,8 @@ module.exports = {
         farmerId: 3,
       },
       {
+        name_EN: 'Lorem9',
+        name_HE: '',
         unit: 'kg',
         price: 2.3,
         image: 'products/a57e42-600x600_b99quk',
@@ -134,6 +152,8 @@ module.exports = {
         farmerId: 4,
       },
       {
+        name_EN: 'Lorem10',
+        name_HE: '',
         unit: 'kg',
         price: 2.7,
         image: 'products/6_zjlcdk',

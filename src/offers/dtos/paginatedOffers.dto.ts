@@ -8,6 +8,8 @@ export class PaginatedOfferDto {
     example: [
       {
         id: 123,
+        name_EN: 'Tomato',
+        name_HE: 'Tomato',
         price: '100',
         unit: 'kg',
         isActive: true,

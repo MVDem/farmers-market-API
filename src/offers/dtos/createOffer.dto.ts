@@ -10,6 +10,29 @@ export class CreateOfferDto {
   productId: number;
 
   @ApiProperty({
+    example: 'Tomato',
+    description: 'name_EN must be a string and max 15 symbols',
+    required: true,
+  })
+  @IsString({ message: 'name_EN must be a string' })
+  @MaxLength(15, {
+    message: 'name_EN must be max 15 symbols',
+  })
+  @IsOptional()
+  name_EN: string;
+
+  @ApiProperty({
+    example: 'Tomato',
+    required: false,
+  })
+  @IsString({ message: 'name_HE must be a string' })
+  @MaxLength(15, {
+    message: 'name_HE must be max 15 symbols',
+  })
+  @IsOptional()
+  name_HE: string;
+
+  @ApiProperty({
     example: '100',
     description: 'Offer price',
     required: true,

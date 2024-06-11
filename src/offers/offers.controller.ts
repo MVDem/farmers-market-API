@@ -5,6 +5,7 @@ import {
   Get,
   Param,
   Post,
+  Put,
   Query,
   Req,
   UploadedFile,
@@ -29,9 +30,9 @@ export class OffersController {
   @ApiOperation({ summary: 'Create Offer' })
   @ApiResponse({ status: 201, type: Offer })
   // @Roles('FARMER')
-  // @UseGuards(RolesGuard)
-  @Post()
+  @UseGuards(RolesGuard)
   @UseInterceptors(FileInterceptor('file'))
+  @Post()
   create(
     @UploadedFile() file: Express.Multer.File,
     @Req() req,
@@ -45,8 +46,8 @@ export class OffersController {
   @ApiResponse({ status: 200, type: Offer })
   // @Roles('FARMER')
   // @UseGuards(RolesGuard)
-  @Post('update')
   @UseInterceptors(FileInterceptor('file'))
+  @Put(':id')
   update(
     @UploadedFile() file: Express.Multer.File,
     @Req() req,
@@ -58,7 +59,7 @@ export class OffersController {
 
   @ApiOperation({ summary: 'Get one offer by id' })
   @ApiResponse({ status: 200, type: Offer })
-  @Get('one/:id')
+  @Get(':id')
   getOfferById(@Param('id') id: string) {
     return this.OffersService.getById(+id);
   }

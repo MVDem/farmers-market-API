@@ -1,8 +1,8 @@
 {
   "development": {
-    "username": "itworksTeam",
-    "password": "root",
-    "database": "itworksTeam",
+    "username": "postgres",
+    "password": "postgres",
+    "database": "postgres",
     "host": "localhost",
     "dialect": "postgres"
   }

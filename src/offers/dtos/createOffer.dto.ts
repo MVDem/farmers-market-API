@@ -11,7 +11,6 @@ export class CreateOfferDto {
   @MaxLength(15, {
     message: 'name_EN must be max 15 symbols',
   })
-  @IsOptional()
   name_EN: string;
 
   @ApiProperty({
@@ -22,7 +21,6 @@ export class CreateOfferDto {
   @MaxLength(15, {
     message: 'name_HE must be max 15 symbols',
   })
-  @IsOptional()
   name_HE: string;
 
   @ApiProperty({
@@ -100,5 +98,4 @@ export class CreateOfferDto {
   })
   @IsNumber({}, { message: 'Product id must be a number' })
   productId: number;
-
 }

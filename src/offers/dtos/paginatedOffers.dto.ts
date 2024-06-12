@@ -8,14 +8,14 @@ export class PaginatedOfferDto {
     example: [
       {
         id: 123,
-        name_EN: 'Tomato',
-        name_HE: 'Tomato',
+        name_EN: 'Tomatos',
+        name_HE: 'עגבנייה',
         price: '100',
         unit: 'kg',
         isActive: true,
-        description_EN: 'Lorem ',
-        description_HE: 'Lorem ',
-        imageURL: 'http://',
+        description_EN: 'Fresh and juicy tomatoes',
+        description_HE: 'עגבניות טריות ומעולות',
+        imageURL: 'offers/tomatos.png',
       },
     ],
     description: 'List of offers',
@@ -33,4 +33,8 @@ export class PaginatedOfferDto {
     required: true,
   })
   count: number;
+
+  constructor(data: Partial<PaginatedOfferDto>) {
+    Object.assign(this, data);
+  }
 }

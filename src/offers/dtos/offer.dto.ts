@@ -22,4 +22,9 @@ export class OfferDto extends OmitType(CreateOfferDto, ['farmerId', 'productId']
     required: true,
   })
   product: ProductDto;
+
+  constructor(data: Partial<OfferDto>) {
+    super();
+    Object.assign(this, data);
+  }
 }

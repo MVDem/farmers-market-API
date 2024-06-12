@@ -40,22 +40,18 @@ export class OffersService {
   ) {}
 
   async getPaginatedSortedOffers(
+    limit,
+    page,
+    sortBy,
+    order,
     columnName,
     value,
-    pageNumber = 1,
-    pageSize = 10,
-    sortBy = 'id',
-    order = 'ASC',
   ): Promise<PaginatedOfferDto> {
-    const offset = (pageNumber - 1) * pageSize;
+    const offset = (page - 1) * limit;
 
-    const whatAndWhereSearch =
-      columnName && value
-        ? { [columnName]: { [Op.like]: `%${value}%` } }
-        : {};
-
+    const whereSearch = columnName && value !== undefined && value !== '' ? { [columnName]: { [Op.iLike]: `%${value}%` } }: {};
     const response = await this.OffersRepository.findAndCountAll({
-      where: whatAndWhereSearch,
+      where: whereSearch,
       include: [
         { model: Farmer, as: 'farmer' },
         {
@@ -65,9 +61,10 @@ export class OffersService {
         },
       ],
       offset,
-      limit: pageSize,
+      limit: limit,
       order: [[sortBy, order]],
     });
+    
 
     if (!response) {
       throw new HttpException('Nothing to display', HttpStatus.NOT_FOUND);

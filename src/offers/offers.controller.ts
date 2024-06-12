@@ -86,20 +86,20 @@ export class OffersController {
   @ApiResponse({ status: 200, type: Offer })
   @Get()
   getPaginatedSortedOffers(
+    @Query('limit') limit: number = 10,
+    @Query('page') page: number = 1,
+    @Query('sortBy') sortBy: string = 'createdAt',
+    @Query('order') order: string = 'ASC',
     @Query('columnName') columnName: string = '',
     @Query('value') value: string = '',
-    @Query('pageNumber') pageNumber: number = 1,
-    @Query('pageSize') pageSize: number = 10,
-    @Query('sortBy') sortBy: string = 'id',
-    @Query('order') order: string = 'ASC',
   ) {
     return this.OffersService.getPaginatedSortedOffers(
-      columnName,
-      value,
-      pageNumber,
-      pageSize,
+      limit,
+      page,
       sortBy,
       order,
+      columnName,
+      value,
     );
   }
 }

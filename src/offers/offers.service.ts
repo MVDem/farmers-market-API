@@ -32,7 +32,7 @@ export class OffersService {
     value: string,
   ): Promise<PaginatedOfferDto> {
     const offset = (page - 1) * limit;
-    
+
     const whereSearch =
       columnName && value !== undefined && value !== ''
         ? { [columnName]: { [Op.iLike]: `%${value}%` } }
@@ -51,7 +51,6 @@ export class OffersService {
       limit: limit,
       order: [[sortBy, order]],
     });
-    
 
     if (!response) {
       throw new HttpException('Nothing to display', HttpStatus.NOT_FOUND);
@@ -65,8 +64,12 @@ export class OffersService {
           : null;
 
         const farmerDto = new FarmerDto(offer.farmer.toJSON());
-        
+
         const productDto = new ProductDto(offer.product.toJSON());
+        productDto.imageURL = productDto.imageURL
+          ? await this.cloudinary.getPathToImg(productDto.imageURL)
+          : null;
+
         return new OfferDto({
           ...offer.toJSON(),
           imageURL: publicId,
@@ -75,7 +78,6 @@ export class OffersService {
         });
       }),
     );
-    
 
     return new PaginatedOfferDto({ offers: offersDto, count });
   }
@@ -143,7 +145,7 @@ export class OffersService {
         HttpStatus.BAD_REQUEST,
       );
     }
-    
+
     if (dto) {
       Object.assign(offer, dto);
     }
@@ -178,7 +180,7 @@ export class OffersService {
     return offerDto;
   }
 
-  async delete(id: number,  farmerId: number) {
+  async delete(id: number, farmerId: number) {
     const offer = await this.OffersRepository.findOne({
       where: { id: id },
     });
@@ -221,23 +223,28 @@ export class OffersService {
     });
 
     if (!offer) {
-      throw new HttpException('Offer with this id is not found', HttpStatus.NOT_FOUND,
+      throw new HttpException(
+        'Offer with this id is not found',
+        HttpStatus.NOT_FOUND,
       );
     }
 
     let publicId = offer.imageURL
-          ? await this.cloudinary.getPathToImg(offer.imageURL)
-          : null;
+      ? await this.cloudinary.getPathToImg(offer.imageURL)
+      : null;
 
     const farmerDto = new FarmerDto(offer.farmer.toJSON());
     const productDto = new ProductDto(offer.product.toJSON());
-
-        const offerDto = new OfferDto({
-          ...offer.toJSON(),
-          imageURL: publicId,
-          farmer: farmerDto,
-          product: productDto,
-        });
+    productDto.imageURL = productDto.imageURL
+    ? await this.cloudinary.getPathToImg(productDto.imageURL)
+    : null;
+    
+    const offerDto = new OfferDto({
+      ...offer.toJSON(),
+      imageURL: publicId,
+      farmer: farmerDto,
+      product: productDto,
+    });
 
     return offerDto;
   }

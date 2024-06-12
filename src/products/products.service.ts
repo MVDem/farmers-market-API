@@ -88,6 +88,10 @@ export class ProductsService {
         HttpStatus.NOT_FOUND,
       );
     }
+
+    product.imageURL = product.imageURL
+      ? await this.cloudinary.getPathToImg(product.imageURL)
+      : '';
     console.log('Get product by id:', product);
     return product;
   }

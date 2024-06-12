@@ -10,7 +10,9 @@ import {
 import { Farmer } from 'src/farmers/farmers.model';
 import { Product } from 'src/products/products.model';
 
-interface OffersCreationAtributes {
+interface OffersCreationAttributes {
+  name_EN: string;
+  name_HE: string;
   unit: string;
   price: number;
   image: string;
@@ -22,7 +24,7 @@ interface OffersCreationAtributes {
 }
 
 @Table({ tableName: 'offers' })
-export class Offer extends Model<Offer, OffersCreationAtributes> {
+export class Offer extends Model<Offer, OffersCreationAttributes> {
   @ApiProperty({ example: '1', description: 'Unic id. Must be a string' })
   @Column({
     type: DataType.INTEGER,
@@ -31,6 +33,21 @@ export class Offer extends Model<Offer, OffersCreationAtributes> {
     primaryKey: true,
   })
   id: number;
+
+  @ApiProperty({ example: 'Coffee', description: 'Name of a offer/product in English' })
+  @Column({
+    type: DataType.STRING,
+    allowNull: false,
+  })
+  name_EN: string;
+
+
+  @ApiProperty({ example: 'קפה', description: 'Name of a offer/product in Hebrew' })
+  @Column({
+    type: DataType.STRING,
+    allowNull: true,
+  })
+  name_HE: string;
 
   @ApiProperty({ example: 'kg', description: 'unit' })
   @Column({
@@ -51,7 +68,7 @@ export class Offer extends Model<Offer, OffersCreationAtributes> {
     type: DataType.STRING,
     allowNull: true,
   })
-  image: string;
+  imageURL: string;
 
   @ApiProperty({
     example: 'true',

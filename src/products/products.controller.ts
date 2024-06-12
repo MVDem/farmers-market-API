@@ -5,6 +5,7 @@ import {
   Get,
   Param,
   Post,
+  Put,
   UploadedFile,
   UseInterceptors,
 } from '@nestjs/common';
@@ -25,17 +26,22 @@ export class ProductsController {
   @Post()
   @UseInterceptors(FileInterceptor('file'))
   createProduct(
-    @UploadedFile() file: Express.Multer.File,
     @Body() createDto: CreateProductDto,
+    @UploadedFile() file: Express.Multer.File,
   ) {
     return this.productsService.create(createDto, file);
   }
 
   @ApiOperation({ summary: 'Update Product' })
   @ApiResponse({ status: 200, type: Product })
-  @Post(':id')
-  updateProduct(@Body() updateDto: EditProductDto, @Param('id') id: string) {
-    return this.productsService.updateProduct(updateDto, id);
+  @UseInterceptors(FileInterceptor('file'))
+  @Put(':id')
+  updateProduct(
+    @Param('id') id: string,
+    @Body() updateDto: EditProductDto,
+    @UploadedFile() file: Express.Multer.File,
+  ) {
+    return this.productsService.updateProduct(+id, updateDto, file);
   }
 
   @ApiOperation({ summary: 'Get Product' })

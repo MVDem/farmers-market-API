@@ -13,10 +13,7 @@ export class ProductsService {
     private cloudinary: CloudinaryService,
   ) {}
 
-  async create(
-    dto: CreateProductDto,
-    file: Express.Multer.File,
-  ) {
+  async create(dto: CreateProductDto, file?: Express.Multer.File) {
     const product = await this.productRepository.create(dto);
     if (!product) {
       throw new HttpException(
@@ -38,17 +35,31 @@ export class ProductsService {
     return product;
   }
 
-  async updateProduct(dto: EditProductDto, id: string) {
-    const isUpdated = await this.productRepository.update(dto, {
-      where: { id },
-    });
-    if (isUpdated[0] === 0) {
+  async updateProduct(
+    id: number,
+    dto: EditProductDto,
+    file?: Express.Multer.File,
+  ) {
+    let imageURL = '';
+    if (file) {
+      const { public_id, url } = await this.uploadImageToCloudinary(file, id);
+      dto.imageURL = public_id;
+      imageURL = url;
+    }
+
+    const [numberOfAffectedRows, affectedRows] =
+      await this.productRepository.update(dto, {
+        where: { id },
+        returning: true,
+      });
+    if (numberOfAffectedRows === 0) {
       throw new HttpException(
         'Product with this id is not found',
         HttpStatus.NOT_FOUND,
       );
     } else {
-      const product = await this.productRepository.findOne({ where: { id } });
+      const product = affectedRows[0];
+      product.imageURL = imageURL;
       console.log('Update product:', product);
       return product;
     }

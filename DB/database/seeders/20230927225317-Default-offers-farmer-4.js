@@ -7,7 +7,7 @@ module.exports = {
       {
         unit: 'kg',
         price: 60,
-        imageURL: 'offers/cheddar_offer.jpg',
+        image: 'offers/cheddar_offer.jpg',
         isActive: true,
         description_EN: 'Aged cheddar cheese',
         description_HE: "גבינת צ'דר מיושנת",
@@ -21,7 +21,7 @@ module.exports = {
       {
         unit: 'kg',
         price: 55,
-        imageURL: 'offers/mozzarella_offer.jpg',
+        image: 'offers/mozzarella_offer.jpg',
         isActive: true,
         description_EN: 'Fresh mozzarella cheese',
         description_HE: 'גבינת מוצרלה טרייה',
@@ -35,7 +35,7 @@ module.exports = {
       {
         unit: 'kg',
         price: 65,
-        imageURL: 'offers/parmesan_offer.jpg',
+        image: 'offers/parmesan_offer.jpg',
         isActive: true,
         description_EN: 'Rich and nutty parmesan cheese',
         description_HE: 'גבינת פרמזן עשירה ואגוזית',
@@ -49,7 +49,7 @@ module.exports = {
       {
         unit: 'kg',
         price: 58,
-        imageURL: 'offers/blue_cheese_offer.jpg',
+        image: 'offers/blue_cheese_offer.jpg',
         isActive: true,
         description_EN: 'Tangy blue cheese',
         description_HE: 'גבינה כחולה חמוצה',
@@ -63,7 +63,7 @@ module.exports = {
       {
         unit: 'kg',
         price: 62,
-        imageURL: 'offers/brie_offer.jpg',
+        image: 'offers/brie_offer.jpg',
         isActive: true,
         description_EN: 'Creamy brie cheese',
         description_HE: 'גבינת ברי שמנת',
@@ -77,7 +77,7 @@ module.exports = {
       {
         unit: 'kg',
         price: 57,
-        imageURL: 'offers/gouda_offer.jpg',
+        image: 'offers/gouda_offer.jpg',
         isActive: true,
         description_EN: 'Smoked gouda cheese',
         description_HE: 'גבינת גאודה מעושנת',
@@ -91,7 +91,7 @@ module.exports = {
       {
         unit: 'kg',
         price: 64,
-        imageURL: 'offers/gruyere_offer.jpg',
+        image: 'offers/gruyere_offer.jpg',
         isActive: true,
         description_EN: 'Savory gruyere cheese',
         description_HE: 'גבינת גרוייר טעימה',
@@ -105,7 +105,7 @@ module.exports = {
       {
         unit: 'kg',
         price: 70,
-        imageURL: 'offers/feta_offer.jpg',
+        image: 'offers/feta_offer.jpg',
         isActive: true,
         description_EN: 'Crumbly feta cheese',
         description_HE: 'גבינת פטה מתפוררת',
@@ -119,7 +119,7 @@ module.exports = {
       {
         unit: 'kg',
         price: 50,
-        imageURL: 'offers/swiss_cheese_offer.jpg',
+        image: 'offers/swiss_cheese_offer.jpg',
         isActive: true,
         description_EN: 'Classic Swiss cheese',
         description_HE: 'גבינה שוויצרית קלאסית',
@@ -133,7 +133,7 @@ module.exports = {
       {
         unit: 'kg',
         price: 63,
-        imageURL: 'offers/provolone_offer.jpg',
+        image: 'offers/provolone_offer.jpg',
         isActive: true,
         description_EN: 'Mild provolone cheese',
         description_HE: 'גבינת פרובולונה עדינה',

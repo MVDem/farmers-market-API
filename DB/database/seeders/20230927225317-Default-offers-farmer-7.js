@@ -8,7 +8,7 @@ module.exports = {
       {
         unit: 'kg',
         price: 79,
-        imageURL: 'offers/swordfish_offer.jpg',
+        image: 'offers/swordfish_offer.jpg',
         isActive: true,
         description_EN: 'Juicy swordfish steaks',
         description_HE: 'סטייקים טריים של חרבי ים',
@@ -22,7 +22,7 @@ module.exports = {
       {
         unit: 'kg',
         price: 82,
-        imageURL: 'offers/halibut_offer.jpg',
+        image: 'offers/halibut_offer.jpg',
         isActive: true,
         description_EN: 'Tender halibut steaks',
         description_HE: 'סטייקים רכים של חליבוט',
@@ -36,7 +36,7 @@ module.exports = {
       {
         unit: 'kg',
         price: 72,
-        imageURL: 'offers/cod_offer.jpg',
+        image: 'offers/cod_offer.jpg',
         isActive: true,
         description_EN: 'Flaky cod fillets',
         description_HE: 'פילה קוד פריכה',
@@ -50,7 +50,7 @@ module.exports = {
       {
         unit: 'kg',
         price: 78,
-        imageURL: 'offers/mussels_offer.jpg',
+        image: 'offers/mussels_offer.jpg',
         isActive: true,
         description_EN: 'Fresh and plump mussels',
         description_HE: 'צדפים טריים ומתוססים',
@@ -64,7 +64,7 @@ module.exports = {
       {
         unit: 'kg',
         price: 90,
-        imageURL: 'offers/octopus_offer.jpg',
+        image: 'offers/octopus_offer.jpg',
         isActive: true,
         description_EN: 'Tender octopus tentacles',
         description_HE: 'טנטקלים רכים של תמנון',
@@ -78,7 +78,7 @@ module.exports = {
       {
         unit: 'kg',
         price: 85,
-        imageURL: 'offers/lobster_offer.jpg',
+        image: 'offers/lobster_offer.jpg',
         isActive: true,
         description_EN: 'Juicy lobster tails',
         description_HE: 'זנבות פילטים ומרעננים של לובסטר',
@@ -92,7 +92,7 @@ module.exports = {
       {
         unit: 'kg',
         price: 75,
-        imageURL: 'offers/crab_offer.jpg',
+        image: 'offers/crab_offer.jpg',
         isActive: true,
         description_EN: 'Delicious crab meat',
         description_HE: 'בשר סרטן טעים',
@@ -106,7 +106,7 @@ module.exports = {
       {
         unit: 'kg',
         price: 80,
-        imageURL: 'offers/shrimp_offer.jpg',
+        image: 'offers/shrimp_offer.jpg',
         isActive: true,
         description_EN: 'Fresh and succulent shrimp',
         description_HE: 'שרימפס טריים ועסיסיים',
@@ -120,7 +120,7 @@ module.exports = {
       {
         unit: 'kg',
         price: 65,
-        imageURL: 'offers/tuna_offer.jpg',
+        image: 'offers/tuna_offer.jpg',
         isActive: true,
         description_EN: 'Fresh tuna steaks',
         description_HE: 'סטייקים טריים של טונה',
@@ -134,7 +134,7 @@ module.exports = {
       {
         unit: 'kg',
         price: 70,
-        imageURL: 'offers/salmon_offer.jpg',
+        image: 'offers/salmon_offer.jpg',
         isActive: true,
         description_EN: 'Fresh salmon fillets',
         description_HE: 'פילה סלמון טרי',

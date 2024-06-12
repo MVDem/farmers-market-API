@@ -1,44 +1,9 @@
-import { ApiProperty } from "@nestjs/swagger";
+import { ApiProperty, OmitType } from "@nestjs/swagger";
+import { EditFarmerDto } from "./editFarmer.dto";
 
-export class FarmerDto {
+export class FarmerDto extends EditFarmerDto {
     @ApiProperty({ example: '1', description: 'Id of farmer' })
     id: number;
-  
-    @ApiProperty({ example: 'John Doe', description: 'Name of farmer' })
-    name: string;
-  
-    @ApiProperty({
-      example: 'Farmer in the city',
-      description: 'Description of farmer',
-    })
-    description: string;
-  
-    @ApiProperty({
-      example: 'Qiryat Shemona',
-      description: 'City name of farmer',
-    })
-    city: string;
-  
-    @ApiProperty({ example: '123 Farm Street', description: 'Address of farmer' })
-    address: string;
-  
-    @ApiProperty({ example: 'farmer@gmail.com', description: 'Email of farmer' })
-    email: string;
-  
-    @ApiProperty({ example: '0555555555', description: 'Phone of farmer' })
-    phone: string;
-  
-    @ApiProperty({
-      example: '739745.6585827',
-      description: 'Coordinate latitude of farmer',
-    })
-    coordinateLat: number;
-  
-    @ApiProperty({
-      example: '739745.6585827',
-      description: 'Coordinate longitude of farmer',
-    })
-    coordinateLong: number;
   
     @ApiProperty({ example: '1', description: 'User id associated with farmer' })
     userId: number;
@@ -54,5 +19,10 @@ export class FarmerDto {
       description: 'Public id of image in Cloudinary',
     })
     coverURL: string;
+
+    constructor(data: Partial<FarmerDto>) {
+      super();
+      Object.assign(this, data);
+    }
   }
   

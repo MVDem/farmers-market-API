@@ -3,19 +3,33 @@ import { IsNumber, IsString, MaxLength, IsOptional } from 'class-validator';
 
 export class CreateOfferDto {
   @ApiProperty({
-    example: 'P-123',
-    description: 'Product id',
+    example: 'Tomato',
+    description: 'name_EN must be a string and max 15 symbols',
     required: true,
   })
-  productId: number;
+  @IsString({ message: 'name_EN must be a string' })
+  @MaxLength(15, {
+    message: 'name_EN must be max 15 symbols',
+  })
+  name_EN: string;
 
   @ApiProperty({
-    example: '100',
+    example: 'Tomato',
+    required: false,
+  })
+  @IsString({ message: 'name_HE must be a string' })
+  @MaxLength(15, {
+    message: 'name_HE must be max 15 symbols',
+  })
+  name_HE: string;
+
+  @ApiProperty({
+    example: 100,
     description: 'Offer price',
     required: true,
   })
-  @IsString({ message: 'Price must be a string' })
-  price: string;
+  @IsNumber()
+  price: number;
 
   @ApiProperty({
     example: 'kg',
@@ -35,7 +49,7 @@ export class CreateOfferDto {
   })
   @IsOptional()
   @IsString({ message: 'Image must be a string' })
-  image: string;
+  imageURL: string;
 
   @ApiProperty({
     example: 'true',
@@ -68,4 +82,20 @@ export class CreateOfferDto {
   })
   @IsOptional()
   description_HE: string;
+
+  @ApiProperty({
+    example: '123',
+    description: 'Farmer id',
+    required: true,
+  })
+  @IsNumber({}, { message: 'Farmer id must be a number' })
+  farmerId: number;
+
+  @ApiProperty({
+    example: '12',
+    description: 'Product id',
+    required: true,
+  })
+  @IsNumber({}, { message: 'Product id must be a number' })
+  productId: number;
 }

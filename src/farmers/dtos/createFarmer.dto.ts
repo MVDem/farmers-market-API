@@ -17,4 +17,4 @@ export class CreateFarmerDto {
   })
   @IsNumber({}, { message: 'UserId is not a number' })
   userId: number;
-}
+} 

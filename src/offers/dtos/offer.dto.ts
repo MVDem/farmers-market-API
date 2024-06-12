@@ -1,6 +1,9 @@
-import { ApiProperty } from '@nestjs/swagger';
+import { ApiProperty, OmitType } from '@nestjs/swagger';
+import { FarmerDto } from 'src/farmers/dtos/farmer.dto';
+import { ProductDto } from 'src/products/dtos/product.dto';
+import { CreateOfferDto } from './createOffer.dto';
 
-export class OfferDto {
+export class OfferDto extends OmitType(CreateOfferDto, ['farmerId', 'productId']){
   @ApiProperty({
     example: 123,
     description: 'Offer id',
@@ -9,44 +12,19 @@ export class OfferDto {
   id: number;
 
   @ApiProperty({
-    example: '100',
-    description: 'Offer price',
+    description: 'FarmerDto object',
     required: true,
   })
-  price: number;
+  farmer: FarmerDto;
 
   @ApiProperty({
-    example: 'kg',
-    description: 'Offer unit',
+    description: 'ProductDto object',
     required: true,
   })
-  unit: string;
+  product: ProductDto;
 
-  @ApiProperty({
-    example: 'true',
-    description: 'Display/Hide deal on the market',
-    required: false,
-  })
-  isActive?: boolean;
-
-  @ApiProperty({
-    example: 'Lorem ',
-    description: 'English description for product',
-    required: false,
-  })
-  description_EN?: string;
-
-  @ApiProperty({
-    example: 'Lorem ',
-    description: 'Hebrew description for product',
-    required: false,
-  })
-  description_HE?: string;
-
-  @ApiProperty({
-    example: 'http://',
-    description: 'Custom product image URL',
-    required: false,
-  })
-  image?: string;
+  constructor(data: Partial<OfferDto>) {
+    super();
+    Object.assign(this, data);
+  }
 }

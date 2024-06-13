@@ -32,14 +32,11 @@ export class OffersService {
     value: string,
   ): Promise<PaginatedOfferDto> {
     const offset = (page - 1) * limit;
-    
 
     let whereSearch = {}; 
 
     if (columnName) {
       const typeOfAttribute = Offer.getAttributes()[columnName].type.key;
-      console.log('🚀 ~ OffersService ~ columnName:', columnName);
-    console.log('🚀 ~ OffersService ~ typeOfColumn:', typeOfAttribute);
     whereSearch =
       columnName && value !== undefined && value !== ''
         ? typeOfAttribute === 'STRING'
@@ -81,6 +78,10 @@ export class OffersService {
         const farmerDto = new FarmerDto(offer.farmer.toJSON());
 
         const productDto = new ProductDto(offer.product.toJSON());
+        productDto.imageURL = productDto.imageURL
+          ? await this.cloudinary.getPathToImg(productDto.imageURL)
+          : null;
+
         return new OfferDto({
           ...offer.toJSON(),
           imageURL: publicId,
@@ -246,6 +247,10 @@ export class OffersService {
 
     const farmerDto = new FarmerDto(offer.farmer.toJSON());
     const productDto = new ProductDto(offer.product.toJSON());
+
+    productDto.imageURL = productDto.imageURL
+    ? await this.cloudinary.getPathToImg(productDto.imageURL)
+    : null;
 
     const offerDto = new OfferDto({
       ...offer.toJSON(),

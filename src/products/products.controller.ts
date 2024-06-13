@@ -1,9 +1,20 @@
-import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Post,
+  Put,
+  UploadedFile,
+  UseInterceptors,
+} from '@nestjs/common';
 import { ApiOperation, ApiParam, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { ProductsService } from './products.service';
 import { CreateProductDto } from './dtos/createProduct.dto';
 import { EditProductDto } from './dtos/editProduct.dto';
 import { Product } from './products.model';
+import { FileInterceptor } from '@nestjs/platform-express/multer';
 
 @ApiTags('Product')
 @Controller('products')
@@ -13,15 +24,24 @@ export class ProductsController {
   @ApiOperation({ summary: 'Create Product' })
   @ApiResponse({ status: 201, type: Product })
   @Post()
-  createProduct(@Body() createDto: CreateProductDto) {
-    return this.productsService.create(createDto);
+  @UseInterceptors(FileInterceptor('file'))
+  createProduct(
+    @Body() createDto: CreateProductDto,
+    @UploadedFile() file: Express.Multer.File,
+  ) {
+    return this.productsService.create(createDto, file);
   }
 
   @ApiOperation({ summary: 'Update Product' })
   @ApiResponse({ status: 200, type: Product })
-  @Post(':id')
-  updateProduct(@Body() updateDto: EditProductDto, @Param('id') id: string) {
-    return this.productsService.updateProduct(updateDto, id);
+  @UseInterceptors(FileInterceptor('file'))
+  @Put(':id')
+  updateProduct(
+    @Param('id') id: string,
+    @Body() updateDto: EditProductDto,
+    @UploadedFile() file: Express.Multer.File,
+  ) {
+    return this.productsService.updateProduct(+id, updateDto, file);
   }
 
   @ApiOperation({ summary: 'Get Product' })

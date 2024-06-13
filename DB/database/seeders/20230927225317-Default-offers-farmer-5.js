@@ -8,7 +8,7 @@ module.exports = {
       {
         unit: 'liter',
         price: 22,
-        image: 'offers/buttermilk_offer.jpg',
+        imageURL: 'offers/buttermilk_offer.jpg',
         isActive: true,
         description_EN: 'Cultured buttermilk',
         description_HE: 'חמאה מתורבתת',
@@ -22,7 +22,7 @@ module.exports = {
       {
         unit: 'unit',
         price: 25,
-        image: 'offers/whipped_cream_offer.jpg',
+        imageURL: 'offers/whipped_cream_offer.jpg',
         isActive: true,
         description_EN: 'Light and fluffy whipped cream',
         description_HE: 'קצפת קלילה ואוורירית',
@@ -36,7 +36,7 @@ module.exports = {
       {
         unit: 'unit',
         price: 18,
-        image: 'offers/ricotta_offer.jpg',
+        imageURL: 'offers/ricotta_offer.jpg',
         isActive: true,
         description_EN: 'Smooth ricotta cheese',
         description_HE: 'גבינת ריקוטה חלקה',
@@ -50,7 +50,7 @@ module.exports = {
       {
         unit: 'unit',
         price: 20,
-        image: 'offers/sour_cream_offer.jpg',
+        imageURL: 'offers/sour_cream_offer.jpg',
         isActive: true,
         description_EN: 'Tangy sour cream',
         description_HE: 'שמנת חמוצה חמוצה',
@@ -64,7 +64,7 @@ module.exports = {
       {
         unit: 'liter',
         price: 14,
-        image: 'offers/kefir_offer.jpg',
+        imageURL: 'offers/kefir_offer.jpg',
         isActive: true,
         description_EN: 'Probiotic-rich kefir',
         description_HE: 'קפיר עשיר בפרוביוטיקה',
@@ -78,7 +78,7 @@ module.exports = {
       {
         unit: 'unit',
         price: 8,
-        image: 'offers/cottage_cheese_offer.jpg',
+        imageURL: 'offers/cottage_cheese_offer.jpg',
         isActive: true,
         description_EN: 'Fresh cottage cheese',
         description_HE: "גבינת קוטג' טרייה",
@@ -92,7 +92,7 @@ module.exports = {
       {
         unit: 'liter',
         price: 12,
-        image: 'offers/cream_offer.jpg',
+        imageURL: 'offers/cream_offer.jpg',
         isActive: true,
         description_EN: 'Rich and thick cream',
         description_HE: 'שמנת עשירה וסמיכה',
@@ -106,7 +106,7 @@ module.exports = {
       {
         unit: 'unit',
         price: 15,
-        image: 'offers/butter_offer.jpg',
+        imageURL: 'offers/butter_offer.jpg',
         isActive: true,
         description_EN: 'Creamy fresh butter',
         description_HE: 'חמאה טרייה וקרמית',
@@ -120,7 +120,7 @@ module.exports = {
       {
         unit: 'unit',
         price: 5,
-        image: 'offers/yogurt_offer.jpg',
+        imageURL: 'offers/yogurt_offer.jpg',
         isActive: true,
         description_EN: 'Natural yogurt',
         description_HE: 'יוגורט טבעי',
@@ -134,7 +134,7 @@ module.exports = {
       {
         unit: 'liter',
         price: 10,
-        image: 'offers/milk_offer.jpg',
+        imageURL: 'offers/milk_offer.jpg',
         isActive: true,
         description_EN: 'Fresh whole milk',
         description_HE: 'חלב טרי שלם',

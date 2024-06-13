@@ -26,12 +26,14 @@ export class RolesGuard implements CanActivate {
         context.getHandler(),
         context.getClass(),
       ]);
-      console.log('requiredRoles==>', requiredRoles);
 
       if (!requiredRoles) {
         return true;
       }
-      const token = req.cookies['token'];
+
+      const tokenObj = req.cookies['token'];
+      const token = tokenObj ? tokenObj.token : null;
+
       if (!token) {
         throw new UnauthorizedException({
           message: 'User is not authorization',
@@ -39,6 +41,7 @@ export class RolesGuard implements CanActivate {
       }
 
       const user: Auth = this.jwtService.verify(token);
+      // console.log('user==>', user);
       req.user = user;
       return user.role === requiredRoles[0];
     } catch (e) {

@@ -33,21 +33,21 @@ export class OffersService {
   ): Promise<PaginatedOfferDto> {
     const offset = (page - 1) * limit;
 
-    let whereSearch = {}; 
+    let whereSearch = {};
 
     if (columnName) {
       const typeOfAttribute = Offer.getAttributes()[columnName].type.key;
-    whereSearch =
-      columnName && value !== undefined && value !== ''
-        ? typeOfAttribute === 'STRING'
-          ? { [columnName]: { [Op.iLike]: `%${value}%` } }
-          : typeOfAttribute === 'INTEGER'
-            ? { [columnName]: { [Op.eq]: `${value}` } }
-            : typeOfAttribute === 'BOOLEAN'
-              ? { [columnName]: { [Op.is]: `${value}` } }
-              : {}
-        : {};
-      }
+      whereSearch =
+        columnName && value !== undefined && value !== ''
+          ? typeOfAttribute === 'STRING'
+            ? { [columnName]: { [Op.iLike]: `%${value}%` } }
+            : typeOfAttribute === 'INTEGER'
+              ? { [columnName]: { [Op.eq]: `${value}` } }
+              : typeOfAttribute === 'BOOLEAN'
+                ? { [columnName]: { [Op.is]: `${value}` } }
+                : {}
+          : {};
+    }
 
     const response = await this.OffersRepository.findAndCountAll({
       where: whereSearch,
@@ -151,6 +151,9 @@ export class OffersService {
         HttpStatus.BAD_REQUEST,
       );
     }
+
+    // console.log('dto', dto);
+
     if (offer.farmerId !== farmerId) {
       throw new HttpException(
         'You are not the owner of this offer',
@@ -175,6 +178,9 @@ export class OffersService {
     const isUpdated = await this.OffersRepository.update(offer, {
       where: { id: id },
     });
+
+    // console.log('Is updated:', isUpdated);
+
     if (isUpdated[0] === 0) {
       throw new HttpException(
         'The offer was not updated',
@@ -249,8 +255,8 @@ export class OffersService {
     const productDto = new ProductDto(offer.product.toJSON());
 
     productDto.imageURL = productDto.imageURL
-    ? await this.cloudinary.getPathToImg(productDto.imageURL)
-    : null;
+      ? await this.cloudinary.getPathToImg(productDto.imageURL)
+      : null;
 
     const offerDto = new OfferDto({
       ...offer.toJSON(),

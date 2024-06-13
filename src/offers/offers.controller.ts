@@ -21,6 +21,7 @@ import { FileInterceptor } from '@nestjs/platform-express';
 import { Roles } from 'src/auth/user-self.decorator';
 import { RolesGuard } from 'src/auth/roles.quard';
 import { ISearchParams } from './offers.service';
+import { UpdateOfferDto } from './dtos/updateOffer.dto';
 
 @ApiTags('Offers')
 @Controller('offers')
@@ -72,9 +73,11 @@ export class OffersController {
   update(
     @Req() req,
     @Param('id') id: string,
-    @Body() dto: CreateOfferDto,
+    @Body() dto: UpdateOfferDto,
     @UploadedFile() file: Express.Multer.File,
   ) {
+    console.log('dto:', dto);
+    console.log('dto:', JSON.stringify(dto));
     const farmerId: number = req.user.farmer.id;
     return this.OffersService.update(+id, farmerId, dto, file);
   }

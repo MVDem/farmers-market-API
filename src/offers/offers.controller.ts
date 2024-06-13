@@ -38,14 +38,6 @@ export class OffersController {
     @Query('columnName') columnName: string = '',
     @Query('value') value: string = '',
   ) {
-    console.log('🚀 ~ OffersController ~ value:', value)
-    console.log('🚀 ~ OffersController ~ columnName:', columnName)
-    console.log('🚀 ~ OffersController ~ order:', order)
-    console.log('🚀 ~ OffersController ~ sortBy:', sortBy)
-    console.log('🚀 ~ OffersController ~ page:', page)
-    console.log('🚀 ~ OffersController ~ limit:', limit)
-    console.log('🚀 ~ OffersController ~ value:', value)
-    
     return this.OffersService.getPaginatedSortedOffers(
       limit,
       page,

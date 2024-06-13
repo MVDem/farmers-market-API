@@ -8,7 +8,7 @@ import { PaginatedOfferDto } from './dtos/paginatedOffers.dto';
 import { Farmer } from 'src/farmers/farmers.model';
 import { Product } from 'src/products/products.model';
 import { Category } from 'src/categories/categories.model';
-import { Op } from 'sequelize';
+import { Model, Op } from 'sequelize';
 import { FarmerDto } from 'src/farmers/dtos/farmer.dto';
 import { ProductDto } from 'src/products/dtos/product.dto';
 
@@ -33,10 +33,25 @@ export class OffersService {
   ): Promise<PaginatedOfferDto> {
     const offset = (page - 1) * limit;
     
-    const whereSearch =
+
+    let whereSearch = {}; 
+
+    if (columnName) {
+      const typeOfAttribute = Offer.getAttributes()[columnName].type.key;
+      console.log('🚀 ~ OffersService ~ columnName:', columnName);
+    console.log('🚀 ~ OffersService ~ typeOfColumn:', typeOfAttribute);
+    whereSearch =
       columnName && value !== undefined && value !== ''
-        ? { [columnName]: { [Op.iLike]: `%${value}%` } }
+        ? typeOfAttribute === 'STRING'
+          ? { [columnName]: { [Op.iLike]: `%${value}%` } }
+          : typeOfAttribute === 'INTEGER'
+            ? { [columnName]: { [Op.eq]: `${value}` } }
+            : typeOfAttribute === 'BOOLEAN'
+              ? { [columnName]: { [Op.is]: `${value}` } }
+              : {}
         : {};
+      }
+
     const response = await this.OffersRepository.findAndCountAll({
       where: whereSearch,
       include: [
@@ -51,7 +66,6 @@ export class OffersService {
       limit: limit,
       order: [[sortBy, order]],
     });
-    
 
     if (!response) {
       throw new HttpException('Nothing to display', HttpStatus.NOT_FOUND);
@@ -65,7 +79,7 @@ export class OffersService {
           : null;
 
         const farmerDto = new FarmerDto(offer.farmer.toJSON());
-        
+
         const productDto = new ProductDto(offer.product.toJSON());
         return new OfferDto({
           ...offer.toJSON(),
@@ -75,7 +89,6 @@ export class OffersService {
         });
       }),
     );
-    
 
     return new PaginatedOfferDto({ offers: offersDto, count });
   }
@@ -143,7 +156,7 @@ export class OffersService {
         HttpStatus.BAD_REQUEST,
       );
     }
-    
+
     if (dto) {
       Object.assign(offer, dto);
     }
@@ -178,7 +191,7 @@ export class OffersService {
     return offerDto;
   }
 
-  async delete(id: number,  farmerId: number) {
+  async delete(id: number, farmerId: number) {
     const offer = await this.OffersRepository.findOne({
       where: { id: id },
     });
@@ -221,23 +234,25 @@ export class OffersService {
     });
 
     if (!offer) {
-      throw new HttpException('Offer with this id is not found', HttpStatus.NOT_FOUND,
+      throw new HttpException(
+        'Offer with this id is not found',
+        HttpStatus.NOT_FOUND,
       );
     }
 
     let publicId = offer.imageURL
-          ? await this.cloudinary.getPathToImg(offer.imageURL)
-          : null;
+      ? await this.cloudinary.getPathToImg(offer.imageURL)
+      : null;
 
     const farmerDto = new FarmerDto(offer.farmer.toJSON());
     const productDto = new ProductDto(offer.product.toJSON());
 
-        const offerDto = new OfferDto({
-          ...offer.toJSON(),
-          imageURL: publicId,
-          farmer: farmerDto,
-          product: productDto,
-        });
+    const offerDto = new OfferDto({
+      ...offer.toJSON(),
+      imageURL: publicId,
+      farmer: farmerDto,
+      product: productDto,
+    });
 
     return offerDto;
   }

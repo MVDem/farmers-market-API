@@ -8,7 +8,7 @@ import { PaginatedOfferDto } from './dtos/paginatedOffers.dto';
 import { Farmer } from 'src/farmers/farmers.model';
 import { Product } from 'src/products/products.model';
 import { Category } from 'src/categories/categories.model';
-import { Op } from 'sequelize';
+import { Model, Op } from 'sequelize';
 import { FarmerDto } from 'src/farmers/dtos/farmer.dto';
 import { ProductDto } from 'src/products/dtos/product.dto';
 
@@ -33,10 +33,22 @@ export class OffersService {
   ): Promise<PaginatedOfferDto> {
     const offset = (page - 1) * limit;
 
-    const whereSearch =
+    let whereSearch = {}; 
+
+    if (columnName) {
+      const typeOfAttribute = Offer.getAttributes()[columnName].type.key;
+    whereSearch =
       columnName && value !== undefined && value !== ''
-        ? { [columnName]: { [Op.iLike]: `%${value}%` } }
+        ? typeOfAttribute === 'STRING'
+          ? { [columnName]: { [Op.iLike]: `%${value}%` } }
+          : typeOfAttribute === 'INTEGER'
+            ? { [columnName]: { [Op.eq]: `${value}` } }
+            : typeOfAttribute === 'BOOLEAN'
+              ? { [columnName]: { [Op.is]: `${value}` } }
+              : {}
         : {};
+      }
+
     const response = await this.OffersRepository.findAndCountAll({
       where: whereSearch,
       include: [
@@ -235,10 +247,11 @@ export class OffersService {
 
     const farmerDto = new FarmerDto(offer.farmer.toJSON());
     const productDto = new ProductDto(offer.product.toJSON());
+
     productDto.imageURL = productDto.imageURL
     ? await this.cloudinary.getPathToImg(productDto.imageURL)
     : null;
-    
+
     const offerDto = new OfferDto({
       ...offer.toJSON(),
       imageURL: publicId,

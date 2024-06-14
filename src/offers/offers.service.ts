@@ -33,21 +33,21 @@ export class OffersService {
   ): Promise<PaginatedOfferDto> {
     const offset = (page - 1) * limit;
 
-    let whereSearch = {}; 
+    let whereSearch = {};
 
     if (columnName) {
       const typeOfAttribute = Offer.getAttributes()[columnName].type.key;
-    whereSearch =
-      columnName && value !== undefined && value !== ''
-        ? typeOfAttribute === 'STRING'
-          ? { [columnName]: { [Op.iLike]: `%${value}%` } }
-          : typeOfAttribute === 'INTEGER'
-            ? { [columnName]: { [Op.eq]: `${value}` } }
-            : typeOfAttribute === 'BOOLEAN'
-              ? { [columnName]: { [Op.is]: `${value}` } }
-              : {}
-        : {};
-      }
+      whereSearch =
+        columnName && value !== undefined && value !== ''
+          ? typeOfAttribute === 'STRING'
+            ? { [columnName]: { [Op.iLike]: `%${value}%` } }
+            : typeOfAttribute === 'INTEGER'
+              ? { [columnName]: { [Op.eq]: `${value}` } }
+              : typeOfAttribute === 'BOOLEAN'
+                ? { [columnName]: { [Op.is]: `${value}` } }
+                : {}
+          : {};
+    }
 
     const response = await this.OffersRepository.findAndCountAll({
       where: whereSearch,
@@ -151,15 +151,12 @@ export class OffersService {
         HttpStatus.BAD_REQUEST,
       );
     }
+
     if (offer.farmerId !== farmerId) {
       throw new HttpException(
         'You are not the owner of this offer',
         HttpStatus.BAD_REQUEST,
       );
-    }
-
-    if (dto) {
-      Object.assign(offer, dto);
     }
 
     let imageURL = '';
@@ -172,9 +169,10 @@ export class OffersService {
       imageURL = url;
     }
 
-    const isUpdated = await this.OffersRepository.update(offer, {
+    const isUpdated = await this.OffersRepository.update(dto, {
       where: { id: id },
     });
+
     if (isUpdated[0] === 0) {
       throw new HttpException(
         'The offer was not updated',
@@ -249,8 +247,8 @@ export class OffersService {
     const productDto = new ProductDto(offer.product.toJSON());
 
     productDto.imageURL = productDto.imageURL
-    ? await this.cloudinary.getPathToImg(productDto.imageURL)
-    : null;
+      ? await this.cloudinary.getPathToImg(productDto.imageURL)
+      : null;
 
     const offerDto = new OfferDto({
       ...offer.toJSON(),

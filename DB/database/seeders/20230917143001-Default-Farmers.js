@@ -14,8 +14,8 @@ module.exports = {
         coordinateLat: 37.7749,
         coordinateLong: -122.4194,
         userId: 1, // Ensure this ID exists in the auth table
-        logoURL: 'farmers/bob.png',
-        coverURL: 'farmers/bob_cover.png',
+        logoURL: 'farmers/logos/bob.jpg',
+        coverURL: 'farmers/covers/bob_cover.jpg',
         createdAt: new Date(),
         updatedAt: new Date(),
       },

@@ -7,7 +7,7 @@ module.exports = {
       {
         unit: 'kg',
         price: 50,
-        image: 'offers/beef_offer.jpg',
+        imageURL: 'offers/beef_offer.jpg',
         isActive: true,
         description_EN: 'Premium quality beef',
         description_HE: 'בשר בקר איכותי',
@@ -21,7 +21,7 @@ module.exports = {
       {
         unit: 'kg',
         price: 40,
-        image: 'offers/chicken_offer.jpg',
+        imageURL: 'offers/chicken_offer.jpg',
         isActive: true,
         description_EN: 'Fresh and tender chicken',
         description_HE: 'עוף טרי ורך',
@@ -35,7 +35,7 @@ module.exports = {
       {
         unit: 'kg',
         price: 60,
-        image: 'offers/lamb_offer.jpg',
+        imageURL: 'offers/lamb_offer.jpg',
         isActive: true,
         description_EN: 'Tender lamb meat',
         description_HE: 'בשר כבש רך',
@@ -49,7 +49,7 @@ module.exports = {
       {
         unit: 'kg',
         price: 45,
-        image: 'offers/pork_offer.jpg',
+        imageURL: 'offers/pork_offer.jpg',
         isActive: true,
         description_EN: 'Juicy pork cuts',
         description_HE: 'נתחי חזיר עסיסיים',
@@ -63,7 +63,7 @@ module.exports = {
       {
         unit: 'kg',
         price: 55,
-        image: 'offers/veal_offer.jpg',
+        imageURL: 'offers/veal_offer.jpg',
         isActive: true,
         description_EN: 'Tender veal meat',
         description_HE: 'בשר עגל רך',
@@ -77,7 +77,7 @@ module.exports = {
       {
         unit: 'kg',
         price: 48,
-        image: 'offers/duck_offer.jpg',
+        imageURL: 'offers/duck_offer.jpg',
         isActive: true,
         description_EN: 'Fresh duck meat',
         description_HE: 'בשר ברווז טרי',
@@ -91,7 +91,7 @@ module.exports = {
       {
         unit: 'kg',
         price: 52,
-        image: 'offers/rabbit_offer.jpg',
+        imageURL: 'offers/rabbit_offer.jpg',
         isActive: true,
         description_EN: 'Lean rabbit meat',
         description_HE: 'בשר ארנב רזה',
@@ -105,7 +105,7 @@ module.exports = {
       {
         unit: 'kg',
         price: 65,
-        image: 'offers/bison_offer.jpg',
+        imageURL: 'offers/bison_offer.jpg',
         isActive: true,
         description_EN: 'Rich and flavorful bison meat',
         description_HE: 'בשר ביסון עשיר וטעים',
@@ -119,7 +119,7 @@ module.exports = {
       {
         unit: 'kg',
         price: 35,
-        image: 'offers/goat_offer.jpg',
+        imageURL: 'offers/goat_offer.jpg',
         isActive: true,
         description_EN: 'Savory goat meat',
         description_HE: 'בשר עז טעים',
@@ -133,7 +133,7 @@ module.exports = {
       {
         unit: 'kg',
         price: 70,
-        image: 'offers/elk_offer.jpg',
+        imageURL: 'offers/elk_offer.jpg',
         isActive: true,
         description_EN: 'Exotic elk meat',
         description_HE: 'בשר אייל אקזוטי',

@@ -152,17 +152,11 @@ export class OffersService {
       );
     }
 
-    // console.log('dto', dto);
-
     if (offer.farmerId !== farmerId) {
       throw new HttpException(
         'You are not the owner of this offer',
         HttpStatus.BAD_REQUEST,
       );
-    }
-
-    if (dto) {
-      Object.assign(offer, dto);
     }
 
     let imageURL = '';
@@ -175,11 +169,9 @@ export class OffersService {
       imageURL = url;
     }
 
-    const isUpdated = await this.OffersRepository.update(offer, {
+    const isUpdated = await this.OffersRepository.update(dto, {
       where: { id: id },
     });
-
-    // console.log('Is updated:', isUpdated);
 
     if (isUpdated[0] === 0) {
       throw new HttpException(

@@ -22,6 +22,7 @@ import { Roles } from 'src/auth/user-self.decorator';
 import { RolesGuard } from 'src/auth/roles.quard';
 import { ISearchParams } from './offers.service';
 import { UpdateOfferDto } from './dtos/updateOffer.dto';
+import { plainToClass } from 'class-transformer';
 
 @ApiTags('Offers')
 @Controller('offers')
@@ -71,15 +72,14 @@ export class OffersController {
   @UseInterceptors(FileInterceptor('file'))
   @Put(':id')
   update(
+    @UploadedFile() file: Express.Multer.File,
     @Req() req,
     @Param('id') id: string,
-    @Body() dto: UpdateOfferDto,
-    @UploadedFile() file: Express.Multer.File,
+    @Body() body: any,
   ) {
-    console.log('dto:', dto);
-    console.log('dto:', JSON.stringify(dto));
+    const updateOfferDto = plainToClass(UpdateOfferDto, body);
     const farmerId: number = req.user.farmer.id;
-    return this.OffersService.update(+id, farmerId, dto, file);
+    return this.OffersService.update(+id, farmerId, updateOfferDto, file);
   }
 
   @ApiOperation({ summary: 'Delete Offer' })

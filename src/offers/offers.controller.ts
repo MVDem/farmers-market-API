@@ -39,7 +39,10 @@ export class OffersController {
     @Query('order') order: string = 'ASC',
     @Query('columnName') columnName: string = '',
     @Query('value') value: string = '',
+    @Query('categoryId') categoryId?: number,
   ) {
+    console.log('🚀 ~ OffersController ~ value:', value)
+    
     return this.OffersService.getPaginatedSortedOffers(
       limit,
       page,
@@ -47,6 +50,7 @@ export class OffersController {
       order,
       columnName,
       value,
+      categoryId
     );
   }
 
@@ -98,4 +102,5 @@ export class OffersController {
   getById(@Param('id') id: string) {
     return this.OffersService.getById(+id);
   }
+
 }

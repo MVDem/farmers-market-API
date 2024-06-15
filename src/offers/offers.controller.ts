@@ -66,12 +66,10 @@ export class OffersController {
     @Body() body: any,
     @UploadedFile() file: Express.Multer.File,
   ) {
-    console.log('bodyfirst===>', body);
     body.farmerId = +body.farmerId;
     body.productId = +body.productId;
     body.isActive = true;
     body.price = +body.price;
-    console.log('bodyAfter===>', body);
     const dto = plainToClass(UpdateOfferDto, body);
     const farmerId = +req.user.farmer.id;
     return this.OffersService.create(farmerId, dto, file);

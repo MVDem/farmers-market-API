@@ -8,7 +8,8 @@ module.exports = {
       {
         unit: 'kg',
         price: 30,
-        imageURL: 'offers/apple_offer.jpg',
+        imageURL: null,
+        // imageURL: 'offers/apple_offer.jpg',
         isActive: true,
         description_EN: 'Sweet and crunchy apples',
         description_HE: 'תפוחים מתוקים ופריכים',
@@ -22,7 +23,8 @@ module.exports = {
       {
         unit: 'kg',
         price: 25,
-        imageURL: 'offers/banana_offer.jpg',
+        imageURL: null,
+        // imageURL: 'offers/banana_offer.jpg',
         isActive: true,
         description_EN: 'Fresh and ripe bananas',
         description_HE: 'בננות טריות ובשלות',
@@ -36,7 +38,8 @@ module.exports = {
       {
         unit: 'kg',
         price: 35,
-        imageURL: 'offers/grape_offer.jpg',
+        imageURL: null,
+        // imageURL: 'offers/grape_offer.jpg',
         isActive: true,
         description_EN: 'Juicy and sweet grapes',
         description_HE: 'ענבים עסיסיים ומתוקים',
@@ -50,7 +53,8 @@ module.exports = {
       {
         unit: 'kg',
         price: 40,
-        imageURL: 'offers/orange_offer.jpg',
+        imageURL: null,
+        // imageURL: 'offers/orange_offer.jpg',
         isActive: true,
         description_EN: 'Fresh and tangy oranges',
         description_HE: 'תפוזים טריים וחמצמצים',
@@ -64,7 +68,8 @@ module.exports = {
       {
         unit: 'kg',
         price: 32,
-        imageURL: 'offers/strawberry_offer.jpg',
+        imageURL: null,
+        // imageURL: 'offers/strawberry_offer.jpg',
         isActive: true,
         description_EN: 'Sweet and juicy strawberries',
         description_HE: 'תותים מתוקים ועסיסיים',
@@ -78,7 +83,8 @@ module.exports = {
       {
         unit: 'kg',
         price: 28,
-        imageURL: 'offers/kiwi_offer.jpg',
+        imageURL: null,
+        // imageURL: 'offers/kiwi_offer.jpg',
         isActive: true,
         description_EN: 'Tart and refreshing kiwis',
         description_HE: 'קיווי חמצמץ ומרענן',
@@ -92,7 +98,8 @@ module.exports = {
       {
         unit: 'kg',
         price: 38,
-        imageURL: 'offers/mango_offer.jpg',
+        imageURL: null,
+        // imageURL: 'offers/mango_offer.jpg',
         isActive: true,
         description_EN: 'Ripe and juicy mangoes',
         description_HE: 'מנגו בשל ועסיסי',
@@ -106,7 +113,8 @@ module.exports = {
       {
         unit: 'kg',
         price: 27,
-        imageURL: 'offers/pear_offer.jpg',
+        imageURL: null,
+        // imageURL: 'offers/pear_offer.jpg',
         isActive: true,
         description_EN: 'Crisp and sweet pears',
         description_HE: 'אגסים פריכים ומתוקים',
@@ -120,7 +128,8 @@ module.exports = {
       {
         unit: 'kg',
         price: 26,
-        imageURL: 'offers/plum_offer.jpg',
+        imageURL: null,
+        // imageURL: 'offers/plum_offer.jpg',
         isActive: true,
         description_EN: 'Juicy and flavorful plums',
         description_HE: 'שזיפים עסיסיים וטעימים',
@@ -134,7 +143,8 @@ module.exports = {
       {
         unit: 'kg',
         price: 29,
-        imageURL: 'offers/pineapple_offer.jpg',
+        imageURL: null,
+        // imageURL: 'offers/pineapple_offer.jpg',
         isActive: true,
         description_EN: 'Fresh and tangy pineapples',
         description_HE: 'אננס טרי וחמצמץ',

@@ -75,7 +75,6 @@ export class OffersService {
           : null;
 
         const farmerDto = new FarmerDto(offer.farmer.toJSON());
-        console.log('farmerDto', farmerDto);
         farmerDto.logoURL = farmerDto.logoURL
           ? await this.cloudinary.getPathToImg(farmerDto.logoURL)
           : null;

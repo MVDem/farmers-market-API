@@ -28,8 +28,9 @@ export class OffersService {
     page: number,
     sortBy: string,
     order: string,
-    columnName: string,
-    value: string,
+    columnName?: string,
+    value?: string,
+    categoryId?: number,
   ): Promise<PaginatedOfferDto> {
     const offset = (page - 1) * limit;
 
@@ -48,22 +49,40 @@ export class OffersService {
                 : {}
           : {};
     }
+    
+    if (categoryId) {
+      whereSearch = {
+        ...whereSearch,
+        '$product.categoryId$': categoryId,
+      };
+    }
 
     const response = await this.OffersRepository.findAndCountAll({
       where: whereSearch,
-      include: [
+      include: !categoryId ? [
         { model: Farmer, as: 'farmer' },
         {
           model: Product,
           as: 'product',
           include: [{ model: Category, as: 'category' }],
         },
+      ] 
+      : [
+        { model: Farmer, as: 'farmer' },
+        {
+          model: Product,
+          as: 'product',
+          include: [{ model: Category, as: 'category',
+            where: { id: categoryId },
+           }],
+        },
       ],
+
       offset,
       limit: limit,
       order: [[sortBy, order]],
     });
-
+      
     if (!response) {
       throw new HttpException('Nothing to display', HttpStatus.NOT_FOUND);
     }
@@ -220,6 +239,8 @@ export class OffersService {
   }
 
   async getById(id: number) {
+    console.log('🚀 ~ OffersService ~ getById ~ id:', id)
+    
     const offer = await this.OffersRepository.findOne({
       where: { id: id },
       include: [
@@ -275,4 +296,5 @@ export class OffersService {
     }
     return result;
   }
+
 }

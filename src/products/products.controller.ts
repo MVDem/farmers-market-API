@@ -67,4 +67,11 @@ export class ProductsController {
   deleteProduct(@Param('id') id: string) {
     return this.productsService.deleteProduct(id);
   }
+
+  @ApiOperation({ summary: 'Get All Products' })
+  @ApiResponse({ status: 200, type: Product})
+  @Get()
+  getAllProducts() {
+    return this.productsService.getAll();
+  }
 }

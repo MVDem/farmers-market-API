@@ -8,7 +8,8 @@ module.exports = {
       {
         unit: 'kg',
         price: 52,
-        imageURL: 'offers/grouse_offer.jpg',
+        imageURL: null,
+        // imageURL: 'offers/grouse_offer.jpg',
         isActive: true,
         description_EN: 'Tender grouse breast',
         description_HE: 'חזה עוף יער רך',
@@ -22,7 +23,8 @@ module.exports = {
       {
         unit: 'kg',
         price: 48,
-        imageURL: 'offers/squab_offer.jpg',
+        imageURL: null,
+        // imageURL: 'offers/squab_offer.jpg',
         isActive: true,
         description_EN: 'Delicious squab breast',
         description_HE: 'חזה דרור טעים',
@@ -36,7 +38,8 @@ module.exports = {
       {
         unit: 'kg',
         price: 42,
-        imageURL: 'offers/partridge_offer.jpg',
+        imageURL: null,
+        // imageURL: 'offers/partridge_offer.jpg',
         isActive: true,
         description_EN: 'Tender partridge breast',
         description_HE: 'חזה קפריט רך',
@@ -50,7 +53,8 @@ module.exports = {
       {
         unit: 'kg',
         price: 60,
-        imageURL: 'offers/pigeon_offer.jpg',
+        imageURL: null,
+        // imageURL: 'offers/pigeon_offer.jpg',
         isActive: true,
         description_EN: 'Juicy pigeon breast',
         description_HE: 'חזה יונה עסיסי',
@@ -64,7 +68,8 @@ module.exports = {
       {
         unit: 'kg',
         price: 55,
-        imageURL: 'offers/quail_offer.jpg',
+        imageURL: null,
+        // imageURL: 'offers/quail_offer.jpg',
         isActive: true,
         description_EN: 'Tender quail breast',
         description_HE: 'חזה קוויל רך',
@@ -78,7 +83,8 @@ module.exports = {
       {
         unit: 'kg',
         price: 50,
-        imageURL: 'offers/pheasant_offer.jpg',
+        imageURL: null,
+        // imageURL: 'offers/pheasant_offer.jpg',
         isActive: true,
         description_EN: 'Delicious pheasant breast',
         description_HE: "חזה פז'ן טעים",
@@ -92,7 +98,8 @@ module.exports = {
       {
         unit: 'kg',
         price: 45,
-        imageURL: 'offers/goose_offer.jpg',
+        imageURL: null,
+        // imageURL: 'offers/goose_offer.jpg',
         isActive: true,
         description_EN: 'Tender goose breast',
         description_HE: 'חזה עוף צלוי רך',
@@ -106,7 +113,8 @@ module.exports = {
       {
         unit: 'kg',
         price: 38,
-        imageURL: 'offers/duck_offer.jpg',
+        imageURL: null,
+        // imageURL: 'offers/duck_offer.jpg',
         isActive: true,
         description_EN: 'Juicy duck breast',
         description_HE: 'חזה ברווז עסיסי',
@@ -120,7 +128,8 @@ module.exports = {
       {
         unit: 'kg',
         price: 40,
-        imageURL: 'offers/turkey_breast_offer.jpg',
+        imageURL: null,
+        // imageURL: 'offers/turkey_breast_offer.jpg',
         isActive: true,
         description_EN: 'Tender turkey breast',
         description_HE: 'חזה הודו רך',
@@ -134,7 +143,8 @@ module.exports = {
       {
         unit: 'kg',
         price: 35,
-        imageURL: 'offers/chicken_breast_offer.jpg',
+        imageURL: null,
+        // imageURL: 'offers/chicken_breast_offer.jpg',
         isActive: true,
         description_EN: 'Boneless chicken breast',
         description_HE: 'חזה עוף ללא עצמות',

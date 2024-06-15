@@ -8,6 +8,7 @@ import {
   UploadedFile,
   UseInterceptors,
   Param,
+  Put,
 } from '@nestjs/common';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { FarmersService } from './farmers.service';
@@ -26,7 +27,7 @@ export class FarmersController {
   @ApiResponse({ status: 200, type: Farmer })
   @Roles('FARMER')
   @UseGuards(RolesGuard)
-  @Post()
+  @Put('/:id')
   @UseInterceptors(FileInterceptor('logo'))
   @UseInterceptors(FileInterceptor('cover'))
   update(
@@ -36,6 +37,7 @@ export class FarmersController {
     @UploadedFile() cover?: Express.Multer.File,
   ) {
     const id = req.user.id;
+    console.log('updateDto', updateDto);
     return this.farmersService.updateFarmer(updateDto, id, logo, cover);
   }
 

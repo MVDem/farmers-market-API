@@ -41,8 +41,8 @@ export class OffersController {
     @Query('value') value: string = '',
     @Query('categoryId') categoryId?: number,
   ) {
-    console.log('🚀 ~ OffersController ~ value:', value)
-    
+    console.log('🚀 ~ OffersController ~ value:', value);
+
     return this.OffersService.getPaginatedSortedOffers(
       limit,
       page,
@@ -50,7 +50,7 @@ export class OffersController {
       order,
       columnName,
       value,
-      categoryId
+      categoryId,
     );
   }
 
@@ -62,9 +62,15 @@ export class OffersController {
   @Post()
   create(
     @Req() req,
-    @Body() dto: CreateOfferDto,
+    // @Body() dto: CreateOfferDto,
+    @Body() body: any,
     @UploadedFile() file: Express.Multer.File,
   ) {
+    body.farmerId = +body.farmerId;
+    body.productId = +body.productId;
+    body.isActive = true;
+    body.price = +body.price;
+    const dto = plainToClass(UpdateOfferDto, body);
     const farmerId = +req.user.farmer.id;
     return this.OffersService.create(farmerId, dto, file);
   }
@@ -103,5 +109,4 @@ export class OffersController {
   getById(@Param('id') id: string) {
     return this.OffersService.getById(+id);
   }
-
 }

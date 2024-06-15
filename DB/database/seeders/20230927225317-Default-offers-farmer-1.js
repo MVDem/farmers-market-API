@@ -8,7 +8,8 @@ module.exports = {
       {
         unit: 'kg',
         price: 20,
-        imageURL: 'offers/carrot_offer.jpg',
+        // imageURL: 'offers/carrot_offer.jpg',
+        imageURL: null,
         isActive: true,
         description_EN: 'Fresh organic carrots from our farm',
         description_HE: 'גזר אורגני טרי מהחווה שלנו',
@@ -22,7 +23,8 @@ module.exports = {
       {
         unit: 'kg',
         price: 15,
-        imageURL: 'offers/tomato_offer.jpg',
+        // imageURL: 'offers/tomato_offer.jpg',
+        imageURL: null,
         isActive: true,
         description_EN: 'Ripe and juicy tomatoes',
         description_HE: 'עגבניות בשלות ועסיסיות',
@@ -36,7 +38,8 @@ module.exports = {
       {
         unit: 'kg',
         price: 18,
-        imageURL: 'offers/cucumber_offer.jpg',
+        // imageURL: 'offers/cucumber_offer.jpg',
+        imageURL: null,
         isActive: true,
         description_EN: 'Crisp and fresh cucumbers',
         description_HE: 'מלפפונים פריכים וטריים',
@@ -50,7 +53,8 @@ module.exports = {
       {
         unit: 'kg',
         price: 22,
-        imageURL: 'offers/bell_pepper_offer.jpg',
+        // imageURL: 'offers/bell_pepper_offer.jpg',
+        imageURL: null,
         isActive: true,
         description_EN: 'Colorful bell peppers',
         description_HE: 'פלפלים צבעוניים',
@@ -64,7 +68,8 @@ module.exports = {
       {
         unit: 'kg',
         price: 25,
-        imageURL: 'offers/broccoli_offer.jpg',
+        // imageURL: 'offers/broccoli_offer.jpg',
+        imageURL: null,
         isActive: true,
         description_EN: 'Nutritious broccoli florets',
         description_HE: 'שתיית ופרחי ברוקולי',
@@ -78,7 +83,8 @@ module.exports = {
       {
         unit: 'kg',
         price: 12,
-        imageURL: 'offers/spinach_offer.jpg',
+        // imageURL: 'offers/spinach_offer.jpg',
+        imageURL: null,
         isActive: true,
         description_EN: 'Tender baby spinach leaves',
         description_HE: "עלים רכים של ספינג'",
@@ -92,7 +98,8 @@ module.exports = {
       {
         unit: 'kg',
         price: 10,
-        imageURL: 'offers/potato_offer.jpg',
+        // imageURL: 'offers/potato_offer.jpg',
+        imageURL: null,
         isActive: true,
         description_EN: 'Versatile potatoes for cooking',
         description_HE: 'תפוחי אדמה רב תכליתיים לבישול',
@@ -106,7 +113,8 @@ module.exports = {
       {
         unit: 'kg',
         price: 8,
-        imageURL: 'offers/onion_offer.jpg',
+        // imageURL: 'offers/onion_offer.jpg',
+        imageURL: null,
         isActive: true,
         description_EN: 'Pungent and flavorful onions',
         description_HE: 'בצל חזק וטעים',
@@ -120,7 +128,8 @@ module.exports = {
       {
         unit: 'kg',
         price: 16,
-        imageURL: 'offers/lettuce_offer.jpg',
+        // imageURL: 'offers/lettuce_offer.jpg',
+        imageURL: null,
         isActive: true,
         description_EN: 'Crisp and refreshing lettuce leaves',
         description_HE: 'עלים פריכים ומרעננים של חסה',
@@ -134,7 +143,8 @@ module.exports = {
       {
         unit: 'kg',
         price: 14,
-        imageURL: 'offers/zucchini_offer.jpg',
+        // imageURL: 'offers/zucchini_offer.jpg',
+        imageURL: null,
         isActive: true,
         description_EN: 'Versatile zucchini for cooking',
         description_HE: 'קישואים רב תכליתיים לבישול',

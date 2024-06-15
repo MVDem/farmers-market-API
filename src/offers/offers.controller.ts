@@ -61,7 +61,7 @@ export class OffersController {
     @Body() dto: CreateOfferDto,
     @UploadedFile() file: Express.Multer.File,
   ) {
-    const farmerId = req.user.farmer.id;
+    const farmerId = +req.user.farmer.id;
     return this.OffersService.create(farmerId, dto, file);
   }
 
@@ -79,6 +79,7 @@ export class OffersController {
   ) {
     const updateOfferDto = plainToClass(UpdateOfferDto, body);
     const farmerId: number = req.user.farmer.id;
+    console.log(updateOfferDto);
     return this.OffersService.update(+id, farmerId, updateOfferDto, file);
   }
 

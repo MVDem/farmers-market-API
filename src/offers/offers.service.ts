@@ -32,7 +32,6 @@ export class OffersService {
     value: string,
   ): Promise<PaginatedOfferDto> {
     const offset = (page - 1) * limit;
-
     let whereSearch = {};
 
     if (columnName) {
@@ -76,6 +75,10 @@ export class OffersService {
           : null;
 
         const farmerDto = new FarmerDto(offer.farmer.toJSON());
+        console.log('farmerDto', farmerDto);
+        farmerDto.logoURL = farmerDto.logoURL
+          ? await this.cloudinary.getPathToImg(farmerDto.logoURL)
+          : null;
 
         const productDto = new ProductDto(offer.product.toJSON());
         productDto.imageURL = productDto.imageURL

@@ -11,6 +11,7 @@ import { InjectModel } from '@nestjs/sequelize';
 import { UniqueConstraintError } from 'sequelize';
 import { CategoryDto } from './dtos/category.dto';
 import { PaginatedCategoryDto } from './dtos/paginatedCategories.dto';
+import { CloudinaryService } from 'src/cloudinary/cloudinary.service';
 
 @Injectable()
 export class CategoriesService {
@@ -18,6 +19,7 @@ export class CategoriesService {
 
   constructor(
     @InjectModel(Category) private categoryRepository: typeof Category,
+    private cloudinary: CloudinaryService,
   ) {}
 
   async create(dto: EditCategoryDto): Promise<CategoryDto> {
@@ -144,21 +146,36 @@ export class CategoriesService {
     }
     const { count, rows } = response;
 
-    const categories: CategoryDto[] = rows.map((category) => {
-      const { id, name_EN, name_HE, imageURL, description_EN, description_HE } =
-        category;
-      return {
-        id,
-        name_EN,
-        name_HE,
-        imageURL,
-        description_EN,
-        description_HE,
-      };
-    });
+    // const categories: CategoryDto[] = rows.map(async (category) => {
+    //   const { id, name_EN, name_HE, imageURL, description_EN, description_HE } =
+    //     category;
+    //   let newImageURL = imageURL
+    //     ? await this.cloudinary.getPathToImg(imageURL)
+    //     : null;
+    //   return {
+    //     id,
+    //     name_EN,
+    //     name_HE,
+    //     imageURL: newImageURL,
+    //     description_EN,
+    //     description_HE,
+    //   };
+    // });
+
+    const offersDto: CategoryDto[] = await Promise.all(
+      rows.map(async (category) => {
+        category.imageURL = category.imageURL
+          ? await this.cloudinary.getPathToImg(category.imageURL)
+          : null;
+
+        return new CategoryDto({
+          ...category.toJSON(),
+        });
+      }),
+    );
 
     return {
-      categories,
+      categories: offersDto,
       count,
     };
   }

@@ -46,4 +46,8 @@ export class CategoryDto {
     required: false,
   })
   imageURL: string;
+
+  constructor(data: Partial<CategoryDto>) {
+    Object.assign(this, data);
+  }
 }

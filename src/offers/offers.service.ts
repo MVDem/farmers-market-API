@@ -48,7 +48,7 @@ export class OffersService {
                 : {}
           : {};
     }
-    
+
     if (categoryId) {
       whereSearch = {
         ...whereSearch,
@@ -58,30 +58,31 @@ export class OffersService {
 
     const response = await this.OffersRepository.findAndCountAll({
       where: whereSearch,
-      include: !categoryId ? [
-        { model: Farmer, as: 'farmer' },
-        {
-          model: Product,
-          as: 'product',
-          include: [{ model: Category, as: 'category' }],
-        },
-      ] 
-      : [
-        { model: Farmer, as: 'farmer' },
-        {
-          model: Product,
-          as: 'product',
-          include: [{ model: Category, as: 'category',
-            where: { id: categoryId },
-           }],
-        },
-      ],
+      include: !categoryId
+        ? [
+            { model: Farmer, as: 'farmer' },
+            {
+              model: Product,
+              as: 'product',
+              include: [{ model: Category, as: 'category' }],
+            },
+          ]
+        : [
+            { model: Farmer, as: 'farmer' },
+            {
+              model: Product,
+              as: 'product',
+              include: [
+                { model: Category, as: 'category', where: { id: categoryId } },
+              ],
+            },
+          ],
 
       offset,
       limit: limit,
       order: [[sortBy, order]],
     });
-      
+
     if (!response) {
       throw new HttpException('Nothing to display', HttpStatus.NOT_FOUND);
     }
@@ -186,7 +187,11 @@ export class OffersService {
         file,
         offer.id,
       );
-      offer.imageURL = public_id;
+      console.log('file=>>>', file);
+      console.log('publickId=>>>', public_id);
+      console.log('url=>>>', url);
+
+      dto.imageURL = public_id;
       imageURL = url;
     }
 
@@ -241,8 +246,8 @@ export class OffersService {
   }
 
   async getById(id: number) {
-    console.log('🚀 ~ OffersService ~ getById ~ id:', id)
-    
+    console.log('🚀 ~ OffersService ~ getById ~ id:', id);
+
     const offer = await this.OffersRepository.findOne({
       where: { id: id },
       include: [
@@ -298,5 +303,4 @@ export class OffersService {
     }
     return result;
   }
-
 }

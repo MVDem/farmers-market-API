@@ -5,6 +5,7 @@ import { InjectModel } from '@nestjs/sequelize';
 import { CreateProductDto } from './dtos/createProduct.dto';
 import { Category } from 'src/categories/categories.model';
 import { CloudinaryService } from 'src/cloudinary/cloudinary.service';
+import { PROPERTY_DEPS_METADATA } from '@nestjs/common/constants';
 
 @Injectable()
 export class ProductsService {
@@ -122,5 +123,16 @@ export class ProductsService {
       throw new HttpException('Image was not uploaded', HttpStatus.BAD_REQUEST);
     }
     return result;
+  }
+
+  async getAll() {
+    const productsArr = await this.productRepository.findAll();
+    if (!productsArr) {
+      throw new HttpException(
+        'Product with this id is not found',
+        HttpStatus.NOT_FOUND,
+      );
+    }
+    return productsArr;
   }
 }

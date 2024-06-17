@@ -85,7 +85,7 @@ export class Offer extends Model<Offer, OffersCreationAttributes> {
     description: 'English description for product',
   })
   @Column({
-    type: DataType.STRING,
+    type: DataType.STRING(512),
     allowNull: true,
   })
   description_EN: string;
@@ -95,7 +95,7 @@ export class Offer extends Model<Offer, OffersCreationAttributes> {
     description: 'Hebrew description for product',
   })
   @Column({
-    type: DataType.STRING,
+    type: DataType.STRING(512),
     allowNull: true,
   })
   description_HE: string;

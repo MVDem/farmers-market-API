@@ -12,7 +12,7 @@ async function bootstrap() {
   app.use(cookieParser());
 
   const corsOptions: CorsOptions = {
-    origin: 'http://localhost:3000', // Замените на адрес вашего клиентского приложения
+    origin: process.env.ORIGIN, // Замените на адрес вашего клиентского приложения
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     credentials: true,
   };
@@ -28,6 +28,9 @@ async function bootstrap() {
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('/api/docs', app, document);
 
-  await app.listen(PORT, () => console.log(`Server started on port = ${PORT}`));
+  await app.listen(PORT, () => {
+    console.log(process.env.NODE_ENV);
+    console.log(`Server started on port = ${PORT}`);
+  });
 }
 bootstrap();

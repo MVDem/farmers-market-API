@@ -7,6 +7,7 @@
   "license": "UNLICENSED",
   "scripts": {
     "start:dev": "cross-env NODE_ENV=development nest start --watch",
+    "start:staging": "cross-env NODE_ENV=staging nest start --watch",
     "db:seed": "npx sequelize db:seed:all",
     "server": "docker compose -f db/docker-compose.yaml up -d --build ",
     "build": "nest build",

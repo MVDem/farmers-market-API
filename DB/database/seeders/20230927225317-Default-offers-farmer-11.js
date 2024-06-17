@@ -141,7 +141,7 @@ module.exports = {
         description_EN:
           'Our Swiss cheese is known for its mild, nutty flavor and characteristic holes. With a firm texture and a smooth, creamy finish, it is perfect for slicing, melting into fondue, or enjoying as a snack.',
         description_HE:
-          "גבינה שוויצרית שלנו ידועה בטעם עדין ואגוזי ובחורים האופייניים שלה. יש לה מרקם קשה וגימור חלק ושמנתי, והיא מושלמת לחיתוך, להמסה בפונדו או כחטיף טעים.",
+          'גבינה שוויצרית שלנו ידועה בטעם עדין ואגוזי ובחורים האופייניים שלה. יש לה מרקם קשה וגימור חלק ושמנתי, והיא מושלמת לחיתוך, להמסה בפונדו או כחטיף טעים.',
         farmerId: 11,
         productId: 39,
         createdAt: new Date(),
@@ -190,7 +190,7 @@ module.exports = {
         description_EN:
           'Freshly baked whole grain bread with a crisp crust and soft, flavorful interior. Perfect for sandwiches or as a complement to any meal, providing a wholesome and satisfying taste.',
         description_HE:
-          'לחם דגנים מלאים אפוי טרי עם קרום פריך ופנים רך וטעים. מושלם לסנדוויצ\'ים או כתוספת לכל ארוחה, ומספק טעם בריא ומשביע.',
+          "לחם דגנים מלאים אפוי טרי עם קרום פריך ופנים רך וטעים. מושלם לסנדוויצ'ים או כתוספת לכל ארוחה, ומספק טעם בריא ומשביע.",
         farmerId: 11,
         productId: 29,
         createdAt: new Date(),
@@ -239,7 +239,7 @@ module.exports = {
           'Rich and creamy strawberry jam made from ripe, hand-picked strawberries. Ideal for spreading on pastries or adding to yogurt, this jam delivers a burst of fruity sweetness.',
         description_HE:
           'ריבת תות עשירה ושמנתית עשויה מתותים בשלים שנקטפו ידנית. מושלמת למריחה על מאפים או להוספה ליוגורט, ריבה זו מספקת פרץ של מתיקות פרותית.',
-        farmerId:11,
+        farmerId: 11,
         productId: 43,
         createdAt: new Date(),
         updatedAt: new Date(),
@@ -302,7 +302,7 @@ module.exports = {
         description_EN:
           'Freshly baked multigrain bread with a nutty, hearty flavor and a soft, moist crumb. Ideal for sandwiches or as a side to soups and stews.',
         description_HE:
-          'לחם רב דגנים אפוי טרי עם טעם אגוזי ועשיר ופירור רך ולח. מושלם לסנדוויצ\'ים או כתוספת למרקים ותבשילים.',
+          "לחם רב דגנים אפוי טרי עם טעם אגוזי ועשיר ופירור רך ולח. מושלם לסנדוויצ'ים או כתוספת למרקים ותבשילים.",
         farmerId: 11,
         productId: 47,
         createdAt: new Date(),
@@ -318,7 +318,7 @@ module.exports = {
         description_EN:
           'This artisanal sourdough bread is crafted with a tangy flavor and a chewy, flavorful crust. Perfect for sandwiches, toasting, or as a complement to cheeses and spreads.',
         description_HE:
-          'לחם מחמצת בעבודת יד עם טעם חמצמץ וקרום לעיס ועשיר בטעם. מושלם לסנדוויצ\'ים, לקלייה או כתוספת לגבינות וממרחים.',
+          "לחם מחמצת בעבודת יד עם טעם חמצמץ וקרום לעיס ועשיר בטעם. מושלם לסנדוויצ'ים, לקלייה או כתוספת לגבינות וממרחים.",
         farmerId: 11,
         productId: 48,
         createdAt: new Date(),
@@ -422,6 +422,9 @@ module.exports = {
         name_EN: 'Ricotta Cheese',
         name_HE: 'גבינת ריקוטה',
       },
-    ];
+    ]);
   },
-
+  async down(queryInterface) {
+    await queryInterface.bulkDelete('offers', null, {});
+  },
+};

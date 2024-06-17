@@ -7,7 +7,7 @@ module.exports = {
       // Mixed offers for Farmer 10
       {
         unit: '1 kg',
-        price: 149,
+        price: 139,
         imageURL: null,
         isActive: true,
         description_EN: 'Indulge in the rich, savory taste of fresh duck meat, perfect for creating gourmet dishes at home. This premium quality duck meat is tender and full of flavor, ideal for roasting or grilling.',
@@ -21,7 +21,7 @@ module.exports = {
       },
       {
         unit: '1 kg',
-        price: 59,
+        price: 79,
         imageURL: null,
         isActive: true,
         description_EN: 'Premium quality beef, sourced from grass-fed cattle, perfect for a variety of dishes. Enjoy its rich flavor and tender texture in your favorite recipes.',
@@ -34,7 +34,7 @@ module.exports = {
         name_HE: 'בקר',
       },
       {
-        unit: '800 g',
+        unit: '900 g',
         price: 169,
         imageURL: null,
         isActive: true,

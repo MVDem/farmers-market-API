@@ -1,0 +1,160 @@
+'use strict';
+
+/** @type {import('sequelize-cli').Migration} */
+module.exports = {
+  async up(queryInterface) {
+    await queryInterface.bulkInsert('farmers', [
+      {
+        name: 'Bob Farmer',
+        description: 'Experienced farmer in the countryside',
+        city: 'Ruralville',
+        address: '123 Country Lane',
+        email: 'bobfarmer@gmail.com',
+        phone: '0555555551',
+        coordinateLat: 32.4595720719341,
+        coordinateLong: 34.956856023315666,
+        userId: 1, // Ensure this ID exists in the auth table
+        logoURL: 'farmers/logos/bob.jpg',
+        coverURL: 'farmers/covers/bob_cover.jpg',
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        name: 'Alice Green',
+        description: 'Organic produce farmer',
+        city: 'Greenfield',
+        address: '456 Farm Road',
+        email: 'alicegreen@gmail.com',
+        phone: '0555555552',
+        coordinateLat: 31.77295417537109,
+        coordinateLong: 34.886425895587585,
+        userId: 3, // Ensure this ID exists in the auth table
+        logoURL: 'farmers/logos/alice.png',
+        coverURL: 'farmers/covers/alice_cover.jpg',
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        name: 'Charlie Fields',
+        description: 'Specializes in wheat and corn',
+        city: 'Fieldtown',
+        address: '789 Harvest Ave',
+        email: 'charliefields@gmail.com',
+        phone: '0555555553',
+        coordinateLat: 31.37096428495638,
+        coordinateLong: 34.857950145297885,
+        userId: 4, // Ensure this ID exists in the auth table
+        logoURL: 'farmers/logos/charlie.png',
+        coverURL: 'farmers/covers/charlie_cover.jpg',
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        name: 'David Hill',
+        description: 'Mountain farm produce',
+        city: 'Highland',
+        address: '101 Peak St',
+        email: 'davidhill@gmail.com',
+        phone: '0555555554',
+        coordinateLat: 32.3791154138576,
+        coordinateLong: 34.92815452694162,
+        userId: 5, // Ensure this ID exists in the auth table
+        logoURL: 'farmers/logos/david.jpg',
+        coverURL: 'farmers/covers/david_cover.jpg',
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        name: 'Eve Gardens',
+        description: 'Garden fresh vegetables',
+        city: 'Garden City',
+        address: '202 Blossom Blvd',
+        email: 'evegardens@gmail.com',
+        phone: '0555555555',
+        coordinateLat: 32.42617657114611,
+        coordinateLong: 35.000188323452505,
+        userId: 6, // Ensure this ID exists in the auth table
+        logoURL: 'farmers/logos/eve.WebP',
+        coverURL: 'farmers/covers/eve_cover.WebP',
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        name: 'Frank Rivers',
+        description: 'Farming by the river',
+        city: 'Riverdale',
+        address: '303 River Rd',
+        email: 'frankrivers@gmail.com',
+        phone: '0555555556',
+        coordinateLat: 33.13139573311439,
+        coordinateLong: 35.58714335130646,
+        userId: 7, // Ensure this ID exists in the auth table
+        logoURL: 'farmers/logos/frank.jpg',
+        coverURL: 'farmers/covers/frank_cover.jpg',
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        name: 'Grace Valley',
+        description: 'Valley farm products',
+        city: 'Valleyville',
+        address: '404 Valley Way',
+        email: 'gracevalley@gmail.com',
+        phone: '0555555557',
+        coordinateLat: 33.21585486626481,
+        coordinateLong: 35.61459582800615,
+        userId: 8, // Ensure this ID exists in the auth table
+        logoURL: 'farmers/logos/grace.png',
+        coverURL: 'farmers/covers/grace_cover.jpg',
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        name: 'Heidi Meadows',
+        description: 'Meadow fresh dairy products',
+        city: 'Meadowtown',
+        address: '505 Meadow Ln',
+        email: 'heidimeadows@gmail.com',
+        phone: '0555555558',
+        coordinateLat: 32.665899651522146,
+        coordinateLong: 35.41838277650631,
+        userId: 9, // Ensure this ID exists in the auth table
+        logoURL: 'farmers/logos/grace.png',
+        coverURL: 'farmers/covers/heidi_cover.png',
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        name: 'Ivan Orchard',
+        description: 'Fresh fruits from the orchard',
+        city: 'Orchardville',
+        address: '606 Orchard St',
+        email: 'ivanorchard@gmail.com',
+        phone: '0555555559',
+        coordinateLat: 32.65564131113462,
+        coordinateLong: 35.00950189964135,
+        userId: 10, // Ensure this ID exists in the auth table
+        logoURL: 'farmers/logos/frank.jpg',
+        coverURL: 'farmers/covers/frank_cover.jpg',
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+    ]);
+  },
+
+  async down(queryInterface) {
+    await queryInterface.bulkDelete('farmers', {
+      email: [
+        'bobfarmer@gmail.com',
+        'alicegreen@gmail.com',
+        'charliefields@gmail.com',
+        'davidhill@gmail.com',
+        'evegardens@gmail.com',
+        'frankrivers@gmail.com',
+        'gracevalley@gmail.com',
+        'heidimeadows@gmail.com',
+        'ivanorchard@gmail.com',
+      ],
+    });
+  },
+};

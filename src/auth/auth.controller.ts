@@ -21,7 +21,8 @@ export class AuthController {
   async signin(@Body() userDto: SignInUserDto, @Res() res: Response) {
     const { token, userData } = await this.authService.signin(userDto);
 
-    res.cookie('token', token, { httpOnly: true, secure: true });
+      // res.cookie('token', token, { httpOnly: true, secure: true },secure: true);
+    res.cookie('token', token, { httpOnly: true, secure: true },secure: true);
 
     return res.status(200).json(userData);
   }

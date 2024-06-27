@@ -17,9 +17,9 @@ import { CategoriesModule } from './categories/categories.module';
 
 @Module({
   imports: [
-    ConfigModule.forRoot({
-      envFilePath: `.${process.env.NODE_ENV}.env`,
-    }),
+    // ConfigModule.forRoot({
+    //   envFilePath: `.${process.env.NODE_ENV}.env`,
+    // }),
     SequelizeModule.forRootAsync({
       useFactory: () => {
         let options: Record<string, unknown> = {};

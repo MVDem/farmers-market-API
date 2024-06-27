@@ -8,8 +8,8 @@ import {
   ForeignKey,
   BelongsTo,
 } from 'sequelize-typescript';
-import { Offer } from 'src/offers/offers.model';
-import { Auth } from 'src/auth/auth.model';
+import { Offer } from '../offers/offers.model';
+import { Auth } from '../auth/auth.model';
 
 interface FarmerCreationAtributes {
   name: string;
@@ -121,8 +121,7 @@ export class Farmer extends Model<Farmer, FarmerCreationAtributes> {
   @HasMany(() => Offer)
   deals: Offer[];
   @ApiProperty({
-    example:
-      'farmers/logo.png',
+    example: 'farmers/logo.png',
     description: 'Logo URL',
     required: false,
   })
@@ -133,8 +132,7 @@ export class Farmer extends Model<Farmer, FarmerCreationAtributes> {
   logoURL: string;
 
   @ApiProperty({
-    example:
-      'farmers/logo.png',
+    example: 'farmers/logo.png',
     description: 'Cover URL',
     required: false,
   })

@@ -3,7 +3,7 @@ import { EditFarmerDto } from './dtos/editFarmer.dto';
 import { Farmer } from './farmers.model';
 import { InjectModel } from '@nestjs/sequelize';
 import { CreateFarmerDto } from './dtos/createFarmer.dto';
-import { CloudinaryService } from 'src/cloudinary/cloudinary.service';
+import { CloudinaryService } from '../cloudinary/cloudinary.service';
 import { FarmerDto } from './dtos/farmer.dto';
 
 interface IFarmer {

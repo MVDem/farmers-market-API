@@ -1,6 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { Table, Model, Column, DataType, HasOne } from 'sequelize-typescript';
-import { Farmer } from 'src/farmers/farmers.model';
+import { Farmer } from '../farmers/farmers.model';
 
 interface AuthCreationAttrs {
   email: string;

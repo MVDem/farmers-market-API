@@ -16,8 +16,8 @@ import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { OffersService } from './offers.service';
 import { Offer } from './offers.model';
 import { FileInterceptor } from '@nestjs/platform-express';
-import { Roles } from 'src/auth/user-self.decorator';
-import { RolesGuard } from 'src/auth/roles.quard';
+import { Roles } from '../auth/user-self.decorator';
+import { RolesGuard } from '../auth/roles.quard';
 import { UpdateOfferDto } from './dtos/updateOffer.dto';
 import { plainToClass } from 'class-transformer';
 

@@ -8,7 +8,7 @@ import {
   ForeignKey,
   BelongsTo,
 } from 'sequelize-typescript';
-import { Category } from 'src/categories/categories.model';
+import { Category } from '../categories/categories.model';
 
 interface ProductCreationAtributes {
   categoryId: number;

@@ -7,8 +7,8 @@ import {
   Table,
   Model,
 } from 'sequelize-typescript';
-import { Farmer } from 'src/farmers/farmers.model';
-import { Product } from 'src/products/products.model';
+import { Farmer } from '../farmers/farmers.model';
+import { Product } from '../products/products.model';
 
 interface OffersCreationAttributes {
   name_EN: string;
@@ -34,15 +34,20 @@ export class Offer extends Model<Offer, OffersCreationAttributes> {
   })
   id: number;
 
-  @ApiProperty({ example: 'Coffee', description: 'Name of a offer/product in English' })
+  @ApiProperty({
+    example: 'Coffee',
+    description: 'Name of a offer/product in English',
+  })
   @Column({
     type: DataType.STRING,
     allowNull: false,
   })
   name_EN: string;
 
-
-  @ApiProperty({ example: 'קפה', description: 'Name of a offer/product in Hebrew' })
+  @ApiProperty({
+    example: 'קפה',
+    description: 'Name of a offer/product in Hebrew',
+  })
   @Column({
     type: DataType.STRING,
     allowNull: true,

@@ -2,15 +2,15 @@ import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { Offer } from './offers.model';
 import { InjectModel } from '@nestjs/sequelize';
 import { CreateOfferDto } from './dtos/createOffer.dto';
-import { CloudinaryService } from 'src/cloudinary/cloudinary.service';
+import { CloudinaryService } from '../cloudinary/cloudinary.service';
 import { OfferDto } from './dtos/offer.dto';
 import { PaginatedOfferDto } from './dtos/paginatedOffers.dto';
-import { Farmer } from 'src/farmers/farmers.model';
-import { Product } from 'src/products/products.model';
-import { Category } from 'src/categories/categories.model';
+import { Farmer } from '../farmers/farmers.model';
+import { Product } from '../products/products.model';
+import { Category } from '../categories/categories.model';
 import { Model, Op } from 'sequelize';
-import { FarmerDto } from 'src/farmers/dtos/farmer.dto';
-import { ProductDto } from 'src/products/dtos/product.dto';
+import { FarmerDto } from '../farmers/dtos/farmer.dto';
+import { ProductDto } from '../products/dtos/product.dto';
 
 export interface ISearchParams {
   columnName?: string;

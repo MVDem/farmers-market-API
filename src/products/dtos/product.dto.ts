@@ -1,5 +1,5 @@
 import { ApiProperty, OmitType } from '@nestjs/swagger';
-import { CategoryDto } from 'src/categories/dtos/category.dto';
+import { CategoryDto } from '../../categories/dtos/category.dto';
 import { EditProductDto } from './editProduct.dto';
 
 export class ProductDto extends OmitType(EditProductDto, ['categoryId']){

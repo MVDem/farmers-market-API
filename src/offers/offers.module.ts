@@ -3,8 +3,8 @@ import { OffersService } from './offers.service';
 import { Offer } from './offers.model';
 import { SequelizeModule } from '@nestjs/sequelize';
 import { OffersController } from './offers.controller';
-import { AuthModule } from 'src/auth/auth.module';
-import { CloudinaryModule } from 'src/cloudinary/cloudinary.module';
+import { AuthModule } from '../auth/auth.module';
+import { CloudinaryModule } from '../cloudinary/cloudinary.module';
 
 @Module({
   controllers: [OffersController],

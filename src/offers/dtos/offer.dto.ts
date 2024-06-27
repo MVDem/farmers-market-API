@@ -1,9 +1,12 @@
 import { ApiProperty, OmitType } from '@nestjs/swagger';
-import { FarmerDto } from 'src/farmers/dtos/farmer.dto';
-import { ProductDto } from 'src/products/dtos/product.dto';
+import { FarmerDto } from '../../farmers/dtos/farmer.dto';
+import { ProductDto } from '../../products/dtos/product.dto';
 import { CreateOfferDto } from './createOffer.dto';
 
-export class OfferDto extends OmitType(CreateOfferDto, ['farmerId', 'productId']){
+export class OfferDto extends OmitType(CreateOfferDto, [
+  'farmerId',
+  'productId',
+]) {
   @ApiProperty({
     example: 123,
     description: 'Offer id',

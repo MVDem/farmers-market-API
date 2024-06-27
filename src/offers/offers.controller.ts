@@ -15,12 +15,9 @@ import {
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { OffersService } from './offers.service';
 import { Offer } from './offers.model';
-import { CreateOfferDto } from './dtos/createOffer.dto';
-import { JwtAuthGuard } from 'src/auth/jwt-auth-guard';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { Roles } from 'src/auth/user-self.decorator';
 import { RolesGuard } from 'src/auth/roles.quard';
-import { ISearchParams } from './offers.service';
 import { UpdateOfferDto } from './dtos/updateOffer.dto';
 import { plainToClass } from 'class-transformer';
 
@@ -41,8 +38,6 @@ export class OffersController {
     @Query('value') value: string = '',
     @Query('categoryId') categoryId?: number,
   ) {
-    console.log('🚀 ~ OffersController ~ value:', value);
-
     return this.OffersService.getPaginatedSortedOffers(
       limit,
       page,

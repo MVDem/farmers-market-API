@@ -12,7 +12,6 @@ import { ProductsModule } from './products/products.module';
 import { CloudinaryModule } from './cloudinary/cloudinary.module';
 import { Offer } from './offers/offers.model';
 import { OffersModule } from './offers/offers.module';
-//--add 06-06-2024 + new obj.category
 import { Category } from './categories/categories.model';
 import { CategoriesModule } from './categories/categories.module';
 
@@ -28,11 +27,16 @@ import { CategoriesModule } from './categories/categories.module';
         if (process.env.NODE_ENV === 'development') {
           options = {
             dialect: 'postgres',
-            host: process.env.POSTGRES_HOST,
-            port: Number(process.env.POSTGRES_PORT),
             username: process.env.POSTGRES_USER,
             password: process.env.POSTGRES_PASSWORD,
-            database: process.env.POSTGRES_DB,
+            database: process.env.POSTGRES_DATABASE,
+            host: process.env.POSTGRES_HOST,
+            dialectOptions: {
+              ssl: {
+                require: true,
+                rejectUnauthorized: false,
+              },
+            },
             models: [Auth, Farmer, Offer, Product, Category],
             autoLoadModels: true,
             synchronize: true,
@@ -41,29 +45,26 @@ import { CategoriesModule } from './categories/categories.module';
         } else {
           options = {
             dialect: 'postgres',
+            username: process.env.POSTGRES_USER,
+            password: process.env.POSTGRES_PASSWORD,
+            database: process.env.POSTGRES_DATABASE,
+            host: process.env.POSTGRES_HOST,
+            dialectOptions: {
+              ssl: {
+                require: true,
+                rejectUnauthorized: false,
+              },
+            },
             models: [Auth, Farmer, Offer, Product, Category],
             autoLoadModels: true,
             synchronize: true,
             logging: false,
-            uri: process.env.POSTGRES_URI,
           };
         }
 
         return options;
       },
     }),
-    // SequelizeModule.forRoot({
-    //   dialect: 'postgres',
-    //   host: process.env.POSTGRES_HOST,
-    //   port: Number(process.env.POSTGRES_PORT),
-    //   username: process.env.POSTGRES_USER,
-    //   password: process.env.POSTGRES_PASSWORD,
-    //   database: process.env.POSTGRES_DB,
-    //   models: [Auth, Farmer, Offer, Product, Category],
-    //   autoLoadModels: true,
-    //   synchronize: true,
-    //   logging: false,
-    // }),
     AuthModule,
     FarmersModule,
     ProductsModule,

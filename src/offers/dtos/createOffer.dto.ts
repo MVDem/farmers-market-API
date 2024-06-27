@@ -65,8 +65,8 @@ export class CreateOfferDto {
     required: false,
   })
   @IsString({ message: 'Description must be a string' })
-  @MaxLength(150, {
-    message: 'Description must be max 150 symbols',
+  @MaxLength(255, {
+    message: 'Description must be max 255 symbols',
   })
   @IsOptional()
   description_EN: string;
@@ -77,8 +77,8 @@ export class CreateOfferDto {
     required: false,
   })
   @IsString({ message: 'Description must be a string' })
-  @MaxLength(150, {
-    message: 'Description must be max 150 symbols',
+  @MaxLength(255, {
+    message: 'Description must be max 255 symbols',
   })
   @IsOptional()
   description_HE: string;

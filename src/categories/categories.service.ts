@@ -11,7 +11,7 @@ import { InjectModel } from '@nestjs/sequelize';
 import { UniqueConstraintError } from 'sequelize';
 import { CategoryDto } from './dtos/category.dto';
 import { PaginatedCategoryDto } from './dtos/paginatedCategories.dto';
-import { CloudinaryService } from 'src/cloudinary/cloudinary.service';
+import { CloudinaryService } from '../cloudinary/cloudinary.service';
 
 @Injectable()
 export class CategoriesService {

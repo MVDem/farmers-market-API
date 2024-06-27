@@ -5,9 +5,9 @@ import {
 } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcryptjs';
-import { CreateFarmerDto } from 'src/farmers/dtos/createFarmer.dto';
-import { FarmersService } from 'src/farmers/farmers.service';
-import { CloudinaryService } from 'src/cloudinary/cloudinary.service';
+import { CreateFarmerDto } from '../farmers/dtos/createFarmer.dto';
+import { FarmersService } from '../farmers/farmers.service';
+import { CloudinaryService } from '../cloudinary/cloudinary.service';
 import { InjectModel } from '@nestjs/sequelize';
 import { Auth } from './auth.model';
 import { CreateUserDto } from './dto/create-user-dto';

@@ -3,7 +3,7 @@ import { ProductsController } from './products.controller';
 import { ProductsService } from './products.service';
 import { SequelizeModule } from '@nestjs/sequelize';
 import { Product } from './products.model';
-import { CloudinaryModule } from 'src/cloudinary/cloudinary.module';
+import { CloudinaryModule } from '../cloudinary/cloudinary.module';
 
 @Module({
   controllers: [ProductsController],

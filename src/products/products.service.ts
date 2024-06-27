@@ -3,8 +3,8 @@ import { EditProductDto } from './dtos/editProduct.dto';
 import { Product } from './products.model';
 import { InjectModel } from '@nestjs/sequelize';
 import { CreateProductDto } from './dtos/createProduct.dto';
-import { Category } from 'src/categories/categories.model';
-import { CloudinaryService } from 'src/cloudinary/cloudinary.service';
+import { Category } from '../categories/categories.model';
+import { CloudinaryService } from '../cloudinary/cloudinary.service';
 import { PROPERTY_DEPS_METADATA } from '@nestjs/common/constants';
 
 @Injectable()

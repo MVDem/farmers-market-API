@@ -15,8 +15,8 @@ import { FarmersService } from './farmers.service';
 import { EditFarmerDto } from './dtos/editFarmer.dto';
 import { Farmer } from './farmers.model';
 import { FileInterceptor } from '@nestjs/platform-express';
-import { Roles } from 'src/auth/user-self.decorator';
-import { RolesGuard } from 'src/auth/roles.quard';
+import { Roles } from '../auth/user-self.decorator';
+import { RolesGuard } from '../auth/roles.quard';
 
 @ApiTags('Farmers')
 @Controller('farmers')

@@ -16,8 +16,8 @@ async function bootstrap() {
   //   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
   //   credentials: true,
   // };
-  const corsOptions = {
-    origin: ['https://YOUR-APP-NAME.vercel.app', 'http://localhost:3000'],
+  const corsOptions: CorsOptions = {
+    origin: process.env.ORIGIN || '*',
     methods: 'GET, HEAD, PUT, POST, DELETE, OPTIONS, PATCH',
     credentials: true,
     allowedHeaders:

@@ -43,6 +43,7 @@ import { CategoriesModule } from './categories/categories.module';
             logging: false,
           };
         } else {
+          console.log(process.env);
           options = {
             dialect: 'postgres',
             username: process.env.POSTGRES_USER,

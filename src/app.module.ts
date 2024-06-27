@@ -47,10 +47,10 @@ import { CategoriesModule } from './categories/categories.module';
           console.log(process.env);
           options = {
             dialect: 'postgres',
-            username: process.env.POSTGRES_USER,
-            password: process.env.POSTGRES_PASSWORD,
-            database: process.env.POSTGRES_DATABASE,
-            host: process.env.POSTGRES_HOST,
+            username: process.env.VERCEL_POSTGRES_USER,
+            password: process.env.VERCEL_POSTGRES_PASSWORD,
+            database: process.env.VERCEL_POSTGRES_DATABASE,
+            host: process.env.VERCEL_POSTGRES_HOST,
             dialectOptions: {
               ssl: {
                 require: true,

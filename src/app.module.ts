@@ -25,6 +25,7 @@ import { CategoriesModule } from './categories/categories.module';
         let options: Record<string, unknown> = {};
 
         if (process.env.NODE_ENV === 'development') {
+          console.log(process.env);
           options = {
             dialect: 'postgres',
             username: process.env.POSTGRES_USER,

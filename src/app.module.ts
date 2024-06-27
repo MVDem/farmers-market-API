@@ -14,12 +14,13 @@ import { Offer } from './offers/offers.model';
 import { OffersModule } from './offers/offers.module';
 import { Category } from './categories/categories.model';
 import { CategoriesModule } from './categories/categories.module';
+import pg from 'pg';
 
 @Module({
   imports: [
-    // ConfigModule.forRoot({
-    //   envFilePath: `.${process.env.NODE_ENV}.env`,
-    // }),
+    ConfigModule.forRoot({
+      envFilePath: `.${process.env.NODE_ENV}.env`,
+    }),
     SequelizeModule.forRootAsync({
       useFactory: () => {
         let options: Record<string, unknown> = {};
@@ -47,6 +48,7 @@ import { CategoriesModule } from './categories/categories.module';
           console.log('production', process.env);
           options = {
             dialect: 'postgres',
+            dialectModule: pg,
             username: process.env.POSTGRES_USER,
             password: process.env.POSTGRES_PASSWORD,
             database: process.env.POSTGRES_DATABASE,

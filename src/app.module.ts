@@ -25,7 +25,7 @@ import { CategoriesModule } from './categories/categories.module';
         let options: Record<string, unknown> = {};
 
         if (process.env.NODE_ENV === 'development') {
-          console.log(process.env);
+          console.log('development', process.env);
           options = {
             dialect: 'postgres',
             username: process.env.POSTGRES_USER,
@@ -44,7 +44,7 @@ import { CategoriesModule } from './categories/categories.module';
             logging: false,
           };
         } else {
-          console.log(process.env);
+          console.log('production', process.env);
           options = {
             dialect: 'postgres',
             username: process.env.VERCEL_POSTGRES_USER,
@@ -62,6 +62,7 @@ import { CategoriesModule } from './categories/categories.module';
             synchronize: true,
             logging: false,
           };
+          console.log('options', options);
         }
 
         return options;

@@ -26,7 +26,6 @@ import pg from 'pg';
         let options: Record<string, unknown> = {};
 
         if (process.env.NODE_ENV === 'development') {
-          console.log('development', process.env);
           options = {
             dialect: 'postgres',
             username: process.env.POSTGRES_USER,
@@ -45,7 +44,6 @@ import pg from 'pg';
             logging: false,
           };
         } else {
-          console.log('production', process.env);
           options = {
             dialect: 'postgres',
             dialectModule: pg,
@@ -64,7 +62,6 @@ import pg from 'pg';
             synchronize: true,
             logging: false,
           };
-          console.log('options', options);
         }
 
         return options;

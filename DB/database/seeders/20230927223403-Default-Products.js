@@ -239,16 +239,16 @@ module.exports = {
         createdAt: new Date(),
         updatedAt: new Date(),
       },
-      {
-        categoryId: 3, // Meat
-        name_EN: 'Pork Ribs',
-        name_HE: 'צלעות חזיר',
-        description_EN: 'Succulent and flavorful pork ribs',
-        description_HE: 'צלעות חזיר מרגיעות וטעימות',
-        imageURL: 'products/meat/pork_ribs.jpg',
-        createdAt: new Date(),
-        updatedAt: new Date(),
-      },
+      // {
+      //   categoryId: 3, // Meat
+      //   name_EN: 'Pork Ribs',
+      //   name_HE: 'צלעות חזיר',
+      //   description_EN: 'Succulent and flavorful pork ribs',
+      //   description_HE: 'צלעות חזיר מרגיעות וטעימות',
+      //   imageURL: 'products/meat/pork_ribs.jpg',
+      //   createdAt: new Date(),
+      //   updatedAt: new Date(),
+      // },
       {
         categoryId: 3, // Meat
         name_EN: 'Ground Beef',
@@ -299,16 +299,16 @@ module.exports = {
         createdAt: new Date(),
         updatedAt: new Date(),
       },
-      {
-        categoryId: 3, // Meat
-        name_EN: 'Bacon',
-        name_HE: 'בקון',
-        description_EN: 'Crispy and smoky bacon strips',
-        description_HE: 'רצועות בקון צריכות ומעושנות',
-        imageURL: 'products/meat/bacon.jpg',
-        createdAt: new Date(),
-        updatedAt: new Date(),
-      },
+      // {
+      //   categoryId: 3, // Meat
+      //   name_EN: 'Bacon',
+      //   name_HE: 'בקון',
+      //   description_EN: 'Crispy and smoky bacon strips',
+      //   description_HE: 'רצועות בקון צריכות ומעושנות',
+      //   imageURL: 'products/meat/bacon.jpg',
+      //   createdAt: new Date(),
+      //   updatedAt: new Date(),
+      // },
 
       // Products for Cheese
       {
@@ -449,7 +449,7 @@ module.exports = {
         name_HE: 'חמאה',
         description_EN: 'Rich and creamy butter',
         description_HE: 'חמאה רכה וקרמית',
-        imageURL: 'products/dairy/butter.jpg',
+        imageURL: 'products/dairy/butter.WebP',
         createdAt: new Date(),
         updatedAt: new Date(),
       },
@@ -479,7 +479,7 @@ module.exports = {
         name_HE: "גבינת קוטג'",
         description_EN: 'Soft and crumbly cottage cheese',
         description_HE: "גבינת קוטג' רכה וגריזלית",
-        imageURL: 'products/dairy/cottage_cheese.jpg',
+        imageURL: 'products/dairy/cottage_cheese.WebP',
         createdAt: new Date(),
         updatedAt: new Date(),
       },
@@ -489,7 +489,7 @@ module.exports = {
         name_HE: 'גבינת שמנת',
         description_EN: 'Smooth and spreadable cream cheese',
         description_HE: 'גבינת שמנת חלקה ומתפשטת',
-        imageURL: 'products/dairy/cream_cheese.jpg',
+        imageURL: 'products/dairy/sour_cream.jpg',
         createdAt: new Date(),
         updatedAt: new Date(),
       },
@@ -581,7 +581,7 @@ module.exports = {
         name_HE: 'פיתה',
         description_EN: 'Soft and fluffy pita bread',
         description_HE: 'פיתה רכה וקלילה',
-        imageURL: 'products/bread/pita_bread.jpg',
+        imageURL: 'products/bread/pita_bread.WebP',
         createdAt: new Date(),
         updatedAt: new Date(),
       },
@@ -637,16 +637,16 @@ module.exports = {
         createdAt: new Date(),
         updatedAt: new Date(),
       },
-      {
-        categoryId: 7, // Fish
-        name_EN: 'Trout',
-        name_HE: 'פורל',
-        description_EN: 'Farm-raised rainbow trout',
-        description_HE: 'פורל קשת מגידול חקלאי',
-        imageURL: 'products/fish/trout.jpg',
-        createdAt: new Date(),
-        updatedAt: new Date(),
-      },
+      // {
+      //   categoryId: 7, // Fish
+      //   name_EN: 'Trout',
+      //   name_HE: 'פורל',
+      //   description_EN: 'Farm-raised rainbow trout',
+      //   description_HE: 'פורל קשת מגידול חקלאי',
+      //   imageURL: 'products/fish/trout.jpg',
+      //   createdAt: new Date(),
+      //   updatedAt: new Date(),
+      // },
       {
         categoryId: 7, // Fish
         name_EN: 'Cod',
@@ -657,26 +657,26 @@ module.exports = {
         createdAt: new Date(),
         updatedAt: new Date(),
       },
-      {
-        categoryId: 7, // Fish
-        name_EN: 'Haddock',
-        name_HE: 'הדוק',
-        description_EN: 'Fresh haddock fillets',
-        description_HE: 'פילה הדוק טרי',
-        imageURL: 'products/fish/haddock.jpg',
-        createdAt: new Date(),
-        updatedAt: new Date(),
-      },
-      {
-        categoryId: 7, // Fish
-        name_EN: 'Mackerel',
-        name_HE: 'מקרל',
-        description_EN: 'Rich and flavorful mackerel',
-        description_HE: 'מקרל עשיר וטעים',
-        imageURL: 'products/fish/mackerel.jpg',
-        createdAt: new Date(),
-        updatedAt: new Date(),
-      },
+      // {
+      //   categoryId: 7, // Fish
+      //   name_EN: 'Haddock',
+      //   name_HE: 'הדוק',
+      //   description_EN: 'Fresh haddock fillets',
+      //   description_HE: 'פילה הדוק טרי',
+      //   imageURL: 'products/fish/haddock.jpg',
+      //   createdAt: new Date(),
+      //   updatedAt: new Date(),
+      // },
+      // {
+      //   categoryId: 7, // Fish
+      //   name_EN: 'Mackerel',
+      //   name_HE: 'מקרל',
+      //   description_EN: 'Rich and flavorful mackerel',
+      //   description_HE: 'מקרל עשיר וטעים',
+      //   imageURL: 'products/fish/mackerel.jpg',
+      //   createdAt: new Date(),
+      //   updatedAt: new Date(),
+      // },
       {
         categoryId: 7, // Fish
         name_EN: 'Sardines',

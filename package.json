@@ -7,12 +7,14 @@
   "license": "UNLICENSED",
   "scripts": {
     "start:dev": "cross-env NODE_ENV=development nest start --watch",
-    "start:staging": "cross-env NODE_ENV=staging nest start --watch",
-    "db:seed": "npx sequelize db:seed:all",
-    "server": "docker compose -f db/docker-compose.yaml up -d --build ",
+    "db:dev:migrate": "cross-env NODE_ENV=development sequelize-cli db:migrate --config DB/database/config.js",
+    "db:dev:migrate:undo:all": "cross-env NODE_ENV=development sequelize-cli db:migrate:undo:all --config DB/database/config.js",
+    "db:dev:seed:all": "cross-env NODE_ENV=development sequelize-cli db:seed:all --config DB/database/config.js",
+    "db:dev:seed:undo:all": "cross-env NODE_ENV=development sequelize-cli db:seed:undo:all --config DB/database/config.js",
     "build": "nest build",
-    "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "start": "cross-env NODE_ENV=production nest start",
+    "start:staging": "cross-env NODE_ENV=staging nest start --watch",
+    "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "start:debug": "nest start --debug --watch",
     "start:prod": "node dist/main",
     "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
@@ -20,7 +22,12 @@
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
-    "test:e2e": "jest --config ./test/jest-e2e.json"
+    "test:e2e": "jest --config ./test/jest-e2e.json",
+    "db:test:server": "docker compose -f db/docker-compose.yaml up -d --build ",
+    "db:test:migrate": "cross-env NODE_ENV=test sequelize-cli db:migrate --config DB/database/config.js",
+    "db:test:migrate:undo:all": "cross-env NODE_ENV=test sequelize-cli db:migrate:undo:all --config DB/database/config.js",
+    "db:test:seed:all": "cross-env NODE_ENV=test sequelize-cli db:seed:all --config DB/database/config.js",
+    "db:test:seed:undo:all": "cross-env NODE_ENV=test sequelize-cli db:seed:undo:all --config DB/database/config.js"
   },
   "dependencies": {
     "@nestjs/common": "^10.0.0",

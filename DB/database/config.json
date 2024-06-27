@@ -1,6 +1,0 @@
-{
-  "development": {
-    "url": "postgres://sergey:PXrb923ijXWQtLiRxzfHhJhllUsshDpT@dpg-cpo6n4l6l47c73aa558g-a.frankfurt-postgres.render.com/farmersmarket?ssl=true",
-    "dialect": "postgres"
-  }
-}

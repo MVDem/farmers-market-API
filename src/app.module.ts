@@ -14,6 +14,7 @@ import { Offer } from './offers/offers.model';
 import { OffersModule } from './offers/offers.module';
 import { Category } from './categories/categories.model';
 import { CategoriesModule } from './categories/categories.module';
+import pg from 'pg';
 
 @Module({
   imports: [

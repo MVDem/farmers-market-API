@@ -26,7 +26,7 @@ import pg from 'pg';
         let options: Record<string, unknown> = {};
         options = {
           dialect: 'postgres',
-          // dialectModule: pg,
+          dialectModule: pg,
           username: process.env.POSTGRES_USER,
           password: process.env.POSTGRES_PASSWORD,
           database: process.env.POSTGRES_DATABASE,

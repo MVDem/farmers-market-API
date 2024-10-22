@@ -36,7 +36,6 @@ export class OffersController {
     @Query('order') order: string = 'ASC',
     @Query('columnName') columnName: string = '',
     @Query('value') value: string = '',
-    @Query('categoryId') categoryId?: number,
   ) {
     return this.OffersService.getPaginatedSortedOffers(
       limit,
@@ -45,7 +44,6 @@ export class OffersController {
       order,
       columnName,
       value,
-      categoryId,
     );
   }
 

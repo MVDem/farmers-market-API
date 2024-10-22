@@ -8,7 +8,7 @@ import { PaginatedOfferDto } from './dtos/paginatedOffers.dto';
 import { Farmer } from '../farmers/farmers.model';
 import { Product } from '../products/products.model';
 import { Category } from '../categories/categories.model';
-import { Model, Op } from 'sequelize';
+import { Op } from 'sequelize';
 import { FarmerDto } from '../farmers/dtos/farmer.dto';
 import { ProductDto } from '../products/dtos/product.dto';
 
@@ -30,12 +30,16 @@ export class OffersService {
     order: string,
     columnName?: string,
     value?: string,
-    categoryId?: number,
   ): Promise<PaginatedOfferDto> {
     const offset = (page - 1) * limit;
     let whereSearch = {};
 
-    if (columnName) {
+    if (columnName === 'categoryId') {
+      whereSearch = {
+        ...whereSearch,
+        '$product.categoryId$': value,
+      };
+    } else if (columnName) {
       const typeOfAttribute = Offer.getAttributes()[columnName].type.key;
       whereSearch =
         columnName && value !== undefined && value !== ''
@@ -49,34 +53,32 @@ export class OffersService {
           : {};
     }
 
-    if (categoryId) {
-      whereSearch = {
-        ...whereSearch,
-        '$product.categoryId$': categoryId,
-      };
-    }
-
     const response = await this.OffersRepository.findAndCountAll({
       where: whereSearch,
-      include: !categoryId
-        ? [
-            { model: Farmer, as: 'farmer' },
-            {
-              model: Product,
-              as: 'product',
-              include: [{ model: Category, as: 'category' }],
-            },
-          ]
-        : [
-            { model: Farmer, as: 'farmer' },
-            {
-              model: Product,
-              as: 'product',
-              include: [
-                { model: Category, as: 'category', where: { id: categoryId } },
-              ],
-            },
-          ],
+      include:
+        columnName !== 'categoryId'
+          ? [
+              { model: Farmer, as: 'farmer' },
+              {
+                model: Product,
+                as: 'product',
+                include: [{ model: Category, as: 'category' }],
+              },
+            ]
+          : [
+              { model: Farmer, as: 'farmer' },
+              {
+                model: Product,
+                as: 'product',
+                include: [
+                  {
+                    model: Category,
+                    as: 'category',
+                    where: { id: value },
+                  },
+                ],
+              },
+            ],
 
       offset,
       limit: limit,
@@ -90,23 +92,23 @@ export class OffersService {
     const { count, rows } = response;
     const offersDto: OfferDto[] = await Promise.all(
       rows.map(async (offer) => {
-        let publicId = offer.imageURL
-          ? await this.cloudinary.getPathToImg(offer.imageURL)
-          : null;
+        // let publicId = offer.imageURL
+        //   ? await this.cloudinary.getPathToImg(offer.imageURL)
+        //   : null;
 
         const farmerDto = new FarmerDto(offer.farmer.toJSON());
-        farmerDto.logoURL = farmerDto.logoURL
-          ? await this.cloudinary.getPathToImg(farmerDto.logoURL)
-          : null;
+        // farmerDto.logoURL = farmerDto.logoURL
+        //   ? await this.cloudinary.getPathToImg(farmerDto.logoURL)
+        //   : null;
 
         const productDto = new ProductDto(offer.product.toJSON());
-        productDto.imageURL = productDto.imageURL
-          ? await this.cloudinary.getPathToImg(productDto.imageURL)
-          : null;
+        // productDto.imageURL = productDto.imageURL
+        //   ? await this.cloudinary.getPathToImg(productDto.imageURL)
+        //   : null;
 
         return new OfferDto({
           ...offer.toJSON(),
-          imageURL: publicId,
+          // imageURL: publicId,
           farmer: farmerDto,
           product: productDto,
         });

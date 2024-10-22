@@ -164,9 +164,9 @@ export class CategoriesService {
 
     const offersDto: CategoryDto[] = await Promise.all(
       rows.map(async (category) => {
-        category.imageURL = category.imageURL
-          ? await this.cloudinary.getPathToImg(category.imageURL)
-          : null;
+        // category.imageURL = category.imageURL
+        //   ? await this.cloudinary.getPathToImg(category.imageURL)
+        //   : null;
 
         return new CategoryDto({
           ...category.toJSON(),

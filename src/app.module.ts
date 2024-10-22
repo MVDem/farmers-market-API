@@ -24,45 +24,24 @@ import pg from 'pg';
     SequelizeModule.forRootAsync({
       useFactory: () => {
         let options: Record<string, unknown> = {};
-
-        if (process.env.NODE_ENV === 'development') {
-          options = {
-            dialect: 'postgres',
-            username: process.env.POSTGRES_USER,
-            password: process.env.POSTGRES_PASSWORD,
-            database: process.env.POSTGRES_DATABASE,
-            host: process.env.POSTGRES_HOST,
-            dialectOptions: {
-              ssl: {
-                require: true,
-                rejectUnauthorized: false,
-              },
+        options = {
+          dialect: 'postgres',
+          // dialectModule: pg,
+          username: process.env.POSTGRES_USER,
+          password: process.env.POSTGRES_PASSWORD,
+          database: process.env.POSTGRES_DATABASE,
+          host: process.env.POSTGRES_HOST,
+          dialectOptions: {
+            ssl: {
+              require: true,
+              rejectUnauthorized: false,
             },
-            models: [Auth, Farmer, Offer, Product, Category],
-            autoLoadModels: true,
-            synchronize: true,
-            logging: false,
-          };
-        } else {
-          options = {
-            dialect: 'postgres',
-            dialectModule: pg,
-            username: process.env.POSTGRES_USER,
-            password: process.env.POSTGRES_PASSWORD,
-            database: process.env.POSTGRES_DATABASE,
-            host: process.env.POSTGRES_HOST,
-            dialectOptions: {
-              ssl: {
-                require: true,
-                rejectUnauthorized: false,
-              },
-            },
-            models: [Auth, Farmer, Offer, Product, Category],
-            autoLoadModels: true,
-            synchronize: true,
-            logging: false,
-          };
-        }
+          },
+          models: [Auth, Farmer, Offer, Product, Category],
+          autoLoadModels: true,
+          synchronize: true,
+          logging: false,
+        };
 
         return options;
       },
